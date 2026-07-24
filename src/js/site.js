@@ -221,6 +221,136 @@
     });
   }
 
+  /* ---------- El mar del pie: salpica al pasar por encima ---------- */
+  var wave = doc.querySelector('[data-wave]');
+  var splash = wave && wave.querySelector('[data-wave-splash]');
+
+  if (wave && splash && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var TONES = ['#ffffff', '#c9efff', '#84cce4', '#a8e0f5'];
+    /* Los tres signos del patrón de Tradissea. «scale» compensa el tamaño de
+       cada dibujo: la eszett ocupa toda la caja tipográfica y la virgulilla o
+       el apóstrofo son mucho menores, así que se agrandan para que todos
+       salten con la misma presencia. */
+    var MARKS = [
+      { glyph: '~', scale: 2.5, font: "'Bodoni Moda', " },
+      { glyph: 'ß', scale: 1 },
+      { glyph: '’', scale: 3.3 }
+    ];
+    /* Los colores se reparten al azar entre los signos: así ninguno queda
+       siempre del tono que peor se ve sobre el agua. */
+    var MARK_TONES = ['#00807e', '#eeb01a', '#2b95c4', '#2f3d3d'];
+    var lastDrop = 0;
+    var stirTimer = null;
+    var rand = function (min, max) {
+      return min + Math.random() * (max - min);
+    };
+
+    var makeDrops = function (ratio, count) {
+      var fragment = doc.createDocumentFragment();
+      ratio = Math.min(0.97, Math.max(0.03, ratio));
+      for (var i = 0; i < count; i += 1) {
+        var drop = doc.createElement('span');
+        var inner = doc.createElement('i');
+        /* Uno de cada tres saltos es un signo de la marca. */
+        var isMark = Math.random() < 0.34;
+
+        drop.className = 'drop ' + (isMark ? 'drop--mark' : 'drop--bubble');
+        drop.style.setProperty('--x', (ratio * 100).toFixed(2) + '%');
+        var driftMin = ratio < 0.1 ? 0 : -38;
+        var driftMax = ratio > 0.9 ? 0 : 38;
+        drop.style.setProperty('--dx', rand(driftMin, driftMax).toFixed(1) + 'px');
+        drop.style.setProperty('--from', (isMark ? rand(40, 56) : rand(30, 48)).toFixed(0) + '%');
+
+        if (isMark) {
+          var mark = MARKS[Math.floor(Math.random() * MARKS.length)];
+          inner.textContent = mark.glyph;
+          inner.style.setProperty('--size', (rand(15, 34) * mark.scale).toFixed(1) + 'px');
+          inner.style.setProperty('--tone', MARK_TONES[Math.floor(Math.random() * MARK_TONES.length)]);
+          inner.style.setProperty('--spin', rand(-220, 220).toFixed(0) + 'deg');
+          if (mark.font) inner.style.setProperty('--mark-font', mark.font + "'Prata', serif");
+          drop.style.setProperty('--dy', rand(-52, -115).toFixed(1) + 'px');
+          drop.style.setProperty('--dur', rand(1000, 1700).toFixed(0) + 'ms');
+        } else {
+          inner.style.setProperty('--size', rand(4, 15).toFixed(1) + 'px');
+          inner.style.setProperty('--tone', TONES[Math.floor(Math.random() * TONES.length)]);
+          drop.style.setProperty('--dy', rand(-24, -66).toFixed(1) + 'px');
+          drop.style.setProperty('--dur', rand(650, 1250).toFixed(0) + 'ms');
+        }
+
+        drop.appendChild(inner);
+        drop.addEventListener('animationend', function () {
+          if (this.parentNode) this.parentNode.removeChild(this);
+        });
+        fragment.appendChild(drop);
+      }
+      var ripple = doc.createElement('span');
+      ripple.className = 'ripple';
+      ripple.style.setProperty('--x', (ratio * 100).toFixed(2) + '%');
+      ripple.style.setProperty('--from', '40%');
+      ripple.addEventListener('animationend', function () {
+        if (this.parentNode) this.parentNode.removeChild(this);
+      });
+      fragment.appendChild(ripple);
+
+      splash.appendChild(fragment);
+      if (splash.childElementCount > 70) splash.removeChild(splash.firstElementChild);
+    };
+
+    var stir = function () {
+      wave.classList.add('is-stirred');
+      clearTimeout(stirTimer);
+      stirTimer = setTimeout(function () {
+        wave.classList.remove('is-stirred');
+      }, 900);
+    };
+
+    wave.addEventListener('pointermove', function (ev) {
+      var now = Date.now();
+      if (now - lastDrop < 90) return;
+      lastDrop = now;
+      var bounds = wave.getBoundingClientRect();
+      makeDrops((ev.clientX - bounds.left) / bounds.width, 2 + Math.floor(Math.random() * 3));
+      stir();
+    });
+
+    wave.addEventListener('pointerdown', function (ev) {
+      var bounds = wave.getBoundingClientRect();
+      makeDrops((ev.clientX - bounds.left) / bounds.width, 8);
+      stir();
+    });
+
+    /* Salpica sola al llegar al final de la página (así también se ve en el
+       móvil) y detiene el oleaje mientras el mar no está en pantalla. */
+    if ('IntersectionObserver' in window) {
+      var breaking = false;
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            wave.classList.toggle('is-offscreen', !entry.isIntersecting);
+            /* Se trae la Bodoni de las virgulillas al acercarse el mar, para
+               que el primer salto ya salga con su tipografía. */
+            if (entry.isIntersecting && doc.fonts && doc.fonts.load) {
+              doc.fonts.load("16px 'Bodoni Moda'", '~').catch(function () {});
+            }
+            if (entry.intersectionRatio < 0.55 || breaking) return;
+            breaking = true;
+            stir();
+            for (var i = 0; i < 9; i += 1) {
+              (function (index) {
+                setTimeout(function () {
+                  makeDrops(0.08 + index * 0.105 + (Math.random() * 0.05 - 0.025), 2);
+                }, index * 110);
+              })(i);
+            }
+            setTimeout(function () { breaking = false; }, 4000);
+          });
+        },
+        { threshold: [0, 0.55] }
+      );
+      observer.observe(wave);
+    }
+  }
+
   /* ---------- Formulario de contacto ---------- */
   var form = doc.querySelector('form[data-contact-form]');
   if (form) {

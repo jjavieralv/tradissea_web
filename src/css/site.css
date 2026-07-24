@@ -33,6 +33,16 @@
     U+2C60-2C7F, U+A720-A7FF;
 }
 
+/* Bodoni Moda, recortada a los signos que saltan del mar (2 KB). */
+@font-face {
+  font-family: 'Bodoni Moda';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../fonts/bodonimoda-tilde.woff2') format('woff2');
+  unicode-range: U+007E, U+00DF, U+2019, U+02DC, U+0303;
+}
+
 /* ---------- Tokens ---------- */
 :root {
   /* Marca */
@@ -1258,9 +1268,152 @@ strong { font-weight: 600; }
 }
 
 /* ---------- Pie ---------- */
-/* Onda de transición hacia el pie */
-.wave-divider { display: block; line-height: 0; background: var(--white); }
-.wave-divider svg { display: block; width: 100%; height: clamp(48px, 6vw, 90px); }
+/* ---------- Mar animado entre el contenido y el pie ---------- */
+.wave-divider {
+  position: relative;
+  height: clamp(120px, 14vw, 200px);
+  background: var(--white);
+  /* El agua se recorta a la franja, pero lo que salta puede salir de ella. */
+  overflow: clip;
+  overflow-clip-margin: 150px;
+  line-height: 0;
+  touch-action: manipulation;
+  /* Los signos son texto: sin esto, al mantener pulsado en el móvil se
+     seleccionarían como si fueran contenido. */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.wave-sea { position: absolute; inset: 0; overflow: hidden; }
+
+.wave-layer {
+  position: absolute;
+  left: 0;
+  /* Sobresalen por abajo para que, al removerse el agua, no asome el fondo. */
+  bottom: -16px;
+  width: 200%;
+  height: calc(100% + 16px);
+  transition: translate 0.7s ease-out;
+  will-change: transform;
+}
+.wave-layer .wave-foam {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.85);
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+}
+.wave-layer--1 { animation: wave-drift 38s linear infinite; }
+.wave-layer--1 .wave-fill { fill: #b6e4fa; }
+.wave-layer--2 { animation: wave-drift 25s linear infinite reverse; }
+.wave-layer--2 .wave-fill { fill: #d3f0fd; }
+.wave-layer--3 { animation: wave-drift 17s linear infinite; }
+.wave-layer--3 .wave-fill { fill: var(--sky-soft); }
+.wave-layer--3 .wave-foam { stroke: rgba(255, 255, 255, 0.6); }
+
+@keyframes wave-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* El mar solo se mueve mientras está a la vista (ahorra batería). */
+.wave-divider.is-offscreen .wave-layer,
+.wave-divider.is-offscreen .wave-drift,
+.wave-divider.is-offscreen + .site-footer::before { animation-play-state: paused; }
+
+/* Los símbolos de la marca derivan dentro del agua */
+.wave-drift {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc(100% + 300px);
+  background: url('../img/pattern-tile.png') repeat;
+  background-size: 300px 150px;
+  background-position: 0 100%;
+  opacity: 0.6;
+  animation: pattern-drift 70s linear infinite;
+  -webkit-mask-image: linear-gradient(180deg, transparent 18%, #000 52%);
+  mask-image: linear-gradient(180deg, transparent 18%, #000 52%);
+}
+
+/* Un tile exacto de recorrido: el bucle no tiene salto. */
+@keyframes pattern-drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(-300px); }
+}
+
+/* La ola sube un poco cuando se la remueve */
+.wave-divider.is-stirred .wave-layer--2 { translate: 0 -5px; }
+.wave-divider.is-stirred .wave-layer--3 { translate: 0 -8px; }
+
+/* Salpicaduras */
+.wave-splash { position: absolute; inset: 0; pointer-events: none; }
+.drop {
+  position: absolute;
+  bottom: var(--from, 46%);
+  left: var(--x, 50%);
+  animation: drop-x var(--dur, 900ms) linear forwards;
+}
+.drop i {
+  display: block;
+  animation: drop-y var(--dur, 900ms) cubic-bezier(0.22, 0.65, 0.5, 1) forwards;
+  user-select: none;
+}
+/* Burbujas de agua */
+.drop--bubble i {
+  width: var(--size, 8px);
+  height: var(--size, 8px);
+  border-radius: 50%;
+  background: var(--tone, #ffffff);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+/* Símbolos de la marca que saltan del agua */
+.drop--mark i {
+  font-family: var(--mark-font, var(--font-display));
+  font-size: var(--size, 20px);
+  line-height: 1;
+  color: var(--tone, var(--teal));
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.85), 0 0 8px rgba(255, 255, 255, 0.5);
+  animation: drop-y var(--dur, 900ms) cubic-bezier(0.22, 0.65, 0.5, 1) forwards,
+    drop-spin var(--dur, 900ms) ease-out forwards;
+}
+@keyframes drop-spin {
+  from { rotate: 0deg; }
+  to { rotate: var(--spin, 180deg); }
+}
+@keyframes drop-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(var(--dx, 0px)); }
+}
+/* Anillo de impacto sobre la superficie */
+.ripple {
+  position: absolute;
+  bottom: var(--from, 44%);
+  left: var(--x, 50%);
+  width: 10px;
+  height: 6px;
+  margin-left: -5px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  animation: ripple-out 620ms ease-out forwards;
+}
+@keyframes ripple-out {
+  from { transform: scale(0.4); opacity: 0.9; }
+  to { transform: scale(4.2); opacity: 0; }
+}
+
+@keyframes drop-y {
+  0% { transform: translateY(0) scale(0.5); opacity: 0; }
+  12% { opacity: 1; }
+  45% { transform: translateY(var(--dy, -34px)) scale(1); opacity: 1; }
+  100% { transform: translateY(14px) scale(0.55); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wave-layer,
+  .wave-drift { animation: none; }
+  .wave-layer { width: 100%; }
+}
 
 .site-footer {
   position: relative;
@@ -1271,10 +1424,19 @@ strong { font-weight: 600; }
 .site-footer::before {
   content: "";
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: calc(100% + 300px);
   background: url('../img/pattern-tile.png') repeat;
   background-size: 300px 150px;
+  background-position: 0 0;
   opacity: 0.6;
+  /* Misma deriva que bajo la ola: el agua continúa en el pie. */
+  animation: pattern-drift 70s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-footer::before { animation: none; }
 }
 .site-footer > * { position: relative; }
 .footer-grid {
