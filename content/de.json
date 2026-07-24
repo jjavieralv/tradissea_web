@@ -1,0 +1,343 @@
+{
+  "_comment": "DEUTSCHE TEXTE. Gleiche Struktur wie es.json. Bitte nur den Text zwischen den Anführungszeichen ändern.",
+
+  "meta": {
+    "language": "de",
+    "languageName": "Deutsch",
+    "languageShort": "DE",
+    "locale": "de_DE"
+  },
+
+  "routes": {
+    "_comment": "Adressen der einzelnen Seiten (das, was nach tradissea.com/de/ steht).",
+    "home": "",
+    "about": "ueber-uns",
+    "contact": "kontakt",
+    "legal": "impressum",
+    "privacy": "datenschutz",
+    "cookies": "cookie-richtlinie"
+  },
+
+  "ui": {
+    "skipToContent": "Zum Inhalt springen",
+    "menu": "Menü",
+    "close": "Schließen",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "language": "Sprache",
+    "changeLanguage": "Sprache wechseln",
+    "readMore": "Mehr erfahren",
+    "readLess": "Schließen",
+    "backHome": "Zurück zur Startseite",
+    "logoAlt": "Tradissea, die zugängliche Agentur",
+    "playVideo": "Vorstellungsvideo abspielen",
+    "videoNotice": "Beim Abspielen des Videos wird eine Verbindung zu YouTube hergestellt.",
+    "toTop": "Nach oben"
+  },
+
+  "announcement": {
+    "_comment": "Laufender Hinweis am oberen Rand der Website. Ein- und ausschalten in site.json → announcement.enabled.",
+    "text": "Neue Sommeröffnungszeiten: Wir sind von 8:00 bis 15:00 Uhr für Sie da.",
+    "pause": "Laufenden Hinweis anhalten",
+    "play": "Laufenden Hinweis fortsetzen"
+  },
+
+  "nav": {
+    "home": "Start",
+    "services": "Leistungen",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "cta": "Angebot anfordern"
+  },
+
+  "home": {
+    "title": "Tradissea | Übersetzungen Englisch und Deutsch → Spanisch",
+    "description": "Übersetzungsagentur für Fach-, Rechts- und Tourismusübersetzungen aus dem Englischen und Deutschen ins Spanische. Lektorat, Post-Editing, Lokalisierung und Transkreation.",
+
+    "hero": {
+      "eyebrow": "Englisch · Deutsch → Spanisch",
+      "title": "Damit Ihre Botschaft in jeder Sprache genauso weit trägt",
+      "text": "Übersetzung, Lektorat und Lokalisierung aus dem Englischen und Deutschen ins Spanische. Wir kümmern uns um Ihr Projekt, als wäre es unser eigenes – damit jedes Wort sitzt.",
+      "ctaPrimary": "Erzählen Sie uns von Ihrem Projekt",
+      "ctaSecondary": "Leistungen ansehen",
+      "points": [
+        "Muttersprachliche Übersetzerinnen und Übersetzer für europäisches Spanisch",
+        "Spezialisiert auf Industrie, Tourismus und Recht",
+        "Zweisprachige Revision in jedem Projekt"
+      ]
+    },
+
+    "clients": {
+      "title": "Diese Unternehmen vertrauen uns"
+    },
+
+    "services": {
+      "title": "Leistungen",
+      "intro": "Sechs Wege der Zusammenarbeit – von der anspruchsvollsten Fachübersetzung bis zur kreativen Anpassung Ihrer Werbung.",
+      "items": [
+        {
+          "id": "uebersetzung",
+          "icon": "translation",
+          "title": "Übersetzung",
+          "summary": "Fach-, Rechts- und Tourismusübersetzungen aus dem Englischen und Deutschen ins Spanische.",
+          "body": [
+            "Übersetzungen sind der beste Weg, Wissen von einem Land in ein anderes zu tragen: Wenn Sie Ihre Texte aus dem Englischen oder Deutschen ins Spanische übersetzen lassen, erreichen Sie ein deutlich größeres Publikum. Deshalb haben wir uns bei Tradissea auf Übersetzungen für verschiedene Branchen spezialisiert, zum Beispiel:"
+          ],
+          "list": [
+            "Fachübersetzungen (Bahnindustrie und Industriemaschinen)",
+            "Tourismusübersetzungen",
+            "Rechtsübersetzungen"
+          ],
+          "bodyAfter": [
+            "Wenn Sie professionelle Übersetzungen für Ihre Dokumente suchen, unterstützen wir Sie bei technischen Handbüchern, technischen Spezifikationen, Produktdatenblättern, Bedienungsanleitungen, Broschüren, Speisekarten, Reiseführern und vielem mehr."
+          ]
+        },
+        {
+          "id": "lektorat",
+          "icon": "proofreading",
+          "title": "Lektorat",
+          "summary": "Revision, Lektorat und Korrektorat spanischer Texte – bis hin zum letzten Komma.",
+          "body": [
+            "Ein zweiter Blick lohnt sich immer, damit auch kein Komma durchrutscht. Mit unserem Service für Revision, Lektorat und Korrektorat spanischer Texte werden Ihre Veröffentlichungen makellos.",
+            "Und worin besteht der Unterschied zwischen Revision und Korrektorat? Lektorat und Korrektorat lassen sich weitgehend gleichsetzen, die Revision geht jedoch weiter. Beim Korrektorat betrachten wir nur das Zieldokument, also die Übersetzung.",
+            "Bei der Revision erfolgt ein zweisprachiger Vergleich, bei dem auch der Ausgangstext berücksichtigt wird. Wenn ein geschultes Auge Ihre Übersetzungen prüfen soll, sprechen Sie uns gerne an."
+          ],
+          "list": [],
+          "bodyAfter": []
+        },
+        {
+          "id": "post-editing",
+          "icon": "postediting",
+          "title": "Post-Editing",
+          "summary": "Das Tempo der maschinellen Übersetzung mit der Verlässlichkeit professioneller Übersetzer.",
+          "body": [
+            "Wenn das Projekt es zulässt, nutzen wir das Tempo der maschinellen Übersetzung, ohne auf Verlässlichkeit zu verzichten: Die Überarbeitung des maschinell übersetzten Textes übernimmt eine professionelle Übersetzerin oder ein professioneller Übersetzer. So prüfen wir, ob sich Ihr Projekt dafür eignet:"
+          ],
+          "list": [
+            "Analyse des Ausgangsmaterials (Dokumentation, audiovisuelle Materialien …) und gegebenenfalls Pre-Editing.",
+            "Auswahl der passenden Übersetzungsengine und der Art des Post-Editings (leicht oder vollständig).",
+            "Zusendung unseres Angebots."
+          ],
+          "bodyAfter": [
+            "Sobald Sie uns Ihr Okay geben, starten wir mit dem Post-Editing Ihrer Dokumente."
+          ]
+        },
+        {
+          "id": "beratung",
+          "icon": "consulting",
+          "title": "Beratung",
+          "summary": "Glossare, Styleguides und mehrsprachiges Projektmanagement mit linguistischem Sachverstand.",
+          "body": [
+            "Ein mehrsprachiges Projekt bringt viele Variablen mit sich. Da hilft nichts so sehr wie die Beratung durch eine professionelle Linguistin – die Einschätzung einer Fachperson. Wir unterstützen Sie zum Beispiel bei:"
+          ],
+          "list": [
+            "Glossaren und Translation Memories (mit Übersetzungstechnologie wie Trados Studio).",
+            "Styleguides (damit alle Übersetzungen in der Stimme Ihrer Marke sprechen).",
+            "Sprachlicher Analyse (gewünschte Sprachvariante, Syntax, Rechtschreibung, Fachwortschatz …).",
+            "Mehrsprachigem Projektmanagement."
+          ],
+          "bodyAfter": [
+            "Was auch immer Sie brauchen: Wir prüfen Ihren Fall und stellen unsere Professionalität und Technologie in Ihren Dienst."
+          ]
+        },
+        {
+          "id": "lokalisierung",
+          "icon": "localization",
+          "title": "Lokalisierung",
+          "summary": "Wir passen Ihre Website oder Ihren E-Learning-Kurs an Sprache, Kultur und Land an.",
+          "body": [
+            "Haben Sie schon einmal eine Website-Übersetzung gesehen, die einfach nicht zur Wirklichkeit passte? Die Lokalisierung passt Ihre Website oder Ihren E-Learning-Kurs nicht nur an die gewünschte Sprache an, sondern auch an die Kultur und den Kontext des Landes, in dem Sie Spuren hinterlassen wollen.",
+            "Solche Anpassungen können bedeuten, dass Inhalte entfallen, die im Zielland nicht funktionieren würden, oder dass Bilder und Videos ausgetauscht werden.",
+            "Wussten Sie zum Beispiel, dass in der spanischen Fassung des Films «The Return of the First Avenger» in einer Liste wichtiger Ereignisse die Mondlandung durch Chupa Chups ersetzt wurde? Das ist audiovisuelle Lokalisierung."
+          ],
+          "list": [],
+          "bodyAfter": []
+        },
+        {
+          "id": "transkreation",
+          "icon": "transcreation",
+          "title": "Transkreation",
+          "summary": "Die kreativste Seite der Übersetzung: Werbung, die genauso berührt wie das Original.",
+          "body": [
+            "Die kreativste Seite der Übersetzung, ganz nah am Marketing. Wenn die Werbung für Ihr Unternehmen die Zielgruppe genauso bewegen soll wie im Original, ist dies der passende Service. Die meisten internationalen Marken nutzen diese Art der Übersetzung, um sich an jedes Land anzupassen.",
+            "Mit der Zielgruppe im Blick passen wir Ihre Texte an deren Besonderheiten an. Das ist besonders wichtig in Sprachen mit vielen Varianten wie dem Spanischen, wo ein «batacazo» je nach Region einen Triumph oder einen Reinfall bedeuten kann.",
+            "Bei Tradissea konzentrieren wir uns auf europäisches Spanisch – mit muttersprachlichen Übersetzerinnen und Übersetzern dieser Variante."
+          ],
+          "list": [],
+          "bodyAfter": []
+        }
+      ]
+    },
+
+    "process": {
+      "title": "So arbeiten wir",
+      "intro": "Ein klarer Weg von der ersten E-Mail bis zur fertigen Lieferung.",
+      "steps": [
+        {
+          "title": "Sie erzählen uns von Ihrem Projekt",
+          "text": "Schicken Sie uns die Dokumente und den Kontext: Zielgruppe, gewünschtes Format und Termin."
+        },
+        {
+          "title": "Maßgeschneidertes Angebot",
+          "text": "Wir analysieren das Material, wählen die passende Leistung und senden Ihnen ein Angebot mit festem Preis und Termin."
+        },
+        {
+          "title": "Übersetzung und Revision",
+          "text": "Wir übersetzen mit Unterstützung von Translation Memories und Glossaren und prüfen den Text anschließend gegen das Original."
+        },
+        {
+          "title": "Lieferung und Nachbetreuung",
+          "text": "Sie erhalten die Übersetzung im gewünschten Format – und wir bleiben für spätere Anpassungen erreichbar."
+        }
+      ]
+    },
+
+    "why": {
+      "title": "Warum Tradissea",
+      "intro": "Wir sind eine kleine Agentur mit Sinn fürs Detail – und das sieht man am Ergebnis.",
+      "items": [
+        {
+          "title": "Die zugängliche Agentur",
+          "text": "Sie sprechen direkt mit der Person, die Ihr Projekt koordiniert – von der ersten Frage bis zur letzten Korrektur."
+        },
+        {
+          "title": "Echte Spezialisierung",
+          "text": "Bahnindustrie, Industriemaschinen, Tourismus und Recht: Terminologie, die wir sicher beherrschen."
+        },
+        {
+          "title": "Technologie im Dienst des Textes",
+          "text": "Translation Memories und Glossare mit Werkzeugen wie Trados Studio sorgen für Konsistenz."
+        },
+        {
+          "title": "Europäisches Spanisch",
+          "text": "Muttersprachliche Fachleute dieser Variante, immer mit Ihrer Zielgruppe im Ohr."
+        }
+      ]
+    },
+
+    "video": {
+      "title": "Tradissea kennenlernen",
+      "text": "Eine Minute, um zu erfahren, wer wir sind und wie wir arbeiten."
+    },
+
+    "aboutTeaser": {
+      "eyebrow": "Über uns",
+      "title": "Eine Geschichte von Ithaka und Reisen",
+      "text": "Übersetzen ist wie eine Odyssee: Man bricht vom Ausgangstext auf, um den Zieltext zu erreichen, und muss dabei allerlei Hindernisse überwinden, ohne den Kopf zu verlieren.",
+      "cta": "Unsere Geschichte lesen",
+      "imageAlt": "Paula Barbero, Gründerin von Tradissea"
+    },
+
+    "cta": {
+      "title": "Sollen wir loslegen?",
+      "text": "Sagen Sie uns, was übersetzt werden soll – wir melden uns mit einem maßgeschneiderten Angebot.",
+      "button": "Schreiben Sie uns"
+    }
+  },
+
+  "about": {
+    "title": "Über uns | Tradissea",
+    "description": "Tradissea ist eine zugängliche Übersetzungsagentur mit Sinn fürs Detail. Lernen Sie unsere Geschichte und unsere Arbeitsweise kennen.",
+    "eyebrow": "Über uns",
+    "heading": "Eine Geschichte von Ithaka und Reisen",
+    "lead": "Kavafis führte mich nach Ithaka, und Odysseus flüsterte mir diesen Namen zu.",
+    "body": [
+      "Übersetzen ist wie eine Odyssee: Man bricht vom Ausgangstext auf, um den Zieltext zu erreichen, und muss dabei allerlei Hindernisse überwinden, ohne den Kopf zu verlieren. Bei Tradissea finden Sie die Leistungen, die am besten zu Ihrem Projekt passen.",
+      "Was ist unser Ziel? Ihr Publikum in seiner Muttersprache zu erreichen. Ihre Botschaft soll direkt ins Herz treffen – und das gelingt am besten, wenn man die Sprache der Menschen spricht. Bei Tradissea übersetzen wir nicht einfach nur: Wir kümmern uns um Ihr Projekt, als wäre es unser eigenes, damit alles passt.",
+      "Bei Tradissea sind wir Kommunikationsprofis: Von der Vorstellung Ihres Projekts bis zu seinem Abschluss achten wir darauf, dass alle Anforderungen erfüllt werden, und beantworten jederzeit gerne Ihre Fragen.",
+      "Wir sind ein besonders detailverliebtes Unternehmen: Ob spezifische Terminologie oder ein besonderes Format – wir prüfen, dass die Übersetzung dem Original bis ins letzte Detail entspricht. Dabei setzen wir modernste Software ein, um die besten Ergebnisse zu erzielen, und passen den Stil der Übersetzung an das gewünschte Format an."
+    ],
+    "quote": "Wir wollen nicht nur in Ihre Sprache übersetzen, sondern in Ihre Sprechweise.",
+    "signature": "Wir sind Tradissea, die zugängliche Agentur.",
+    "imageAlt": "Paula Barbero, Gründerin von Tradissea",
+    "imageCaption": "Paula Barbero, Gründerin von Tradissea",
+    "signatureAlt": "Unterschrift von Paula",
+    "facts": {
+      "title": "Kurz gefasst",
+      "items": [
+        { "label": "Arbeitssprachen", "value": "Englisch und Deutsch → Spanisch" },
+        { "label": "Fachgebiete", "value": "Technik, Recht und Tourismus" },
+        { "label": "Sprachvariante", "value": "Europäisches Spanisch" },
+        { "label": "Technologie", "value": "Trados Studio, Memories und Glossare" }
+      ]
+    },
+    "cta": {
+      "title": "Sprechen wir über Ihr Projekt?",
+      "text": "Wir sehen uns Ihren Fall gerne an und schlagen Ihnen die beste Lösung vor.",
+      "button": "Kontakt aufnehmen"
+    }
+  },
+
+  "contact": {
+    "title": "Kontakt | Tradissea",
+    "description": "Erzählen Sie uns von Ihrem Übersetzungsprojekt. Wir melden uns mit einem maßgeschneiderten Angebot.",
+    "eyebrow": "Kontakt",
+    "heading": "Kontakt aufnehmen",
+    "lead": "Sagen Sie uns, was übersetzt werden soll, in welchem Format und bis wann. Wir antworten so schnell wie möglich mit einem maßgeschneiderten Angebot.",
+    "directTitle": "Schreiben Sie uns direkt",
+    "emailLabel": "E-Mail",
+    "phoneLabel": "Telefon",
+    "whatsappLabel": "WhatsApp",
+    "linkedinLabel": "LinkedIn",
+    "privacyNote": "Ihre Daten werden ausschließlich zur Beantwortung Ihrer Anfrage verwendet. Hier finden Sie die",
+    "privacyLink": "Datenschutzerklärung",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Ihr Name",
+      "email": "E-Mail",
+      "emailPlaceholder": "name@unternehmen.com",
+      "company": "Unternehmen (optional)",
+      "companyPlaceholder": "Name Ihres Unternehmens",
+      "service": "Leistung",
+      "serviceOptions": [
+        "Übersetzung",
+        "Lektorat",
+        "Post-Editing",
+        "Beratung",
+        "Lokalisierung",
+        "Transkreation",
+        "Weiß ich noch nicht"
+      ],
+      "message": "Erzählen Sie uns von Ihrem Projekt",
+      "messagePlaceholder": "Art des Dokuments, Sprachen, ungefähre Wortzahl, Termin …",
+      "consent": "Ich habe die Datenschutzerklärung gelesen und akzeptiere sie.",
+      "submit": "Nachricht senden",
+      "sending": "Wird gesendet …",
+      "required": "Pflichtfeld",
+      "successTitle": "Nachricht gesendet!",
+      "success": "Vielen Dank für Ihre Nachricht. Wir antworten so schnell wie möglich.",
+      "errorTitle": "Die Nachricht konnte nicht gesendet werden",
+      "error": "Da ist etwas schiefgelaufen. Schreiben Sie uns direkt an paula@tradissea.com, wir kümmern uns darum.",
+      "mailtoNotice": "Ihr E-Mail-Programm öffnet sich mit der fertigen Nachricht.",
+      "invalidEmail": "Bitte prüfen Sie die E-Mail-Adresse.",
+      "invalidName": "Bitte nennen Sie uns Ihren Namen.",
+      "invalidMessage": "Bitte beschreiben Sie kurz, was Sie brauchen.",
+      "invalidConsent": "Wir benötigen Ihre Einwilligung, um Ihnen antworten zu können."
+    }
+  },
+
+  "footer": {
+    "tagline": ["Navigating cultures", "Navigating languages", "Navigating translations"],
+    "contactTitle": "Kontakt",
+    "linksTitle": "Navigation",
+    "legalTitle": "Rechtliches",
+    "legal": "Impressum",
+    "privacy": "Datenschutz",
+    "cookies": "Cookies",
+    "rights": "Alle Rechte vorbehalten."
+  },
+
+  "notFound": {
+    "title": "Seite nicht gefunden | Tradissea",
+    "heading": "Diese Seite ist auf der Überfahrt verloren gegangen",
+    "text": "Die gesuchte Adresse gibt es nicht oder sie hat den Kurs gewechselt. Kehren Sie zur Startseite zurück, dann segeln wir weiter.",
+    "button": "Zurück zur Startseite"
+  },
+
+  "legalPages": {
+    "legal": { "title": "Impressum | Tradissea", "heading": "Impressum" },
+    "privacy": { "title": "Datenschutzerklärung | Tradissea", "heading": "Datenschutzerklärung" },
+    "cookies": { "title": "Cookie-Richtlinie | Tradissea", "heading": "Cookie-Richtlinie" },
+    "translationNotice": "Diese Übersetzung dient nur der Information. Rechtsverbindlich ist die spanische Fassung."
+  }
+}

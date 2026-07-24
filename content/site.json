@@ -1,0 +1,40 @@
+{
+  "_comment": "Configuración global del sitio. Los TEXTOS de cada idioma están en content/es.json, content/en.json y content/de.json.",
+
+  "brand": "Tradissea",
+  "domain": "https://tradissea.com",
+
+  "contact": {
+    "email": "paula@tradissea.com",
+    "phone": "+34 695 74 84 45",
+    "phoneLink": "+34695748445",
+    "whatsapp": "https://wa.me/34695748445",
+    "linkedin": "https://www.linkedin.com/in/paula-barbero-urdiales/"
+  },
+
+  "announcement": {
+    "_comment": "Banner con texto en movimiento en lo alto de la web. Pon \"enabled\": false para quitarlo (o cambia el texto en es.json, en.json y de.json → announcement.text).",
+    "enabled": true
+  },
+
+  "video": {
+    "_comment": "ID del vídeo de YouTube que se muestra en la portada. Déjalo vacío (\"\") para ocultar la sección.",
+    "youtubeId": "EFWKsBNPzo0"
+  },
+
+  "form": {
+    "_comment": "Endpoint del formulario de contacto. Si lo dejas vacío, el formulario abre el correo del visitante con el mensaje ya escrito. Para recibir los mensajes por email crea un formulario gratis en https://formspree.io y pega aquí la URL (ej. https://formspree.io/f/xxxxxxx).",
+    "endpoint": ""
+  },
+
+  "languages": ["es", "en", "de"],
+  "defaultLanguage": "es",
+
+  "_clientsComment": "Logotipos de la franja «quiénes han confiado en nosotros». «scale» ajusta el tamaño de cada logo para que todos se vean equilibrados (1 = tamaño base).",
+  "clients": [
+    { "name": "Canva", "logo": "client-canva.png", "scale": 1 },
+    { "name": "DeepL", "logo": "client-deepl.png", "scale": 1.7 },
+    { "name": "Talgo", "logo": "client-talgo.png", "scale": 1.5 },
+    { "name": "Lionbridge", "logo": "client-lionbridge.png", "scale": 0.8 }
+  ]
+}

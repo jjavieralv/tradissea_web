@@ -1,0 +1,15 @@
+{
+  "name": "tradissea-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web estática y multiidioma de Tradissea (ES · EN · DE)",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "start": "node serve.mjs --port 4000",
+    "dev": "node serve.mjs --port 4000 --watch"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
