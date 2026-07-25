@@ -51,7 +51,7 @@ En cumplimiento con la normativa vigente, Tradissea informa de que los datos ser
 
 Asimismo, los datos se tratarán de manera lícita, leal, transparente, adecuada, pertinente, limitada, exacta y actualizada. Es por ello que Tradissea se compromete a adoptar todas las medidas técnicas y de seguridad razonables para que estos se supriman o rectifiquen sin dilación cuando sean inexactos o no veraces.
 
-De acuerdo con la normativa en protección de datos, los usuarios podrán ejercer los derechos de acceso, rectificación, limitación de tratamiento, supresión, portabilidad y oposición al tratamiento de sus datos de carácter personal, así como renunciar al consentimiento prestado para el tratamiento de los mismos. La petición se deberá dirigir al siguiente correo electrónico: [paula@tradissea.com](mailto:paula@tradissea.com).
+De acuerdo con la normativa en protección de datos, los usuarios podrán ejercer los derechos de acceso, rectificación, limitación de tratamiento, supresión, portabilidad y oposición al tratamiento de sus datos de carácter personal, así como renunciar al consentimiento prestado para el tratamiento de los mismos. La petición se deberá dirigir al siguiente correo electrónico: {{email}}.
 
 ## Reserva del derecho a modificar el presente aviso legal
 

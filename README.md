@@ -37,8 +37,9 @@ dist/               Resultado (no se versiona; se genera al publicar)
 
 ## Qué genera el build
 
-- `/es/`, `/en/`, `/de/` con inicio, sobre nosotros, contacto y tres páginas
-  legales cada uno (20 páginas en total).
+- `/es/`, `/en/`, `/de/`: una sola página con todas las secciones (inicio,
+  servicios, especialidades, tecnología, proceso, vídeo, quiénes somos y
+  contacto) más tres páginas legales por idioma (14 páginas en total).
 - `/index.html` que detecta el idioma del navegador y redirige.
 - `404.html`, `sitemap.xml`, `robots.txt`, `.nojekyll`.
 - Enlaces `hreflang` entre idiomas, datos estructurados JSON-LD y etiquetas
@@ -75,6 +76,12 @@ a la raíz del dominio.
 
 ## Decisiones técnicas
 
+- **El correo nunca se publica entero**: va partido en el HTML y el navegador lo
+  recompone, para que los rastreadores de spam no lo encuentren. Sin JavaScript
+  se lee «paula (arroba) tradissea.com» y el enlace lleva al formulario.
+- **Mapa de clientes**: mapamundi de puntos generado desde datos abiertos
+  (Natural Earth vía world-atlas) con el script `scripts/dotmap.mjs`; pesa 37 KB
+  (unos 6 KB al servirse comprimido) y no depende de ningún servicio externo.
 - **Sin cookies ni rastreo.** Solo se guarda el idioma elegido en el navegador
   (`localStorage`).
 - **El vídeo de YouTube no se carga hasta que se pulsa el play**, y entonces usa

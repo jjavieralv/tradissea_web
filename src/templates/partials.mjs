@@ -1,8 +1,8 @@
 /* Bloques reutilizables entre páginas. */
-import { esc, nbsp, icons, prefixFor } from './layout.mjs';
+import { esc, nbsp, icons, mailLink, prefixFor } from './layout.mjs';
 
 /** Formulario de contacto + vías directas. */
-export function contactBlock({ site, t, depth, paths, idPrefix = '', aside = '' }) {
+export function contactBlock({ site, t, depth, paths, idPrefix = '', aside = '', anchors = null }) {
   const p = prefixFor(depth);
   const f = t.contact.form;
   const id = (name) => `${idPrefix}${name}`;
@@ -85,28 +85,13 @@ export function contactBlock({ site, t, depth, paths, idPrefix = '', aside = '' 
     <h3>${esc(t.contact.directTitle)}</h3>
     <ul class="contact-list">
       <li>
-        <a href="mailto:${esc(site.contact.email)}">
-          ${icons.mail}
-          <span><span class="label">${esc(t.contact.emailLabel)}</span><span class="value">${esc(
-    site.contact.email
-  )}</span></span>
-        </a>
-      </li>
-      <li>
-        <a href="tel:${esc(site.contact.phoneLink)}">
-          ${icons.phone}
-          <span><span class="label">${esc(t.contact.phoneLabel)}</span><span class="value">${nbsp(
-    site.contact.phone
-  )}</span></span>
-        </a>
-      </li>
-      <li>
-        <a href="${esc(site.contact.whatsapp)}" target="_blank" rel="noopener noreferrer">
-          ${icons.whatsapp}
-          <span><span class="label">${esc(t.contact.whatsappLabel)}</span><span class="value">${nbsp(
-    site.contact.phone
-  )}</span></span>
-        </a>
+        ${mailLink({
+          email: site.contact.email,
+          fallbackHref: anchors ? `#${anchors.contact}` : '#',
+          inner: `${icons.mail}<span><span class="label">${esc(
+            t.contact.emailLabel
+          )}</span><span class="value">{{mail}}</span></span>`
+        })}
       </li>
       <li>
         <a href="${esc(site.contact.linkedin)}" target="_blank" rel="noopener noreferrer">
@@ -118,6 +103,42 @@ export function contactBlock({ site, t, depth, paths, idPrefix = '', aside = '' 
     ${aside}
   </div>
 </div>`;
+}
+
+/** Mapamundi de puntos con la ubicación de algunos clientes.
+ *  El mapa usa una proyección equirectangular recortada por arriba y por abajo;
+ *  estas constantes deben coincidir con las del SVG (static/img/world-dots.svg). */
+const MAP = { latTop: 78, latBottom: -56 };
+
+export function clientsMap({ site, t, depth }) {
+  const p = prefixFor(depth);
+  const pins = site.clients.filter((client) => typeof client.lat === 'number');
+  if (!pins.length) return '';
+
+  const place = (client) => ({
+    x: ((client.lon + 180) / 360) * 100,
+    y: ((MAP.latTop - client.lat) / (MAP.latTop - MAP.latBottom)) * 100
+  });
+
+  return `
+<figure class="map">
+  <img class="map__base" src="${p}assets/img/world-dots.svg" alt="${esc(t.about.map.alt)}" width="1500" height="660" loading="lazy">
+  <ul class="map__pins">
+    ${pins
+      .map((client) => {
+        const { x, y } = place(client);
+        return `<li class="map__pin" data-label="${esc(client.label || 'top')}" style="--x:${x.toFixed(
+          2
+        )}%;--y:${y.toFixed(2)}%">
+      <span class="map__dot" aria-hidden="true"></span>
+      <span class="map__label">${esc(client.name)}${
+          client.city ? `<span class="map__city">${esc(client.city)}</span>` : ''
+        }</span>
+    </li>`;
+      })
+      .join('\n    ')}
+  </ul>
+</figure>`;
 }
 
 /** Franja teal con los logotipos de clientes. */

@@ -47,21 +47,31 @@ Ejemplo de cambio correcto:
 
 ## 2. Dónde está cada cosa
 
+La web es de **una sola página**: al pulsar en el menú se baja a la sección
+correspondiente. Solo el aviso legal, la privacidad y las cookies son páginas
+aparte.
+
 | Zona de la web | Dónde se edita |
 | --- | --- |
 | Aviso verde en movimiento de la parte superior | `announcement` |
 | Menú superior y botón «Pide presupuesto» | `nav` |
+| Nombre de las secciones en la barra de direcciones | `anchors` |
 | Titular grande de la portada | `home` → `hero` |
 | «Quiénes han confiado en nosotros» | `home` → `clients` |
 | Los seis servicios | `home` → `services` → `items` |
-| «Cómo trabajamos» | `home` → `process` |
+| Especialidades (técnica, jurídica, turismo) | `home` → `industries` |
+| «La mejor tecnología a tu servicio» | `home` → `tech` |
+| «Cómo trabajamos» (las cuatro paradas) | `home` → `process` |
 | «Por qué Tradissea» | `home` → `why` |
 | Texto del vídeo | `home` → `video` |
-| Página «Sobre nosotros» | `about` |
-| Página «Contacto» y el formulario | `contact` |
-| Pie de página | `footer` |
+| Sección «Quiénes somos» y el mapa de clientes | `about` |
+| Sección «Contacto» y el formulario | `contact` |
+| Pie de página y eslogan que se escribe solo | `footer` |
 | Página de error 404 | `notFound` |
 | Títulos de las páginas legales | `legalPages` |
+
+El eslogan que se escribe solo en la portada («Navigating cultures…») sale de
+`footer` → `tagline`: si añades o quitas frases ahí, la animación las recoge.
 
 Los tres archivos de idioma tienen **exactamente la misma estructura**: si
 cambias algo en `es.json`, busca lo mismo en `en.json` y `de.json`.
@@ -94,9 +104,19 @@ Están en `content/site.json`:
 - **`video.youtubeId`** → el identificador del vídeo de YouTube. En una dirección
   como `youtube.com/watch?v=EFWKsBNPzo0`, el identificador es `EFWKsBNPzo0`.
   Si lo dejas vacío (`""`), la sección del vídeo desaparece.
-- **`clients`** → los logotipos de la franja verde. Para añadir uno nuevo, guarda
-  el logotipo **en blanco y con fondo transparente** en `static/img/` y añade su
-  línea. `scale` sirve para que todos se vean del mismo tamaño visual.
+- **`clients`** → los logotipos de la franja verde **y los puntos del mapa**.
+  Para añadir uno nuevo, guarda el logotipo **en blanco y con fondo
+  transparente** en `static/img/` y añade su línea. `scale` sirve para que todos
+  se vean del mismo tamaño visual; `city`, `lat` y `lon` colocan el punto en el
+  mapamundi. Las coordenadas se sacan de Google Maps: clic derecho sobre el
+  lugar y copiar los dos números que aparecen (el primero es `lat`).
+
+## 4 bis. El correo no aparece entero en la web
+
+Para que los robots de spam no lo recojan, en el código la dirección va partida
+en dos y el navegador la recompone al abrir la página. Se ve y funciona con
+normalidad, pero **si cambias el correo hazlo solo en `site.json`**: el resto de
+la web (pie, contacto, textos legales y formulario) lo toma de ahí.
 
 ---
 

@@ -11,11 +11,17 @@
   "routes": {
     "_comment": "Page addresses (what comes after tradissea.com/en/).",
     "home": "",
-    "about": "about-us",
-    "contact": "contact",
     "legal": "legal-notice",
     "privacy": "privacy-policy",
     "cookies": "cookie-policy"
+  },
+
+  "anchors": {
+    "_comment": "The site is a single page: these are the section names shown in the address bar.",
+    "services": "services",
+    "industries": "specialisms",
+    "about": "about-us",
+    "contact": "contact"
   },
 
   "ui": {
@@ -111,6 +117,8 @@
           "title": "Post-editing",
           "summary": "The speed of machine translation with the reliability of a professional translator.",
           "body": [
+            "A professional translator handles an average of 2,000 words a day. So how can we help you with that 4,000-word manual you need by tomorrow morning? Post-editing.",
+            "Machine translation has been improving steadily for the past decade and, with our experience and the RWS post-editing certificate, the result will be top quality despite the deadline.",
             "When the project allows it, we can make the most of the speed of machine translation without losing reliability, leaving the revision of the machine-translated text in the hands of a professional translator. This is how we check whether your project is suitable:"
           ],
           "list": [
@@ -119,7 +127,8 @@
             "We send you our proposal."
           ],
           "bodyAfter": [
-            "As soon as you tell us it works for you, we will start post-editing your documents."
+            "As soon as you tell us it works for you, we will start post-editing your documents.",
+            "Not sure what you need, or working with a tight budget? Tell us about the project and we will suggest the service that fits best."
           ]
         },
         {
@@ -165,6 +174,75 @@
           ],
           "list": [],
           "bodyAfter": []
+        }
+      ]
+    },
+
+    "industries": {
+      "title": "Specialisms",
+      "intro": "Three fields where terminology cannot be improvised.",
+      "items": [
+        {
+          "id": "technical",
+          "title": "Technical translation",
+          "claim": "Technical translations from an experienced language expert and terminology enthusiast.",
+          "text": "Rail industry and industrial machinery.",
+          "docsTitle": "Types of document",
+          "docs": [
+            "Technical and instruction manuals",
+            "Technical specifications",
+            "Product sheets",
+            "Maintenance documentation"
+          ]
+        },
+        {
+          "id": "legal",
+          "title": "Legal translation",
+          "claim": "Legal translations from a qualified professional.",
+          "text": "Legal and corporate documents, with the precision they demand.",
+          "docsTitle": "Types of document",
+          "docs": [
+            "Contracts and agreements",
+            "Terms and conditions",
+            "Corporate documentation",
+            "Regulatory and compliance texts"
+          ]
+        },
+        {
+          "id": "tourism",
+          "title": "Tourism translation",
+          "claim": "Touristic translations from a passionate traveller.",
+          "text": "Texts that make people want to travel, in Spanish too.",
+          "docsTitle": "Types of document",
+          "docs": [
+            "Travel guides",
+            "Brochures",
+            "Restaurant menus",
+            "Hotel and destination websites"
+          ]
+        }
+      ]
+    },
+
+    "tech": {
+      "title": "The best technology at your service",
+      "intro": "Every client has their own translation memory and glossary: the more we work together, the more consistent your translations become.",
+      "items": [
+        {
+          "title": "A translation memory per client",
+          "text": "We store every approved sentence and reuse it in your next projects: same terminology, same style, less time."
+        },
+        {
+          "title": "A glossary of your own",
+          "text": "We build your company's specific vocabulary and keep it up to date with every delivery."
+        },
+        {
+          "title": "Trados Studio and quality checks",
+          "text": "Computer-assisted translation with automatic checks of terminology, figures and formatting before delivery."
+        },
+        {
+          "title": "Whatever the format",
+          "text": "Word, Excel, PowerPoint, PDF, InDesign or your website files: you get them back ready to publish."
         }
       ]
     },
@@ -220,14 +298,6 @@
       "text": "One minute to find out who we are and how we work."
     },
 
-    "aboutTeaser": {
-      "eyebrow": "About us",
-      "title": "A story of Ithaca and journeys",
-      "text": "Translation is like an odyssey: you set off from the source text to reach the target text, and you have to overcome all kinds of obstacles to arrive without losing your head.",
-      "cta": "Read our story",
-      "imageAlt": "Paula Barbero, founder of Tradissea"
-    },
-
     "cta": {
       "title": "Shall we begin?",
       "text": "Tell us what you need translated and we will get back to you with a tailored proposal.",
@@ -236,8 +306,6 @@
   },
 
   "about": {
-    "title": "About us | Tradissea",
-    "description": "Tradissea is an accessible translation agency with an eye for detail. Discover our story, the way we work and who you have on the other side.",
     "eyebrow": "About us",
     "heading": "A story of Ithaca and journeys",
     "lead": "Cavafy took me to Ithaca and Ulysses whispered this name to me.",
@@ -261,6 +329,11 @@
         { "label": "Technology", "value": "Trados Studio, memories and glossaries" }
       ]
     },
+    "map": {
+      "title": "Clients around the world",
+      "text": "We translate for companies and agencies in different countries. These are some of the ones who have trusted us.",
+      "alt": "World map showing the location of some Tradissea clients"
+    },
     "cta": {
       "title": "Shall we talk about your project?",
       "text": "We will be glad to look at your case and suggest the best solution.",
@@ -269,8 +342,6 @@
   },
 
   "contact": {
-    "title": "Contact | Tradissea",
-    "description": "Tell us about your translation project. We will get back to you with a tailored proposal.",
     "eyebrow": "Contact",
     "heading": "Get in touch",
     "lead": "Tell us what you need translated, in which format and by when. We will reply as soon as possible with a tailored proposal.",
@@ -307,7 +378,7 @@
       "successTitle": "Message sent!",
       "success": "Thank you for writing to us. We will reply as soon as possible.",
       "errorTitle": "The message could not be sent",
-      "error": "Something went wrong. Write to us directly at paula@tradissea.com and we will sort it out.",
+      "error": "Something went wrong. Write to us directly by email or WhatsApp and we will sort it out.",
       "mailtoNotice": "Your email programme will open with the message ready to send.",
       "invalidEmail": "Please check the email address.",
       "invalidName": "Please tell us your name.",
@@ -329,9 +400,15 @@
 
   "notFound": {
     "title": "Page not found | Tradissea",
-    "heading": "This page got lost on the crossing",
-    "text": "The address you are looking for does not exist or has changed course. Head back home and we will keep sailing.",
-    "button": "Back to home"
+    "eyebrow": "Error 404",
+    "heading": "This page doesn't exist, much like the word “irregardless” in the eyes of a proofreader",
+    "text": "The address you were trying to reach does not exist, but you can keep browsing the site and you will get to your destination.",
+    "button": "Back to home",
+    "buttonServices": "See services",
+    "helpTitle": "Still lost?",
+    "helpText": "Write to us directly and we will point you in the right direction.",
+    "helpButton": "Get in touch",
+    "imageAlt": "Paper boat adrift among the waves"
   },
 
   "legalPages": {

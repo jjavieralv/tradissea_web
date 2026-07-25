@@ -51,7 +51,7 @@ In Übereinstimmung mit den geltenden Vorschriften weist Tradissea darauf hin, d
 
 Die Daten werden rechtmäßig, nach Treu und Glauben, transparent, angemessen, erheblich, auf das notwendige Maß beschränkt, richtig und aktuell verarbeitet. Tradissea verpflichtet sich daher, alle angemessenen technischen und Sicherheitsmaßnahmen zu ergreifen, damit unrichtige oder unwahre Daten unverzüglich gelöscht oder berichtigt werden.
 
-Gemäß den Datenschutzvorschriften können die Nutzerinnen und Nutzer ihre Rechte auf Auskunft, Berichtigung, Einschränkung der Verarbeitung, Löschung, Datenübertragbarkeit und Widerspruch gegen die Verarbeitung ihrer personenbezogenen Daten ausüben sowie eine erteilte Einwilligung widerrufen. Der Antrag ist an folgende E-Mail-Adresse zu richten: [paula@tradissea.com](mailto:paula@tradissea.com).
+Gemäß den Datenschutzvorschriften können die Nutzerinnen und Nutzer ihre Rechte auf Auskunft, Berichtigung, Einschränkung der Verarbeitung, Löschung, Datenübertragbarkeit und Widerspruch gegen die Verarbeitung ihrer personenbezogenen Daten ausüben sowie eine erteilte Einwilligung widerrufen. Der Antrag ist an folgende E-Mail-Adresse zu richten: {{email}}.
 
 ## Vorbehalt der Änderung dieses Impressums
 

@@ -55,7 +55,7 @@ En aquellos casos en los que la ley pueda exigir que se revelen datos personales
 
 ## ¿Qué derechos te asisten y cómo puedes ejercerlos?
 
-Puedes dirigir tus comunicaciones y ejercitar tus derechos mediante una comunicación escrita al siguiente correo electrónico: [paula@tradissea.com](mailto:paula@tradissea.com).
+Puedes dirigir tus comunicaciones y ejercitar tus derechos mediante una comunicación escrita al siguiente correo electrónico: {{email}}.
 
 En virtud de lo que establece la normativa en protección de datos puedes solicitar:
 

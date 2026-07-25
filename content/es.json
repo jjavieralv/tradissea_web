@@ -11,11 +11,17 @@
   "routes": {
     "_comment": "Direcciones de cada página (lo que aparece después de tradissea.com/es/). Cámbialas solo si sabes lo que haces.",
     "home": "",
-    "about": "sobre-nosotros",
-    "contact": "contacto",
     "legal": "aviso-legal",
     "privacy": "privacidad",
     "cookies": "cookies"
+  },
+
+  "anchors": {
+    "_comment": "La web es de una sola página: estos son los nombres de cada sección en la barra de direcciones.",
+    "services": "servicios",
+    "industries": "especialidades",
+    "about": "quienes-somos",
+    "contact": "contacto"
   },
 
   "ui": {
@@ -45,7 +51,7 @@
   "nav": {
     "home": "Inicio",
     "services": "Servicios",
-    "about": "Sobre nosotros",
+    "about": "Quiénes somos",
     "contact": "Contacto",
     "cta": "Pide presupuesto"
   },
@@ -111,6 +117,8 @@
           "title": "Posedición",
           "summary": "La rapidez de la traducción automática con la fiabilidad de un traductor profesional.",
           "body": [
+            "Un traductor profesional traduce una media de 2.000 palabras al día. Entonces, ¿cómo podemos ayudarte con ese manual de 4.000 palabras que necesitas para mañana por la mañana? Con posedición.",
+            "La traducción automática lleva una década mejorando sin descanso y, con nuestra experiencia y el certificado de posedición de RWS, el resultado será de máxima calidad pese a la urgencia.",
             "Cuando el proyecto lo permita, podemos sacarle el mayor partido a la rapidez de la traducción automática sin perder fiabilidad, dejando la revisión del texto traducido automáticamente a cargo de un traductor profesional. El proceso que seguimos para saber si tu proyecto es apto es el siguiente:"
           ],
           "list": [
@@ -119,7 +127,8 @@
             "Envío de propuesta."
           ],
           "bodyAfter": [
-            "¡En cuanto nos digas que te encaja, empezaremos con la posedición de tus documentos!"
+            "¡En cuanto nos digas que te encaja, empezaremos con la posedición de tus documentos!",
+            "¿No tienes claro qué necesitas o vas justo de presupuesto? Cuéntanos el proyecto y te diremos qué servicio encaja mejor."
           ]
         },
         {
@@ -165,6 +174,75 @@
           ],
           "list": [],
           "bodyAfter": []
+        }
+      ]
+    },
+
+    "industries": {
+      "title": "Especialidades",
+      "intro": "Tres campos en los que la terminología no se improvisa.",
+      "items": [
+        {
+          "id": "tecnica",
+          "title": "Traducción técnica",
+          "claim": "Traducción técnica de una lingüista con experiencia y entusiasmo por la terminología.",
+          "text": "Industria ferroviaria y maquinaria industrial.",
+          "docsTitle": "Tipos de documento",
+          "docs": [
+            "Manuales técnicos y de instrucciones",
+            "Especificaciones técnicas",
+            "Fichas de producto",
+            "Documentación de mantenimiento"
+          ]
+        },
+        {
+          "id": "juridica",
+          "title": "Traducción jurídica",
+          "claim": "Traducción jurídica de una profesional cualificada.",
+          "text": "Documentación legal y societaria con la precisión que exige.",
+          "docsTitle": "Tipos de documento",
+          "docs": [
+            "Contratos y acuerdos",
+            "Condiciones generales",
+            "Documentación societaria",
+            "Textos normativos y cumplimiento"
+          ]
+        },
+        {
+          "id": "turismo",
+          "title": "Traducción de turismo",
+          "claim": "Traducción turística de una viajera apasionada.",
+          "text": "Textos que invitan a viajar, también en español.",
+          "docsTitle": "Tipos de documento",
+          "docs": [
+            "Guías turísticas",
+            "Folletos informativos",
+            "Menús de restaurantes",
+            "Webs de hoteles y destinos"
+          ]
+        }
+      ]
+    },
+
+    "tech": {
+      "title": "La mejor tecnología a tu servicio",
+      "intro": "Cada cliente tiene su propia memoria de traducción y su glosario: cuanto más trabajamos juntos, más coherentes son las traducciones.",
+      "items": [
+        {
+          "title": "Memoria de traducción por cliente",
+          "text": "Guardamos cada frase aprobada para reutilizarla en tus próximos proyectos: misma terminología, mismo estilo y menos tiempo."
+        },
+        {
+          "title": "Glosario específico",
+          "text": "Elaboramos el vocabulario propio de tu empresa y lo mantenemos actualizado en cada entrega."
+        },
+        {
+          "title": "Trados Studio y control de calidad",
+          "text": "Traducción asistida con comprobaciones automáticas de terminología, cifras y formato antes de entregar."
+        },
+        {
+          "title": "El formato que necesites",
+          "text": "Word, Excel, PowerPoint, PDF, InDesign o los archivos de tu web: te lo devolvemos listo para publicar."
         }
       ]
     },
@@ -220,14 +298,6 @@
       "text": "Un minuto para saber quiénes somos y cómo trabajamos."
     },
 
-    "aboutTeaser": {
-      "eyebrow": "Sobre nosotros",
-      "title": "Una historia de Ítaca y viajes",
-      "text": "La traducción es como una odisea: se parte del texto de partida para llegar al texto de llegada y hay que superar todo tipo de obstáculos para llegar al destino sin perder la cabeza.",
-      "cta": "Conoce nuestra historia",
-      "imageAlt": "Paula Barbero, fundadora de Tradissea"
-    },
-
     "cta": {
       "title": "¿Empezamos?",
       "text": "Cuéntanos qué necesitas traducir y te responderemos con una propuesta a medida.",
@@ -236,9 +306,7 @@
   },
 
   "about": {
-    "title": "Sobre nosotros | Tradissea",
-    "description": "Tradissea es una agencia de traducción accesible y detallista. Descubre nuestra historia, nuestra forma de trabajar y a quién tienes al otro lado.",
-    "eyebrow": "Sobre nosotros",
+    "eyebrow": "Quiénes somos",
     "heading": "Una historia de Ítaca y viajes",
     "lead": "Cavafis me llevó a Ítaca y Ulises me susurró este nombre.",
     "body": [
@@ -261,6 +329,11 @@
         { "label": "Tecnología", "value": "Trados Studio, memorias y glosarios" }
       ]
     },
+    "map": {
+      "title": "Clientes de todo el mundo",
+      "text": "Traducimos para empresas y agencias de distintos países. Estas son algunas de las que han confiado en nosotros.",
+      "alt": "Mapamundi con la ubicación de algunos clientes de Tradissea"
+    },
     "cta": {
       "title": "¿Hablamos de tu proyecto?",
       "text": "Estaremos encantados de estudiar tu caso y proponerte la mejor solución.",
@@ -269,8 +342,6 @@
   },
 
   "contact": {
-    "title": "Contacto | Tradissea",
-    "description": "Cuéntanos tu proyecto de traducción. Te responderemos con una propuesta a medida.",
     "eyebrow": "Contacto",
     "heading": "Contacta con nosotros",
     "lead": "Cuéntanos qué necesitas traducir, en qué formato y para cuándo. Te responderemos lo antes posible con una propuesta a medida.",
@@ -307,7 +378,7 @@
       "successTitle": "¡Mensaje enviado!",
       "success": "Gracias por escribirnos. Te responderemos lo antes posible.",
       "errorTitle": "No se ha podido enviar",
-      "error": "Ha ocurrido un problema. Escríbenos directamente a paula@tradissea.com y lo solucionamos.",
+      "error": "Ha ocurrido un problema. Escríbenos directamente por correo o por WhatsApp y lo solucionamos.",
       "mailtoNotice": "Se abrirá tu programa de correo con el mensaje listo para enviar.",
       "invalidEmail": "Revisa la dirección de correo electrónico.",
       "invalidName": "Dinos cómo te llamas, por favor.",
@@ -329,9 +400,15 @@
 
   "notFound": {
     "title": "Página no encontrada | Tradissea",
-    "heading": "Esta página se ha perdido en la travesía",
-    "text": "La dirección que buscas no existe o ha cambiado de rumbo. Vuelve al inicio y seguimos navegando.",
-    "button": "Volver al inicio"
+    "eyebrow": "Error 404",
+    "heading": "Esta página no existe, igual que la palabra «cocreta» en el diccionario de la RAE",
+    "text": "La dirección a la que querías llegar no existe, pero puedes seguir navegando por la web y terminarás llegando a tu destino.",
+    "button": "Volver al inicio",
+    "buttonServices": "Ver servicios",
+    "helpTitle": "¿Sigues perdido?",
+    "helpText": "Escríbenos directamente y te echamos un cable.",
+    "helpButton": "Contactar",
+    "imageAlt": "Barco de papel a la deriva entre las olas"
   },
 
   "legalPages": {

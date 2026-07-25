@@ -55,7 +55,7 @@ Where the law may require personal data to be disclosed to public bodies or othe
 
 ## What are your rights and how can you exercise them?
 
-You may send your communications and exercise your rights by writing to the following email address: [paula@tradissea.com](mailto:paula@tradissea.com).
+You may send your communications and exercise your rights by writing to the following email address: {{email}}.
 
 Under data protection legislation you may request:
 

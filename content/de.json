@@ -11,11 +11,17 @@
   "routes": {
     "_comment": "Adressen der einzelnen Seiten (das, was nach tradissea.com/de/ steht).",
     "home": "",
-    "about": "ueber-uns",
-    "contact": "kontakt",
     "legal": "impressum",
     "privacy": "datenschutz",
     "cookies": "cookie-richtlinie"
+  },
+
+  "anchors": {
+    "_comment": "Die Website ist eine Onepage: So heißen die Abschnitte in der Adresszeile.",
+    "services": "leistungen",
+    "industries": "fachgebiete",
+    "about": "ueber-uns",
+    "contact": "kontakt"
   },
 
   "ui": {
@@ -111,6 +117,8 @@
           "title": "Post-Editing",
           "summary": "Das Tempo der maschinellen Übersetzung mit der Verlässlichkeit professioneller Übersetzer.",
           "body": [
+            "Eine professionelle Übersetzerin schafft im Schnitt 2.000 Wörter pro Tag. Wie können wir Ihnen also bei dem 4.000-Wörter-Handbuch helfen, das Sie morgen früh brauchen? Mit Post-Editing.",
+            "Die maschinelle Übersetzung wird seit einem Jahrzehnt immer besser: Mit unserer Erfahrung und dem RWS-Zertifikat für Post-Editing erhalten Sie trotz knapper Frist ein Ergebnis in höchster Qualität.",
             "Wenn das Projekt es zulässt, nutzen wir das Tempo der maschinellen Übersetzung, ohne auf Verlässlichkeit zu verzichten: Die Überarbeitung des maschinell übersetzten Textes übernimmt eine professionelle Übersetzerin oder ein professioneller Übersetzer. So prüfen wir, ob sich Ihr Projekt dafür eignet:"
           ],
           "list": [
@@ -119,7 +127,8 @@
             "Zusendung unseres Angebots."
           ],
           "bodyAfter": [
-            "Sobald Sie uns Ihr Okay geben, starten wir mit dem Post-Editing Ihrer Dokumente."
+            "Sobald Sie uns Ihr Okay geben, starten wir mit dem Post-Editing Ihrer Dokumente.",
+            "Sie wissen noch nicht genau, was Sie brauchen, oder das Budget ist knapp? Erzählen Sie uns von dem Projekt – wir sagen Ihnen, welche Leistung am besten passt."
           ]
         },
         {
@@ -165,6 +174,75 @@
           ],
           "list": [],
           "bodyAfter": []
+        }
+      ]
+    },
+
+    "industries": {
+      "title": "Fachgebiete",
+      "intro": "Drei Bereiche, in denen Terminologie keine Improvisation verträgt.",
+      "items": [
+        {
+          "id": "technik",
+          "title": "Technische Übersetzung",
+          "claim": "Technische Übersetzungen von einer erfahrenen Sprachexpertin mit Begeisterung für Terminologie.",
+          "text": "Bahnindustrie und Industriemaschinen.",
+          "docsTitle": "Dokumentarten",
+          "docs": [
+            "Technische Handbücher und Bedienungsanleitungen",
+            "Technische Spezifikationen",
+            "Produktdatenblätter",
+            "Wartungsunterlagen"
+          ]
+        },
+        {
+          "id": "recht",
+          "title": "Rechtsübersetzung",
+          "claim": "Rechtsübersetzungen von einer qualifizierten Fachfrau.",
+          "text": "Rechts- und Gesellschaftsunterlagen mit der nötigen Präzision.",
+          "docsTitle": "Dokumentarten",
+          "docs": [
+            "Verträge und Vereinbarungen",
+            "Allgemeine Geschäftsbedingungen",
+            "Gesellschaftsunterlagen",
+            "Rechtsvorschriften und Compliance"
+          ]
+        },
+        {
+          "id": "tourismus",
+          "title": "Tourismusübersetzung",
+          "claim": "Tourismusübersetzungen von einer leidenschaftlichen Reisenden.",
+          "text": "Texte, die Lust aufs Reisen machen – auch auf Spanisch.",
+          "docsTitle": "Dokumentarten",
+          "docs": [
+            "Reiseführer",
+            "Broschüren",
+            "Speisekarten",
+            "Websites von Hotels und Reisezielen"
+          ]
+        }
+      ]
+    },
+
+    "tech": {
+      "title": "Beste Technologie in Ihrem Dienst",
+      "intro": "Jede Kundin und jeder Kunde hat ein eigenes Translation Memory und ein eigenes Glossar: Je länger wir zusammenarbeiten, desto konsistenter werden die Übersetzungen.",
+      "items": [
+        {
+          "title": "Ein Translation Memory pro Kunde",
+          "text": "Wir speichern jeden freigegebenen Satz und verwenden ihn in Ihren nächsten Projekten wieder: gleiche Terminologie, gleicher Stil, weniger Zeit."
+        },
+        {
+          "title": "Ein eigenes Glossar",
+          "text": "Wir erstellen den spezifischen Wortschatz Ihres Unternehmens und halten ihn bei jeder Lieferung aktuell."
+        },
+        {
+          "title": "Trados Studio und Qualitätsprüfung",
+          "text": "Computergestützte Übersetzung mit automatischen Prüfungen von Terminologie, Zahlen und Formatierung vor der Lieferung."
+        },
+        {
+          "title": "Jedes gewünschte Format",
+          "text": "Word, Excel, PowerPoint, PDF, InDesign oder die Dateien Ihrer Website: Sie erhalten alles druck- und veröffentlichungsfertig zurück."
         }
       ]
     },
@@ -220,14 +298,6 @@
       "text": "Eine Minute, um zu erfahren, wer wir sind und wie wir arbeiten."
     },
 
-    "aboutTeaser": {
-      "eyebrow": "Über uns",
-      "title": "Eine Geschichte von Ithaka und Reisen",
-      "text": "Übersetzen ist wie eine Odyssee: Man bricht vom Ausgangstext auf, um den Zieltext zu erreichen, und muss dabei allerlei Hindernisse überwinden, ohne den Kopf zu verlieren.",
-      "cta": "Unsere Geschichte lesen",
-      "imageAlt": "Paula Barbero, Gründerin von Tradissea"
-    },
-
     "cta": {
       "title": "Sollen wir loslegen?",
       "text": "Sagen Sie uns, was übersetzt werden soll – wir melden uns mit einem maßgeschneiderten Angebot.",
@@ -236,8 +306,6 @@
   },
 
   "about": {
-    "title": "Über uns | Tradissea",
-    "description": "Tradissea ist eine zugängliche Übersetzungsagentur mit Sinn fürs Detail. Lernen Sie unsere Geschichte und unsere Arbeitsweise kennen.",
     "eyebrow": "Über uns",
     "heading": "Eine Geschichte von Ithaka und Reisen",
     "lead": "Kavafis führte mich nach Ithaka, und Odysseus flüsterte mir diesen Namen zu.",
@@ -261,6 +329,11 @@
         { "label": "Technologie", "value": "Trados Studio, Memories und Glossare" }
       ]
     },
+    "map": {
+      "title": "Kundinnen und Kunden weltweit",
+      "text": "Wir übersetzen für Unternehmen und Agenturen in verschiedenen Ländern. Einige davon vertrauen uns bereits.",
+      "alt": "Weltkarte mit den Standorten einiger Kunden von Tradissea"
+    },
     "cta": {
       "title": "Sprechen wir über Ihr Projekt?",
       "text": "Wir sehen uns Ihren Fall gerne an und schlagen Ihnen die beste Lösung vor.",
@@ -269,8 +342,6 @@
   },
 
   "contact": {
-    "title": "Kontakt | Tradissea",
-    "description": "Erzählen Sie uns von Ihrem Übersetzungsprojekt. Wir melden uns mit einem maßgeschneiderten Angebot.",
     "eyebrow": "Kontakt",
     "heading": "Kontakt aufnehmen",
     "lead": "Sagen Sie uns, was übersetzt werden soll, in welchem Format und bis wann. Wir antworten so schnell wie möglich mit einem maßgeschneiderten Angebot.",
@@ -307,7 +378,7 @@
       "successTitle": "Nachricht gesendet!",
       "success": "Vielen Dank für Ihre Nachricht. Wir antworten so schnell wie möglich.",
       "errorTitle": "Die Nachricht konnte nicht gesendet werden",
-      "error": "Da ist etwas schiefgelaufen. Schreiben Sie uns direkt an paula@tradissea.com, wir kümmern uns darum.",
+      "error": "Da ist etwas schiefgelaufen. Schreiben Sie uns direkt per E-Mail oder WhatsApp, wir kümmern uns darum.",
       "mailtoNotice": "Ihr E-Mail-Programm öffnet sich mit der fertigen Nachricht.",
       "invalidEmail": "Bitte prüfen Sie die E-Mail-Adresse.",
       "invalidName": "Bitte nennen Sie uns Ihren Namen.",
@@ -329,9 +400,15 @@
 
   "notFound": {
     "title": "Seite nicht gefunden | Tradissea",
-    "heading": "Diese Seite ist auf der Überfahrt verloren gegangen",
-    "text": "Die gesuchte Adresse gibt es nicht oder sie hat den Kurs gewechselt. Kehren Sie zur Startseite zurück, dann segeln wir weiter.",
-    "button": "Zurück zur Startseite"
+    "eyebrow": "Fehler 404",
+    "heading": "Diese Seite gibt es nicht – genauso wenig wie „Macher“ in einem sorgfältig lektorierten Text",
+    "text": "Die Adresse, die Sie erreichen wollten, existiert nicht. Stöbern Sie einfach weiter auf der Website, dann kommen Sie ans Ziel.",
+    "button": "Zurück zur Startseite",
+    "buttonServices": "Leistungen ansehen",
+    "helpTitle": "Immer noch verloren?",
+    "helpText": "Schreiben Sie uns direkt, wir helfen Ihnen weiter.",
+    "helpButton": "Kontakt",
+    "imageAlt": "Papierschiff, das zwischen den Wellen treibt"
   },
 
   "legalPages": {

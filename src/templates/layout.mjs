@@ -10,6 +10,20 @@ export const esc = (value) =>
 /** Como esc(), pero evita que un número de teléfono se parta en dos líneas. */
 export const nbsp = (value) => esc(value).replace(/ /g, '&nbsp;');
 
+/** Enlace de correo sin la dirección completa en el HTML: los robots de spam
+ *  rastrean el patrón «algo@algo», así que se publica partido y el navegador
+ *  lo recompone. Sin JavaScript se lee «paula (arroba) tradissea.com» y el
+ *  enlace lleva al formulario de contacto. */
+export function mailLink({ email, fallbackHref = '#', className = '', inner = null, attrs = '' }) {
+  const [user, domain] = String(email).split('@');
+  const text = `${esc(user)}<span class="mail-at" aria-hidden="true">&#8202;(arroba)&#8202;</span>${esc(domain)}`;
+  return `<a class="mail-link${className ? ` ${className}` : ''}" href="${fallbackHref}" data-user="${esc(
+    user
+  )}" data-domain="${esc(domain)}"${attrs ? ` ${attrs}` : ''}>${
+    inner ? inner.replace('{{mail}}', `<span class="mail-text">${text}</span>`) : `<span class="mail-text">${text}</span>`
+  }</a>`;
+}
+
 export const icons = {
   mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 9 6 9-6"/></svg>',
   phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 5.5 5.5L16 12l4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 3.5 5.2 2 2 0 0 1 5.5 3z"/></svg>',
@@ -111,18 +125,26 @@ export function layout({
   bodyClass = '',
   content,
   jsonLd,
+  noindex = false,
   assets
 }) {
   const p = prefixFor(depth);
   const url = (key) => p + paths[key];
   const year = new Date().getFullYear();
 
+  /* Web de una sola página: el menú lleva a las secciones de la portada. Desde
+     la propia portada basta el ancla, para que el navegador se desplace en vez
+     de recargar; desde las páginas legales hace falta la ruta completa. */
+  const a = t.anchors;
+  const onHome = pageKey === 'home';
+  const section = (name) => (onHome ? `#${name}` : `${url('home')}#${name}`);
   const navItems = [
-    ['home', t.nav.home, url('home')],
-    ['services', t.nav.services, `${url('home')}#servicios`],
-    ['about', t.nav.about, url('about')],
-    ['contact', t.nav.contact, url('contact')]
+    ['home', t.nav.home, onHome ? '#top' : url('home')],
+    ['services', t.nav.services, section(a.services)],
+    ['about', t.nav.about, section(a.about)],
+    ['contact', t.nav.contact, section(a.contact)]
   ];
+  const contactHref = section(a.contact);
 
   const langLinks = langs
     .map((code) => {
@@ -148,9 +170,9 @@ export function layout({
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-<link rel="canonical" href="${site.domain}/${canonical}">
-${alternates}
-  <link rel="alternate" hreflang="x-default" href="${site.domain}/">
+${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${site.domain}/${canonical}">`}
+${noindex ? '' : `${alternates}
+  <link rel="alternate" hreflang="x-default" href="${site.domain}/">`}
 <meta name="theme-color" content="#00807e">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${esc(site.brand)}">
@@ -169,6 +191,7 @@ ${alternates}
 ${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : ''}
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ''}>
+<span id="top"></span>
 <a class="skip-link" href="#main">${esc(t.ui.skipToContent)}</a>
 ${announcement(site, t)}
 
@@ -182,15 +205,15 @@ ${announcement(site, t)}
       ${navItems
         .map(
           ([key, label, href]) =>
-            `<a href="${href}"${key === pageKey ? ' aria-current="page"' : ''}>${esc(label)}</a>`
+            `<a href="${href}" data-nav="${key}"${key === pageKey ? ' aria-current="page"' : ''}>${esc(label)}</a>`
         )
         .join('\n      ')}
-      <a class="btn btn--primary" href="${url('contact')}">${esc(t.nav.cta)}</a>
+      <a class="btn btn--primary" href="${contactHref}">${esc(t.nav.cta)}</a>
     </nav>
 
     <div class="header-actions">
       <nav class="lang" aria-label="${esc(t.ui.changeLanguage)}">${langLinks}</nav>
-      <a class="btn btn--primary" href="${url('contact')}">${esc(t.nav.cta)}</a>
+      <a class="btn btn--primary" href="${contactHref}">${esc(t.nav.cta)}</a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"
         aria-label="${esc(t.ui.openMenu)}" data-label-open="${esc(t.ui.openMenu)}" data-label-close="${esc(
     t.ui.closeMenu
@@ -226,17 +249,19 @@ ${seaDivider()}
       <div>
         <h2>${esc(t.footer.contactTitle)}</h2>
         <ul class="footer-links">
-          <li><a href="mailto:${esc(site.contact.email)}">${esc(site.contact.email)}</a></li>
-          <li><a href="tel:${esc(site.contact.phoneLink)}">${nbsp(site.contact.phone)}</a></li>
+          <li>${mailLink({ email: site.contact.email, fallbackHref: contactHref })}</li>
         </ul>
         <div class="social-row">
           <a href="${esc(site.contact.linkedin)}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">${
     icons.linkedin
   }</a>
-          <a href="${esc(site.contact.whatsapp)}" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">${
-    icons.whatsapp
-  }</a>
-          <a href="mailto:${esc(site.contact.email)}" aria-label="${esc(t.contact.emailLabel)}">${icons.mail}</a>
+          ${mailLink({
+    email: site.contact.email,
+    fallbackHref: contactHref,
+    className: 'mail-link--icon',
+    inner: icons.mail,
+    attrs: `aria-label="${esc(t.contact.emailLabel)}"`
+  })}
         </div>
       </div>
 
@@ -252,14 +277,14 @@ ${seaDivider()}
 
     <div class="footer-bottom">
       <p>© ${year} ${esc(site.brand)}. ${esc(t.footer.rights)}</p>
-      <p><a href="#main">${esc(t.ui.toTop)}</a></p>
+      <p><a href="#top">${esc(t.ui.toTop)}</a></p>
     </div>
   </div>
 </footer>
 
 <script>window.TRADISSEA=${JSON.stringify({
     lang,
-    email: site.contact.email,
+    mail: { u: String(site.contact.email).split('@')[0], d: String(site.contact.email).split('@')[1] },
     formEndpoint: site.form.endpoint || '',
     mailSubject: site.brand,
     formText: t.contact.form

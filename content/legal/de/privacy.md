@@ -55,7 +55,7 @@ Sofern gesetzlich vorgeschrieben, können personenbezogene Daten an Behörden od
 
 ## Welche Rechte haben Sie und wie können Sie sie ausüben?
 
-Sie können Ihre Anliegen und die Ausübung Ihrer Rechte schriftlich an folgende E-Mail-Adresse richten: [paula@tradissea.com](mailto:paula@tradissea.com).
+Sie können Ihre Anliegen und die Ausübung Ihrer Rechte schriftlich an folgende E-Mail-Adresse richten: {{email}}.
 
 Nach den Datenschutzvorschriften können Sie Folgendes verlangen:
 

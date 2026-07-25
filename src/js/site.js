@@ -7,6 +7,10 @@
   var doc = document;
   var config = window.TRADISSEA || {};
 
+  /* Marca que hay JavaScript: algunos efectos parten de un estado oculto y no
+     deben aplicarse si el visitante navega sin él. */
+  doc.documentElement.classList.add('js');
+
   /* ---------- Recordar el idioma elegido ---------- */
   try {
     if (config.lang) localStorage.setItem('tradissea-lang', config.lang);
@@ -25,6 +29,320 @@
         );
       });
     }
+  }
+
+  var reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ---------- Correo: se recompone en el navegador ----------
+     En el HTML solo hay «paula (arroba) tradissea.com» partido en dos
+     atributos, para que los rastreadores de spam no encuentren la dirección. */
+  Array.prototype.forEach.call(doc.querySelectorAll('.mail-link'), function (link) {
+    var address = link.dataset.user + '@' + link.dataset.domain;
+    link.href = 'mailto:' + address;
+    var slot = link.querySelector('.mail-text');
+    if (slot) slot.textContent = address;
+  });
+
+  /* ---------- Eslogan escrito a máquina ----------
+     La primera vez se escribe entero; después solo se borra y se reescribe la
+     parte final que cambia («cultures» → «languages» → «translations»). */
+  var typer = doc.querySelector('[data-typewriter]');
+  if (typer) {
+    var phrases = [];
+    try { phrases = JSON.parse(typer.dataset.typewriter) || []; } catch (e) { phrases = []; }
+    var slot = typer.querySelector('.type-text');
+
+    if (slot && phrases.length > 1 && !reduceMotionQuery.matches) {
+      /* Prefijo común a todas las frases: eso no se vuelve a escribir. */
+      var stem = phrases[0];
+      phrases.forEach(function (phrase) {
+        var i = 0;
+        while (i < stem.length && i < phrase.length && stem[i] === phrase[i]) i += 1;
+        stem = stem.slice(0, i);
+      });
+      stem = stem.replace(/\S+$/, ''); // corta por la última palabra completa
+
+      var index = 0;
+      var shown = phrases[0].length;
+      var erasing = true;
+
+      var tick = function () {
+        var current = phrases[index];
+        slot.textContent = current.slice(0, shown);
+
+        var wait = erasing ? 38 : 70;
+        if (erasing && shown <= stem.length) {
+          erasing = false;
+          index = (index + 1) % phrases.length;
+          wait = 260;
+        } else if (!erasing && shown >= current.length) {
+          erasing = true;
+          wait = 2100;
+        } else {
+          shown += erasing ? -1 : 1;
+        }
+        setTimeout(tick, wait);
+      };
+      setTimeout(tick, 2200);
+    }
+  }
+
+  /* ---------- Títulos que se escriben (con su errata y su corrección) ----------
+     El texto real vive en un span oculto para lectores de pantalla; lo que se
+     anima es una copia marcada como decorativa, así que sin JavaScript o con
+     «reducir movimiento» el título se ve completo desde el principio. */
+  var NEARBY = {
+    a: 'sqz', b: 'vn', c: 'xv', d: 'sf', e: 'wr', f: 'dg', g: 'fh', h: 'gj', i: 'uo',
+    j: 'hk', k: 'jl', l: 'kñ', m: 'n', n: 'mb', o: 'ip', p: 'oó', q: 'wa', r: 'et',
+    s: 'ad', t: 'ry', u: 'yi', v: 'cb', w: 'qe', x: 'zc', y: 'tu', z: 'xs'
+  };
+
+  var typeInto = function (heading) {
+    var slot = heading.querySelector('.type-in__text');
+    if (!slot) return;
+    var full = slot.textContent;
+    var letters = full.split('');
+
+    /* Se escoge una letra de la segunda mitad para equivocarse en ella. */
+    var typoAt = -1;
+    for (var i = Math.floor(full.length * 0.45); i < full.length - 1; i += 1) {
+      if (NEARBY[full[i].toLowerCase()]) { typoAt = i; break; }
+    }
+    var wrong = '';
+    if (typoAt > -1) {
+      var options = NEARBY[full[typoAt].toLowerCase()];
+      wrong = options[Math.floor(Math.random() * options.length)];
+      if (full[typoAt] === full[typoAt].toUpperCase()) wrong = wrong.toUpperCase();
+    }
+
+    var escapeHtml = function (text) {
+      return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    };
+
+    heading.classList.add('is-typing');
+    slot.textContent = '';
+    var at = 0;
+
+    /* Con la errata puesta, se siguen tecleando un par de letras antes de
+       darse cuenta: entonces se borra hasta el fallo y se reescribe bien. */
+    var typoRun = function () {
+      var head = escapeHtml(full.slice(0, typoAt));
+      var typo = '<span class="type-typo">' + escapeHtml(wrong) + '</span>';
+      var extra = Math.min(2 + Math.floor(Math.random() * 2), full.length - typoAt - 1);
+      var written = 0;
+
+      var keepGoing = function () {
+        slot.innerHTML = head + typo + escapeHtml(full.slice(typoAt + 1, typoAt + 1 + written));
+        if (written < extra) {
+          written += 1;
+          setTimeout(keepGoing, 70 + Math.random() * 50);
+          return;
+        }
+        /* Se para en seco al ver el error… */
+        setTimeout(function () {
+          var erase = function () {
+            if (written > 0) {
+              written -= 1;
+              slot.innerHTML = head + typo + escapeHtml(full.slice(typoAt + 1, typoAt + 1 + written));
+              setTimeout(erase, 55);
+              return;
+            }
+            /* …y se corrige. */
+            slot.textContent = full.slice(0, typoAt);
+            setTimeout(function () {
+              at = typoAt + 1;
+              slot.textContent = full.slice(0, at);
+              setTimeout(write, 90);
+            }, 170);
+          };
+          erase();
+        }, 520);
+      };
+      keepGoing();
+    };
+
+    var write = function () {
+      if (at === typoAt) {
+        typoRun();
+        return;
+      }
+      at += 1;
+      slot.textContent = full.slice(0, at);
+      if (at < letters.length) {
+        setTimeout(write, 45 + Math.random() * 45);
+      } else {
+        setTimeout(function () { heading.classList.remove('is-typing'); }, 900);
+      }
+    };
+    setTimeout(write, 120);
+  };
+
+  /* ---------- El convoy recorre la línea de paradas ---------- */
+  var runLine = function (wrap) {
+    var track = wrap.querySelector('.line__track');
+    var progress = wrap.querySelector('[data-line-progress]');
+    var train = wrap.querySelector('[data-line-train]');
+    var dots = wrap.querySelectorAll('.line__dot');
+    var stops = wrap.querySelectorAll('.line__stop');
+    if (!track || !train || !dots.length) return;
+
+    wrap.classList.add('is-running');
+
+    /* Posición de cada estación medida sobre el contenedor, no sobre la vía:
+       la vía se recorta después y sus medidas ya no servirían. */
+    var wrapBox = wrap.getBoundingClientRect();
+    var first = dots[0].getBoundingClientRect();
+    var lastDot = dots[dots.length - 1].getBoundingClientRect();
+    var vertical = lastDot.top - first.top > Math.abs(lastDot.left - first.left);
+
+    var origin = vertical
+      ? first.top + first.height / 2 - wrapBox.top
+      : first.left + first.width / 2 - wrapBox.left;
+
+    var marks = [];
+    Array.prototype.forEach.call(dots, function (dot) {
+      var box = dot.getBoundingClientRect();
+      var pos = vertical
+        ? box.top + box.height / 2 - wrapBox.top
+        : box.left + box.width / 2 - wrapBox.left;
+      marks.push(pos - origin);
+    });
+
+    /* La vía empieza en la primera estación y acaba en la última. */
+    var span = marks[marks.length - 1];
+    if (vertical) {
+      track.style.top = origin + 'px';
+      track.style.bottom = 'auto';
+      track.style.height = span + 'px';
+    } else {
+      track.style.left = origin + 'px';
+      track.style.right = 'auto';
+      track.style.width = span + 'px';
+    }
+
+    var perLeg = 1500;  // tiempo entre estaciones
+    var dwell = 1000;   // parada en cada estación
+    var frames = [];
+    var times = [];
+    var clock = 0;
+    marks.forEach(function (pos, i) {
+      if (i > 0) clock += perLeg;
+      times.push(clock);
+      frames.push({ offset: 0, at: clock, pos: pos });
+      clock += dwell;
+      frames.push({ offset: 0, at: clock, pos: pos });
+    });
+    var total = clock;
+
+    var keyframes = frames.map(function (frame) {
+      return vertical
+        ? { top: frame.pos + 'px', offset: total ? frame.at / total : 0 }
+        : { left: frame.pos + 'px', offset: total ? frame.at / total : 0 };
+    });
+    var fill = frames.map(function (frame) {
+      return vertical
+        ? { height: frame.pos + 'px', offset: total ? frame.at / total : 0 }
+        : { width: frame.pos + 'px', offset: total ? frame.at / total : 0 };
+    });
+
+    if (typeof train.animate === 'function') {
+      train.animate(keyframes, { duration: total, easing: 'ease-in-out', fill: 'forwards' });
+      if (progress) progress.animate(fill, { duration: total, easing: 'ease-in-out', fill: 'forwards' });
+    } else if (progress) {
+      progress.style[vertical ? 'height' : 'width'] = '100%';
+    }
+
+    /* Cada estación se enciende cuando el convoy llega, y su texto queda
+       destacado mientras el convoy está parado en ella. */
+    Array.prototype.forEach.call(stops, function (stop, i) {
+      setTimeout(function () {
+        stop.classList.add('is-on', 'is-current');
+      }, times[i] || 0);
+      setTimeout(function () {
+        stop.classList.remove('is-current');
+      }, (times[i] || 0) + dwell + 420);
+    });
+  };
+
+  var headings = doc.querySelectorAll('[data-type-in]');
+  var lineWrap = doc.querySelector('[data-line]');
+
+  if (!('IntersectionObserver' in window) || reduceMotionQuery.matches) {
+    if (lineWrap) {
+      Array.prototype.forEach.call(lineWrap.querySelectorAll('.line__stop'), function (stop) {
+        stop.classList.add('is-on');
+      });
+      var staticProgress = lineWrap.querySelector('[data-line-progress]');
+      if (staticProgress) staticProgress.style.width = '100%';
+    }
+  } else {
+    var sceneObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          sceneObserver.unobserve(el);
+          if (el.hasAttribute('data-line')) runLine(el);
+          else typeInto(el);
+        });
+      },
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.35 }
+    );
+    Array.prototype.forEach.call(headings, function (el) { sceneObserver.observe(el); });
+    if (lineWrap) sceneObserver.observe(lineWrap);
+  }
+
+  /* ---------- El menú subraya la sección que se está leyendo ----------
+     Se mira qué sección cruza una línea imaginaria a un tercio de la pantalla;
+     es más estable que fiarse de cuánta parte de cada sección se ve, porque
+     unas son mucho más largas que otras. */
+  var spy = [];
+  Array.prototype.forEach.call(doc.querySelectorAll('#primary-nav a[data-nav]'), function (link) {
+    var target = link.getAttribute('href') || '';
+    var id = target.indexOf('#') > -1 ? target.split('#')[1] : '';
+    /* «Inicio» no es una sección: lo gestiona aparte homeLink. */
+    var section = id && id !== 'main' && id !== 'top' ? doc.getElementById(id) : null;
+    if (section) spy.push({ link: link, section: section });
+  });
+  var homeLink = doc.querySelector('#primary-nav a[data-nav="home"]');
+
+  if (spy.length) {
+    var mark = function (active) {
+      spy.forEach(function (item) {
+        if (item === active) item.link.setAttribute('aria-current', 'true');
+        else item.link.removeAttribute('aria-current');
+      });
+      if (homeLink) {
+        if (active) homeLink.removeAttribute('aria-current');
+        else homeLink.setAttribute('aria-current', 'page');
+      }
+    };
+
+    var updateSpy = function () {
+      var line = window.scrollY + window.innerHeight * 0.34;
+      var bottom = window.scrollY + window.innerHeight;
+      var active = null;
+      spy.forEach(function (item) {
+        var top = item.section.getBoundingClientRect().top + window.scrollY;
+        if (top <= line) active = item;
+      });
+      /* Al llegar al final de la página gana siempre la última sección. */
+      if (bottom >= doc.documentElement.scrollHeight - 4) active = spy[spy.length - 1];
+      mark(active);
+    };
+
+    var spyTicking = false;
+    var onSpyScroll = function () {
+      if (spyTicking) return;
+      spyTicking = true;
+      window.requestAnimationFrame(function () {
+        spyTicking = false;
+        updateSpy();
+      });
+    };
+    updateSpy();
+    window.addEventListener('scroll', onSpyScroll, { passive: true });
+    window.addEventListener('resize', onSpyScroll, { passive: true });
   }
 
   /* ---------- Cabecera con sombra al hacer scroll ---------- */
@@ -75,7 +393,7 @@
     var slotBody = serviceDialog.querySelector('[data-service-dialog-body]');
     var scroller = serviceDialog.querySelector('[data-service-scroll]');
     var closeBtn = serviceDialog.querySelector('[data-service-close]');
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var reduceMotion = reduceMotionQuery;
     var canAnimate = typeof panel.animate === 'function';
     var openCard = null;
 
@@ -225,7 +543,7 @@
   var wave = doc.querySelector('[data-wave]');
   var splash = wave && wave.querySelector('[data-wave-splash]');
 
-  if (wave && splash && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (wave && splash && !reduceMotionQuery.matches) {
     var TONES = ['#ffffff', '#c9efff', '#84cce4', '#a8e0f5'];
     /* Los tres signos del patrón de Tradissea. «scale» compensa el tamaño de
        cada dibujo: la eszett ocupa toda la caja tipográfica y la virgulilla o
@@ -418,7 +736,8 @@
       lines.push(data.message || '');
       lines.push('');
       lines.push(data.email || '');
-      return 'mailto:' + (config.email || '') +
+      var mail = config.mail ? config.mail.u + '@' + config.mail.d : '';
+      return 'mailto:' + mail +
         '?subject=' + encodeURIComponent((config.mailSubject || 'Web') + ' — ' + (data.name || '')) +
         '&body=' + encodeURIComponent(lines.join('\n'));
     };

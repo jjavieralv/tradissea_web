@@ -10,12 +10,11 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
-import { layout, prefixFor, esc } from './src/templates/layout.mjs';
+import { layout, prefixFor, esc, mailLink } from './src/templates/layout.mjs';
 import { homePage } from './src/templates/home.mjs';
-import { aboutPage } from './src/templates/about.mjs';
-import { contactPage } from './src/templates/contact.mjs';
 import { legalPage, notFoundPage } from './src/templates/legal.mjs';
 import { markdownToHtml } from './src/lib/markdown.mjs';
+import { buildDotMap } from './src/lib/dotmap.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const CONTENT = path.join(ROOT, 'content');
@@ -93,8 +92,10 @@ checkTranslations(
   languages.filter((lang) => lang !== site.defaultLanguage).map((lang) => ({ lang, data: translations[lang] }))
 );
 
-/* Rutas de cada página por idioma (relativas a la raíz del sitio). */
-const PAGE_KEYS = ['home', 'about', 'contact', 'legal', 'privacy', 'cookies'];
+/* Rutas de cada página por idioma (relativas a la raíz del sitio).
+   La web es de una sola página: servicios, quiénes somos y contacto son
+   secciones de la portada, no páginas propias. */
+const PAGE_KEYS = ['home', 'legal', 'privacy', 'cookies'];
 const pathsByLang = Object.fromEntries(
   languages.map((lang) => {
     const routes = translations[lang].routes;
@@ -120,6 +121,19 @@ write(path.join('assets', 'css', assets.css), css);
 write(path.join('assets', 'js', assets.js), js);
 write('.nojekyll', '');
 
+/* ---------- Mapa de clientes ----------
+   Se dibuja en cada compilación a partir de las coordenadas de site.json, así
+   que basta con añadir un cliente para que su país aparezca resaltado. */
+{
+  const topo = readJson(path.join(ROOT, 'scripts', 'countries-110m.json'));
+  const pins = site.clients.filter((client) => typeof client.lat === 'number');
+  const map = buildDotMap(topo, pins);
+  write(path.join('assets', 'img', 'world-dots.svg'), map.svg);
+  if (pins.length && !map.countries.length) {
+    warnings.push('El mapa no ha reconocido ningún país: revisa lat/lon en site.json');
+  }
+}
+
 /* ---------- Datos estructurados ---------- */
 function jsonLdFor(lang, t) {
   return {
@@ -128,8 +142,6 @@ function jsonLdFor(lang, t) {
     name: site.brand,
     description: t.home.description,
     url: `${site.domain}/${pathsByLang[lang].home}`,
-    email: site.contact.email,
-    telephone: site.contact.phone,
     image: `${site.domain}/assets/img/og-image.jpg`,
     logo: `${site.domain}/assets/img/logo-tradissea.png`,
     sameAs: [site.contact.linkedin],
@@ -143,11 +155,12 @@ function jsonLdFor(lang, t) {
 /* ---------- Generación de páginas ---------- */
 const sitemapEntries = [];
 
-const renderPage = ({ lang, pageKey, depth, title, description, content, jsonLd, canonicalKey, bodyClass }) => {
+const renderPage = ({ lang, pageKey, depth, title, description, content, jsonLd, canonicalKey, bodyClass, noindex }) => {
   const t = translations[lang];
   const paths = pathsByLang[lang];
+  const key = canonicalKey || pageKey;
   const altPaths = Object.fromEntries(
-    languages.map((code) => [code, pathsByLang[code][canonicalKey || pageKey]])
+    languages.map((code) => [code, pathsByLang[code][key] || `${code}/404/`])
   );
 
   return layout({
@@ -159,7 +172,8 @@ const renderPage = ({ lang, pageKey, depth, title, description, content, jsonLd,
     depth,
     paths,
     altPaths,
-    canonical: paths[canonicalKey || pageKey],
+    canonical: paths[key] || `${lang}/404/`,
+    noindex,
     title,
     description,
     content,
@@ -188,34 +202,6 @@ for (const lang of languages) {
   );
   sitemapEntries.push({ lang, key: 'home', priority: '1.0' });
 
-  /* Sobre nosotros */
-  write(
-    path.join(paths.about, 'index.html'),
-    renderPage({
-      lang,
-      pageKey: 'about',
-      depth: 2,
-      title: t.about.title,
-      description: t.about.description,
-      content: aboutPage({ site, t, depth: 2, paths })
-    })
-  );
-  sitemapEntries.push({ lang, key: 'about', priority: '0.8' });
-
-  /* Contacto */
-  write(
-    path.join(paths.contact, 'index.html'),
-    renderPage({
-      lang,
-      pageKey: 'contact',
-      depth: 2,
-      title: t.contact.title,
-      description: t.contact.description,
-      content: contactPage({ site, t, depth: 2, paths })
-    })
-  );
-  sitemapEntries.push({ lang, key: 'contact', priority: '0.8' });
-
   /* Páginas legales */
   const legalDocs = [
     { key: 'legal', file: 'legal.md' },
@@ -241,7 +227,10 @@ for (const lang of languages) {
         content: legalPage({
           t,
           heading: meta.heading,
-          html: markdownToHtml(fs.readFileSync(source, 'utf8')),
+          html: markdownToHtml(fs.readFileSync(source, 'utf8')).replace(
+            /\{\{email\}\}/g,
+            mailLink({ email: site.contact.email, fallbackHref: `../#${t.anchors.contact}` })
+          ),
           notice: t.legalPages.translationNotice
         })
       })
@@ -250,21 +239,64 @@ for (const lang of languages) {
   }
 }
 
-/* ---------- Página 404 (rutas absolutas) ---------- */
-{
-  const lang = site.defaultLanguage;
+/* ---------- Páginas 404 ----------
+   El servidor solo puede servir un archivo para las direcciones que no existen,
+   así que se genera una página 404 completa por idioma y, en la raíz, un
+   redirector que elige la del idioma del visitante. */
+for (const lang of languages) {
   const t = translations[lang];
   const paths = pathsByLang[lang];
   write(
-    '404.html',
+    `${lang}/404/index.html`,
     renderPage({
       lang,
-      pageKey: 'home',
+      pageKey: 'notFound',
       depth: -1,
       title: t.notFound.title,
       description: t.notFound.text,
-      content: notFoundPage({ t, paths })
+      noindex: true,
+      content: notFoundPage({ t, paths, anchors: t.anchors })
     })
+  );
+}
+
+{
+  const fallback = site.defaultLanguage;
+  const routes = Object.fromEntries(languages.map((lang) => [lang, `/${lang}/404/`]));
+  write(
+    '404.html',
+    `<!DOCTYPE html>
+<html lang="${fallback}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>${esc(translations[fallback].notFound.title)}</title>
+<link rel="icon" href="/assets/img/favicon.ico" sizes="any">
+<script>
+(function () {
+  var routes = ${JSON.stringify(routes)};
+  var available = ${JSON.stringify(languages)};
+  var chosen = null;
+  try { chosen = localStorage.getItem('tradissea-lang'); } catch (e) {}
+  if (available.indexOf(chosen) === -1) chosen = null;
+  if (!chosen) {
+    var preferred = navigator.languages || [navigator.language || ''];
+    for (var i = 0; i < preferred.length && !chosen; i++) {
+      var code = String(preferred[i]).slice(0, 2).toLowerCase();
+      if (available.indexOf(code) !== -1) chosen = code;
+    }
+  }
+  window.location.replace(routes[chosen || '${fallback}']);
+})();
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=/${fallback}/404/"></noscript>
+</head>
+<body>
+<p><a href="/${fallback}/404/">${esc(translations[fallback].notFound.heading)}</a></p>
+</body>
+</html>
+`
   );
 }
 

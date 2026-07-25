@@ -51,7 +51,7 @@ In compliance with current legislation, Tradissea states that the data will be k
 
 The data will also be processed in a lawful, fair, transparent, adequate, relevant, limited, accurate and up-to-date manner. Tradissea therefore undertakes to adopt all reasonable technical and security measures to ensure that data are deleted or rectified without delay when they are inaccurate or untrue.
 
-In accordance with data protection legislation, users may exercise their rights of access, rectification, restriction of processing, erasure, portability and objection to the processing of their personal data, as well as withdraw the consent given for such processing. Requests should be sent to the following email address: [paula@tradissea.com](mailto:paula@tradissea.com).
+In accordance with data protection legislation, users may exercise their rights of access, rectification, restriction of processing, erasure, portability and objection to the processing of their personal data, as well as withdraw the consent given for such processing. Requests should be sent to the following email address: {{email}}.
 
 ## Right to modify this legal notice
 
