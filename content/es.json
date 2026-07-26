@@ -48,6 +48,58 @@
     "play": "Reanudar el aviso en movimiento"
   },
 
+  "game": {
+    "_comment": "Página del juego «La palabra del día». Donde pone {percent} se escribe solo el descuento configurado en site.json.",
+    "route": "descuentos",
+    "title": "La palabra del día | Tradissea",
+    "description": "Adivina la palabra del día y consigue un {percent} % de descuento en tu próximo encargo de traducción.",
+    "eyebrow": "Descuentos",
+    "heading": "La palabra del día",
+    "lead": "Seis intentos para adivinar una palabra de cinco letras. Si la aciertas, te llevas un {percent} % de descuento en tu próximo encargo.",
+    "howTitle": "Cómo se juega",
+    "how": [
+      "Escribe una palabra de cinco letras y pulsa Enter.",
+      "Los colores te dicen lo cerca que estás.",
+      "Tienes seis intentos y una palabra nueva cada día."
+    ],
+    "legendTitle": "Qué significan los colores",
+    "legend": [
+      { "state": "ok", "label": "En su sitio", "text": "La letra está en la palabra y en esa posición." },
+      { "state": "near", "label": "Casi", "text": "La letra está en la palabra, pero en otro sitio." },
+      { "state": "off", "label": "Fuera", "text": "La letra no está en la palabra." }
+    ],
+    "board": "Tablero de juego",
+    "keyboard": "Teclado",
+    "enter": "Enter",
+    "delete": "Borrar",
+    "rowLabel": "Intento {n} de 6",
+    "shortWord": "Faltan letras: la palabra tiene cinco.",
+    "notAWord": "Esa palabra no aparece en el diccionario.",
+    "checking": "Comprobando la palabra…",
+    "cellEmpty": "Letra {n}, vacía. Púlsala para escribir aquí.",
+    "cellFilled": "Letra {n}: {letter}. Púlsala para cambiarla.",
+    "checkNote": "Las palabras se comprueban en Wikcionario, así que hace falta conexión.",
+    "alreadyPlayed": "Ya has jugado hoy. ¡Vuelve mañana!",
+    "guessResult": "Intento {n}: {word}. {result}",
+    "winTitle": "¡Acertaste!",
+    "winText": "La palabra era {word}. Aquí tienes tu {percent} % de descuento:",
+    "loseTitle": "Hoy no ha podido ser",
+    "loseText": "La palabra era {word}. Mañana hay una nueva.",
+    "codeLabel": "Tu código de descuento",
+    "copy": "Copiar código",
+    "copied": "Código copiado",
+    "useTitle": "Cómo usarlo",
+    "useText": "Escríbenos con el código y aplicaremos el descuento a tu presupuesto.",
+    "useButton": "Pedir presupuesto con el código",
+    "termsTitle": "Condiciones",
+    "terms": [
+      "Un {percent} % de descuento sobre el presupuesto de un encargo nuevo.",
+      "Válido durante los 30 días siguientes a la fecha del código.",
+      "No acumulable con otras promociones y aplicable a un solo encargo por cliente."
+    ],
+    "backHome": "Volver al inicio"
+  },
+
   "nav": {
     "home": "Inicio",
     "services": "Servicios",
@@ -383,7 +435,8 @@
       "invalidEmail": "Revisa la dirección de correo electrónico.",
       "invalidName": "Dinos cómo te llamas, por favor.",
       "invalidMessage": "Cuéntanos brevemente qué necesitas.",
-      "invalidConsent": "Necesitamos tu consentimiento para poder responderte."
+      "invalidConsent": "Necesitamos tu consentimiento para poder responderte.",
+      "codeIntro": "Código de descuento:"
     }
   },
 

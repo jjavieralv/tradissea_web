@@ -1,0 +1,42 @@
+{
+  "_comment": "Palabras del juego «La palabra del día», una lista por idioma. Todas deben tener 5 LETRAS, en mayúsculas y SIN tildes, diéresis ni ñ (el teclado del juego no las incluye). Cada día se juega con la siguiente de la lista y, cuando se acaba, vuelve a empezar: con 10 palabras el ciclo dura 10 días. Añade las que quieras.",
+
+  "es": [
+    "TILDE",
+    "VERBO",
+    "FRASE",
+    "PROSA",
+    "LETRA",
+    "GLOSA",
+    "MAREA",
+    "VELAS",
+    "COSTA",
+    "PUNTO"
+  ],
+
+  "en": [
+    "IDIOM",
+    "PROSE",
+    "COMMA",
+    "VERBS",
+    "DRAFT",
+    "VOICE",
+    "WAVES",
+    "SHORE",
+    "TERMS",
+    "NOUNS"
+  ],
+
+  "de": [
+    "WORTE",
+    "PROSA",
+    "KOMMA",
+    "VERSE",
+    "SILBE",
+    "TEXTE",
+    "WELLE",
+    "SEGEL",
+    "ANKER",
+    "MEERE"
+  ]
+}

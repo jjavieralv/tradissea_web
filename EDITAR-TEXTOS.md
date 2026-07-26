@@ -5,7 +5,8 @@ nada de código: se edita el texto, se guarda y la web se actualiza.
 
 ```
 content/
-├── site.json      → datos de contacto, vídeo, logotipos de clientes
+├── site.json      → datos de contacto, vídeo, logotipos de clientes, descuento
+├── words.json     → palabras del juego «La palabra del día»
 ├── es.json        → todos los textos en español
 ├── en.json        → todos los textos en inglés
 ├── de.json        → todos los textos en alemán
@@ -68,6 +69,7 @@ aparte.
 | Sección «Contacto» y el formulario | `contact` |
 | Pie de página y eslogan que se escribe solo | `footer` |
 | Página de error 404 | `notFound` |
+| Página de descuentos y su juego | `game` |
 | Títulos de las páginas legales | `legalPages` |
 
 El eslogan que se escribe solo en la portada («Navigating cultures…») sale de
@@ -99,8 +101,9 @@ Una palabra en **negrita** y un [enlace](https://ejemplo.com).
 
 Están en `content/site.json`:
 
-- **`contact`** → correo, teléfono, WhatsApp y LinkedIn. Si cambias el teléfono,
-  cambia también `phoneLink` (el mismo número sin espacios, con el prefijo `+34`).
+- **`contact`** → correo y LinkedIn, que son las vías que aparecen en la web. El
+  teléfono y el WhatsApp siguen guardados ahí por si algún día quieres volver a
+  mostrarlos, pero ahora mismo no se publican en ninguna página.
 - **`video.youtubeId`** → el identificador del vídeo de YouTube. En una dirección
   como `youtube.com/watch?v=EFWKsBNPzo0`, el identificador es `EFWKsBNPzo0`.
   Si lo dejas vacío (`""`), la sección del vídeo desaparece.
@@ -117,6 +120,51 @@ Para que los robots de spam no lo recojan, en el código la dirección va partid
 en dos y el navegador la recompone al abrir la página. Se ve y funciona con
 normalidad, pero **si cambias el correo hazlo solo en `site.json`**: el resto de
 la web (pie, contacto, textos legales y formulario) lo toma de ahí.
+
+---
+
+## 4 ter. El juego «La palabra del día»
+
+La página de descuentos (`tradissea.com/es/descuentos/`) tiene un juego: seis
+intentos para adivinar una palabra de cinco letras. Quien acierta recibe un
+código de descuento.
+
+**Las palabras** están en `content/words.json`, diez por idioma. Cada día se
+juega con la siguiente de la lista, así que con diez palabras el ciclo dura diez
+días y luego vuelve a empezar: si quieres que tarde más en repetirse, añade más.
+Deben ser de **cinco letras, en mayúsculas y sin tildes ni ñ**.
+
+**El descuento** se define en `content/site.json`:
+
+```json
+"discount": {
+  "enabled": true,
+  "percent": 10,
+  "prefix": "TRAD"
+}
+```
+
+El número de `percent` aparece solo en todos los textos de la página (donde
+pone `{percent}`) y **dentro del propio código**. Con `"enabled": false` la
+página desaparece de la web.
+
+**Las palabras que escribe la gente se comprueban en Wikcionario**, así que no
+se pueden meter cinco letras al azar. Si alguien juega sin conexión, el juego
+acepta la palabra en vez de bloquearse. Esa consulta está declarada en la
+política de cookies.
+
+**Cómo son los códigos:** `TRAD-10-2607-6AKA`
+
+- `TRAD` → el prefijo que hayas puesto
+- `10` → el descuento, en tanto por ciento
+- `2607` → día y mes en que se ganó
+- `6AKA` → firma de ese día concreto
+
+Cuando alguien te escriba con un código, comprueba que el descuento y la fecha
+cuadran. Ten en cuenta que la web es estática: no hay forma de impedir del todo
+que alguien con conocimientos técnicos genere un código sin jugar. Para un
+descuento pequeño no compensa preocuparse; si algún día quieres códigos
+infalsificables, habría que añadir un servidor.
 
 ---
 

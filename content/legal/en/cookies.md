@@ -11,12 +11,15 @@ To remember the language you choose, we save a preference in your browser's loca
 | Name | Type | Purpose | Duration |
 | --- | --- | --- | --- |
 | tradissea-lang | Local storage (technical) | Remembering the language you selected so that the website is shown in the same language on your next visit. | Until you delete it from your browser |
+| tradissea-word-es, -en, -de | Local storage (technical) | Saving your progress in the «Word of the day» game so you can pick up where you left off. | Until you delete it from your browser |
 
 ## Third-party content
 
 The home page includes a video hosted on YouTube (Google Ireland Limited). The video **is not loaded until you press the play button**: until then, no connection is made to YouTube and no third-party cookie is installed.
 
 If you decide to play it, YouTube may install its own cookies and process data in accordance with its own privacy policy, over which Tradissea has no control. You can read it at [policies.google.com/privacy](https://policies.google.com/privacy).
+
+On the discounts page, the «Word of the day» game checks with **Wiktionary** (Wikimedia Foundation) that the word you typed exists. That request is only made when you submit a guess and sends Wikimedia the visitor's IP address and the word being checked, under the [Wikimedia privacy policy](https://foundation.wikimedia.org/wiki/Policy:Privacy_policy). Without a connection the game still works, simply without checking.
 
 The same applies if you follow the links to social media or other external sites: once you leave this website, their own policies apply.
 

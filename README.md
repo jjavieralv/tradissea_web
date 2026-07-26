@@ -39,7 +39,8 @@ dist/               Resultado (no se versiona; se genera al publicar)
 
 - `/es/`, `/en/`, `/de/`: una sola página con todas las secciones (inicio,
   servicios, especialidades, tecnología, proceso, vídeo, quiénes somos y
-  contacto) más tres páginas legales por idioma (14 páginas en total).
+  contacto), tres páginas legales, la página de descuentos con el juego y un
+  404 por idioma.
 - `/index.html` que detecta el idioma del navegador y redirige.
 - `404.html`, `sitemap.xml`, `robots.txt`, `.nojekyll`.
 - Enlaces `hreflang` entre idiomas, datos estructurados JSON-LD y etiquetas
@@ -82,8 +83,13 @@ a la raíz del dominio.
 - **Mapa de clientes**: mapamundi de puntos generado desde datos abiertos
   (Natural Earth vía world-atlas) con el script `scripts/dotmap.mjs`; pesa 37 KB
   (unos 6 KB al servirse comprimido) y no depende de ningún servicio externo.
-- **Sin cookies ni rastreo.** Solo se guarda el idioma elegido en el navegador
-  (`localStorage`).
+- **Sin cookies ni rastreo.** En `localStorage` solo se guardan el idioma
+  elegido y la partida del día del juego.
+- **«La palabra del día»** (`/es/descuentos/`): juego propio, sin librerías. La
+  palabra sale de la fecha, así que es la misma para todos sin servidor, y viaja
+  codificada para que no se lea en el código de la página. El código de
+  descuento incluye el porcentaje configurado en `site.json`. No usa el nombre
+  ni el diseño de Wordle, que son marca del New York Times.
 - **El vídeo de YouTube no se carga hasta que se pulsa el play**, y entonces usa
   `youtube-nocookie.com`.
 - **Tipografías alojadas en el propio dominio**: no se conecta con Google Fonts.

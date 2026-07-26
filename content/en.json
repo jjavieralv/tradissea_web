@@ -48,6 +48,58 @@
     "play": "Resume the scrolling notice"
   },
 
+  "game": {
+    "_comment": "Word of the day page. {percent} is replaced with the discount set in site.json.",
+    "route": "discounts",
+    "title": "Word of the day | Tradissea",
+    "description": "Guess the word of the day and get {percent}% off your next translation project.",
+    "eyebrow": "Discounts",
+    "heading": "Word of the day",
+    "lead": "Six tries to guess a five-letter word. Get it right and you take {percent}% off your next project.",
+    "howTitle": "How to play",
+    "how": [
+      "Type a five-letter word and press Enter.",
+      "The colours tell you how close you are.",
+      "You have six tries and a new word every day."
+    ],
+    "legendTitle": "What the colours mean",
+    "legend": [
+      { "state": "ok", "label": "In place", "text": "The letter is in the word and in that position." },
+      { "state": "near", "label": "Close", "text": "The letter is in the word, but somewhere else." },
+      { "state": "off", "label": "Not there", "text": "The letter is not in the word." }
+    ],
+    "board": "Game board",
+    "keyboard": "Keyboard",
+    "enter": "Enter",
+    "delete": "Delete",
+    "rowLabel": "Try {n} of 6",
+    "shortWord": "Not enough letters: the word has five.",
+    "notAWord": "That word is not in the dictionary.",
+    "checking": "Checking the word…",
+    "cellEmpty": "Letter {n}, empty. Select it to type here.",
+    "cellFilled": "Letter {n}: {letter}. Select it to change it.",
+    "checkNote": "Words are checked against Wiktionary, so a connection is needed.",
+    "alreadyPlayed": "You have already played today. Come back tomorrow!",
+    "guessResult": "Try {n}: {word}. {result}",
+    "winTitle": "You got it!",
+    "winText": "The word was {word}. Here is your {percent}% discount:",
+    "loseTitle": "Not today",
+    "loseText": "The word was {word}. There will be a new one tomorrow.",
+    "codeLabel": "Your discount code",
+    "copy": "Copy code",
+    "copied": "Code copied",
+    "useTitle": "How to use it",
+    "useText": "Write to us with the code and we will apply the discount to your quote.",
+    "useButton": "Request a quote with the code",
+    "termsTitle": "Terms",
+    "terms": [
+      "{percent}% off the quote for a new project.",
+      "Valid for 30 days from the date of the code.",
+      "Cannot be combined with other offers; one project per client."
+    ],
+    "backHome": "Back to home"
+  },
+
   "nav": {
     "home": "Home",
     "services": "Services",
@@ -383,7 +435,8 @@
       "invalidEmail": "Please check the email address.",
       "invalidName": "Please tell us your name.",
       "invalidMessage": "Please tell us briefly what you need.",
-      "invalidConsent": "We need your consent in order to reply to you."
+      "invalidConsent": "We need your consent in order to reply to you.",
+      "codeIntro": "Discount code:"
     }
   },
 

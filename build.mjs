@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 import { layout, prefixFor, esc, mailLink } from './src/templates/layout.mjs';
 import { homePage } from './src/templates/home.mjs';
 import { legalPage, notFoundPage } from './src/templates/legal.mjs';
+import { gamePage } from './src/templates/game.mjs';
 import { markdownToHtml } from './src/lib/markdown.mjs';
 import { buildDotMap } from './src/lib/dotmap.mjs';
 
@@ -50,6 +51,17 @@ function write(relative, contents) {
 }
 
 const hash = (contents) => crypto.createHash('sha1').update(contents).digest('hex').slice(0, 8);
+
+/* Ofuscación ligera de las palabras del juego (XOR + base64). */
+const WORD_KEY = 'tradissea';
+const encodeWord = (word) =>
+  Buffer.from(
+    word
+      .split('')
+      .map((letter, i) => String.fromCharCode(letter.charCodeAt(0) ^ WORD_KEY.charCodeAt(i % WORD_KEY.length)))
+      .join(''),
+    'binary'
+  ).toString('base64');
 
 /* ---------- Comprobación de traducciones ---------- */
 function collectKeys(value, prefix = '', acc = []) {
@@ -96,6 +108,7 @@ checkTranslations(
    La web es de una sola página: servicios, quiénes somos y contacto son
    secciones de la portada, no páginas propias. */
 const PAGE_KEYS = ['home', 'legal', 'privacy', 'cookies'];
+const gameOn = Boolean(site.discount && site.discount.enabled !== false);
 const pathsByLang = Object.fromEntries(
   languages.map((lang) => {
     const routes = translations[lang].routes;
@@ -103,9 +116,25 @@ const pathsByLang = Object.fromEntries(
       const slug = routes[key] || '';
       return [key, slug ? `${lang}/${slug}/` : `${lang}/`];
     });
+    if (gameOn) entries.push(['game', `${lang}/${translations[lang].game.route}/`]);
     return [lang, Object.fromEntries(entries)];
   })
 );
+
+/* El porcentaje de descuento se escribe una sola vez, en site.json: en los
+   textos se pone {percent} y aquí se sustituye. */
+const percent = String((site.discount && site.discount.percent) || 0);
+const fillPercent = (value) => {
+  if (typeof value === 'string') return value.replace(/\{percent\}/g, percent);
+  if (Array.isArray(value)) return value.map(fillPercent);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, fillPercent(item)]));
+  }
+  return value;
+};
+for (const lang of languages) {
+  if (translations[lang].game) translations[lang].game = fillPercent(translations[lang].game);
+}
 
 /* ---------- Assets ---------- */
 rmrf(DIST);
@@ -155,7 +184,7 @@ function jsonLdFor(lang, t) {
 /* ---------- Generación de páginas ---------- */
 const sitemapEntries = [];
 
-const renderPage = ({ lang, pageKey, depth, title, description, content, jsonLd, canonicalKey, bodyClass, noindex }) => {
+const renderPage = ({ lang, pageKey, depth, title, description, content, jsonLd, canonicalKey, bodyClass, noindex, game }) => {
   const t = translations[lang];
   const paths = pathsByLang[lang];
   const key = canonicalKey || pageKey;
@@ -174,6 +203,7 @@ const renderPage = ({ lang, pageKey, depth, title, description, content, jsonLd,
     altPaths,
     canonical: paths[key] || `${lang}/404/`,
     noindex,
+    game,
     title,
     description,
     content,
@@ -236,6 +266,41 @@ for (const lang of languages) {
       })
     );
     sitemapEntries.push({ lang, key: doc.key, priority: '0.3' });
+  }
+}
+
+/* ---------- Página del juego ---------- */
+if (gameOn) {
+  const words = readJson(path.join(CONTENT, 'words.json'));
+  for (const lang of languages) {
+    const t = translations[lang];
+    const list = (words[lang] || []).map((word) => String(word).trim().toUpperCase());
+    const wrong = list.filter((word) => word.length !== 5);
+    if (wrong.length) warnings.push(`[words.json → ${lang}] no tienen 5 letras: ${wrong.join(', ')}`);
+    if (!list.length) {
+      warnings.push(`[words.json → ${lang}] no hay palabras: el juego quedará vacío`);
+      continue;
+    }
+
+    write(
+      path.join(pathsByLang[lang].game, 'index.html'),
+      renderPage({
+        lang,
+        pageKey: 'game',
+        depth: 2,
+        title: t.game.title,
+        description: t.game.description,
+        content: gamePage({ site, t, depth: 2, paths: pathsByLang[lang] }),
+        game: {
+          /* Las palabras viajan codificadas para que no se lean de un vistazo
+             en el código de la página. No es seguridad, es cortesía. */
+          words: list.map(encodeWord),
+          percent: Number(percent),
+          prefix: (site.discount && site.discount.prefix) || 'TRAD'
+        }
+      })
+    );
+    sitemapEntries.push({ lang, key: 'game', priority: '0.5' });
   }
 }
 

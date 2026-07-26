@@ -669,9 +669,398 @@
     }
   }
 
+  /* ---------- La palabra del día ----------
+     Juego de seis intentos para adivinar una palabra de cinco letras. La
+     palabra del día sale de la fecha, así que es la misma para todo el mundo
+     sin necesidad de servidor. */
+  var gameRoot = doc.querySelector('[data-game]');
+
+  if (gameRoot && config.game && config.game.words && config.game.words.length) {
+    var G = config.game;
+    var text = G.text || {};
+    var LETTERS = 5;
+    var TRIES = 6;
+
+    var decode = function (encoded) {
+      var key = 'tradissea';
+      var raw = window.atob(encoded);
+      var out = '';
+      for (var i = 0; i < raw.length; i += 1) {
+        out += String.fromCharCode(raw.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+      }
+      return out;
+    };
+
+    /* Día del calendario en horario local, sin la hora. */
+    var today = new Date();
+    var stamp =
+      today.getFullYear() +
+      '-' +
+      ('0' + (today.getMonth() + 1)).slice(-2) +
+      '-' +
+      ('0' + today.getDate()).slice(-2);
+    var dayNumber = Math.floor(
+      Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) / 86400000
+    );
+    var answer = decode(G.words[dayNumber % G.words.length]);
+
+    var board = gameRoot.querySelector('[data-board]');
+    var keyboard = gameRoot.querySelector('[data-keyboard]');
+    var status = gameRoot.querySelector('[data-game-status]');
+    var resultBox = gameRoot.querySelector('[data-game-result]');
+    var resultTitle = gameRoot.querySelector('[data-result-title]');
+    var resultText = gameRoot.querySelector('[data-result-text]');
+    var codeBox = gameRoot.querySelector('[data-code-box]');
+    var codeSlot = gameRoot.querySelector('[data-code]');
+    var codeLink = gameRoot.querySelector('[data-code-link]');
+    var copyBtn = gameRoot.querySelector('[data-copy]');
+
+    var row = 0;
+    var letters = ['', '', '', '', ''];
+    var caret = 0;
+    var checking = false;
+    var finished = false;
+    var known = {};   // palabras ya consultadas en el diccionario
+
+    var storeKey = 'tradissea-word-' + (config.lang || 'es');
+    var saved = null;
+    try { saved = JSON.parse(localStorage.getItem(storeKey) || 'null'); } catch (e) { saved = null; }
+    if (!saved || saved.day !== stamp) saved = { day: stamp, guesses: [], done: false, won: false };
+
+    var announce = gameRoot.querySelector('[data-game-say]');
+    /* Los avisos cortos se ven; el detalle de cada intento solo se anuncia
+       para quien navega con lector de pantalla. */
+    var say = function (message) {
+      if (status) status.textContent = message || '';
+    };
+    var readOut = function (message) {
+      if (announce) announce.textContent = message || '';
+    };
+
+    /* Código del día: lleva el descuento dentro y se puede comprobar a mano. */
+    var makeCode = function () {
+      var seed = stamp + answer + G.prefix;
+      var sum = 0;
+      for (var i = 0; i < seed.length; i += 1) sum = (sum * 31 + seed.charCodeAt(i)) % 1679616;
+      var tail = sum.toString(36).toUpperCase();
+      while (tail.length < 4) tail = '0' + tail;
+      return (
+        G.prefix +
+        '-' + G.percent +
+        '-' + stamp.slice(8, 10) + stamp.slice(5, 7) +
+        '-' + tail.slice(-4)
+      );
+    };
+
+    /* Compara el intento con la solución: primero los aciertos de posición y
+       después las letras sueltas, sin repetir las ya consumidas. */
+    var scoreOf = function (guess) {
+      var marks = new Array(LETTERS).fill('off');
+      var pool = {};
+      var i;
+      for (i = 0; i < LETTERS; i += 1) {
+        if (guess[i] === answer[i]) marks[i] = 'ok';
+        else pool[answer[i]] = (pool[answer[i]] || 0) + 1;
+      }
+      for (i = 0; i < LETTERS; i += 1) {
+        if (marks[i] === 'ok') continue;
+        if (pool[guess[i]]) {
+          marks[i] = 'near';
+          pool[guess[i]] -= 1;
+        }
+      }
+      return marks;
+    };
+
+    var tileAt = function (r, c) {
+      return board.querySelector('.tile[data-row="' + r + '"][data-col="' + c + '"]');
+    };
+
+    var paintRow = function (r, guess, marks, animate) {
+      for (var i = 0; i < LETTERS; i += 1) {
+        (function (index) {
+          var tile = tileAt(r, index);
+          if (!tile) return;
+          var apply = function () {
+            tile.querySelector('.tile__letter').textContent = guess[index];
+            tile.classList.remove('is-filled');
+            tile.classList.add('is-' + marks[index]);
+          };
+          if (animate && !reduceMotionQuery.matches) {
+            setTimeout(function () {
+              tile.classList.add('is-revealing');
+              setTimeout(apply, 220);
+              setTimeout(function () { tile.classList.remove('is-revealing'); }, 520);
+            }, index * 160);
+          } else {
+            apply();
+          }
+          var key = keyboard.querySelector('.key[data-key="' + guess[index] + '"]');
+          if (key) {
+            var rank = { off: 0, near: 1, ok: 2 };
+            var now = key.classList.contains('is-ok') ? 'ok' : key.classList.contains('is-near') ? 'near' : key.classList.contains('is-off') ? 'off' : null;
+            if (now === null || rank[marks[index]] > rank[now]) {
+              key.classList.remove('is-ok', 'is-near', 'is-off');
+              key.classList.add('is-' + marks[index]);
+            }
+          }
+        })(i);
+      }
+    };
+
+    var drawCurrent = function () {
+      /* El cursor solo puede estar en un sitio: se limpia todo el tablero antes
+         de marcarlo, o al cambiar de fila se quedaría parpadeando en la
+         anterior. */
+      Array.prototype.forEach.call(board.querySelectorAll('.tile.is-caret'), function (tile) {
+        tile.classList.remove('is-caret');
+      });
+      for (var i = 0; i < LETTERS; i += 1) {
+        var tile = tileAt(row, i);
+        if (!tile) continue;
+        tile.querySelector('.tile__letter').textContent = letters[i] || '';
+        tile.classList.toggle('is-filled', Boolean(letters[i]));
+        tile.classList.toggle('is-caret', i === caret && !finished);
+        var label = letters[i]
+          ? String(text.cellFilled || '').replace('{n}', String(i + 1)).replace('{letter}', letters[i])
+          : String(text.cellEmpty || '').replace('{n}', String(i + 1));
+        tile.setAttribute('aria-label', label);
+      }
+    };
+
+    /* Solo se puede escribir en la fila que toca. */
+    var openRow = function () {
+      Array.prototype.forEach.call(board.querySelectorAll('.tile'), function (tile) {
+        tile.disabled = finished || Number(tile.dataset.row) !== row;
+      });
+      drawCurrent();
+    };
+
+    var wordOf = function () {
+      return letters.join('');
+    };
+
+    var finish = function (won, animate) {
+      finished = true;
+      Array.prototype.forEach.call(board.querySelectorAll('.tile'), function (tile) {
+        tile.disabled = true;
+        tile.classList.remove('is-caret');
+      });
+      resultBox.hidden = false;
+      resultTitle.textContent = won ? text.winTitle : text.loseTitle;
+      var template = won ? text.winText : text.loseText;
+      resultText.textContent = String(template || '').replace('{word}', answer);
+      if (won) {
+        var code = makeCode();
+        codeBox.hidden = false;
+        codeSlot.textContent = code;
+        if (codeLink) {
+          var base = codeLink.getAttribute('href').split('?')[0].split('#');
+          codeLink.setAttribute('href', base[0] + '?code=' + encodeURIComponent(code) + (base[1] ? '#' + base[1] : ''));
+        }
+      }
+      if (animate) {
+        setTimeout(function () {
+          resultBox.scrollIntoView({ block: 'nearest', behavior: reduceMotionQuery.matches ? 'auto' : 'smooth' });
+        }, 900);
+      }
+    };
+
+    /* ¿Existe la palabra? Se pregunta a Wikcionario, que cubre los tres
+       idiomas. Si la consulta falla o tarda, se da por buena: nadie debería
+       quedarse sin jugar por un problema de red. */
+    var wordExists = function (word) {
+      if (known[word] !== undefined) return Promise.resolve(known[word]);
+      if (!window.fetch) return Promise.resolve(true);
+
+      var lang = config.lang || 'es';
+      var lower = word.toLowerCase();
+      var capital = lower.charAt(0).toUpperCase() + lower.slice(1);
+      var url =
+        'https://' + lang + '.wiktionary.org/w/api.php?action=query&format=json&origin=*&titles=' +
+        encodeURIComponent(lower + '|' + capital);
+
+      var stop = null;
+      var signal;
+      if (window.AbortController) {
+        var ctrl = new AbortController();
+        signal = ctrl.signal;
+        stop = setTimeout(function () { ctrl.abort(); }, 2500);
+      }
+
+      return fetch(url, { signal: signal })
+        .then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (data) {
+          if (stop) clearTimeout(stop);
+          if (!data || !data.query || !data.query.pages) return true;
+          var pages = data.query.pages;
+          var exists = Object.keys(pages).some(function (id) { return !('missing' in pages[id]); });
+          known[word] = exists;
+          return exists;
+        })
+        .catch(function () {
+          if (stop) clearTimeout(stop);
+          return true;
+        });
+    };
+
+    var shake = function () {
+      var line = board.querySelectorAll('.board__row')[row];
+      if (!line) return;
+      line.classList.add('is-wrong');
+      setTimeout(function () { line.classList.remove('is-wrong'); }, 400);
+    };
+
+    var submit = function () {
+      if (finished || checking) return;
+      var current = wordOf();
+      if (current.length < LETTERS || letters.some(function (l) { return !l; })) {
+        say(text.shortWord);
+        shake();
+        return;
+      }
+
+      /* Las palabras del juego no hace falta comprobarlas. */
+      if (current !== answer) {
+        checking = true;
+        say(text.checking);
+        wordExists(current).then(function (exists) {
+          checking = false;
+          if (!exists) {
+            say(text.notAWord);
+            shake();
+            return;
+          }
+          say('');
+          play(current);
+        });
+        return;
+      }
+      play(current);
+    };
+
+    var play = function (current) {
+      var marks = scoreOf(current);
+      paintRow(row, current, marks, true);
+      saved.guesses.push(current);
+
+      var summary = String(text.guessResult || '')
+        .replace('{n}', String(row + 1))
+        .replace('{word}', current.split('').join(' '))
+        .replace(
+          '{result}',
+          marks
+            .map(function (mark, i) {
+              var name = (text.legend || []).filter(function (item) { return item.state === mark; })[0];
+              return current[i] + ': ' + (name ? name.label : mark);
+            })
+            .join(', ')
+        );
+      readOut(summary);
+      say('');
+
+      var won = current === answer;
+      row += 1;
+      letters = ['', '', '', '', ''];
+      caret = 0;
+      openRow();
+
+      if (won || row >= TRIES) {
+        saved.done = true;
+        saved.won = won;
+        setTimeout(function () { finish(won, true); }, 900);
+      }
+      try { localStorage.setItem(storeKey, JSON.stringify(saved)); } catch (e) { /* sin almacenamiento */ }
+    };
+
+    var press = function (key) {
+      if (finished || checking) return;
+      if (key === 'ENTER') { submit(); return; }
+
+      if (key === 'DEL') {
+        /* Borra la letra del cursor o, si está vacío, la anterior. */
+        if (letters[caret]) {
+          letters[caret] = '';
+        } else if (caret > 0) {
+          caret -= 1;
+          letters[caret] = '';
+        }
+        drawCurrent();
+        return;
+      }
+
+      if (!/^[A-ZÑ]$/.test(key)) return;
+      letters[caret] = key;
+      /* Salta al siguiente hueco libre; si no queda ninguno, se queda donde está. */
+      var next = caret + 1;
+      while (next < LETTERS && letters[next]) next += 1;
+      caret = next < LETTERS ? next : Math.min(caret + 1, LETTERS - 1);
+      drawCurrent();
+    };
+
+    /* Al pulsar una casilla, el cursor se coloca ahí para cambiar esa letra. */
+    board.addEventListener('click', function (ev) {
+      var tile = ev.target.closest('.tile');
+      if (!tile || tile.disabled || finished) return;
+      if (Number(tile.dataset.row) !== row) return;
+      caret = Number(tile.dataset.col);
+      drawCurrent();
+      tile.focus();
+    });
+
+    keyboard.addEventListener('click', function (ev) {
+      var key = ev.target.closest('.key');
+      if (key) press(key.dataset.key);
+    });
+
+    doc.addEventListener('keydown', function (ev) {
+      if (ev.metaKey || ev.ctrlKey || ev.altKey) return;
+      if (ev.target.closest('input, textarea, select')) return;
+      if (ev.key === 'Enter') { press('ENTER'); return; }
+      if (ev.key === 'Backspace') { press('DEL'); return; }
+      var letter = ev.key.toUpperCase();
+      if (/^[A-ZÑ]$/.test(letter)) press(letter);
+    });
+
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function () {
+        var code = codeSlot.textContent;
+        var done = function () {
+          copyBtn.textContent = copyBtn.dataset.done;
+          setTimeout(function () { copyBtn.textContent = copyBtn.dataset.label; }, 2200);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(code).then(done, function () {});
+        }
+      });
+    }
+
+    /* Se recupera la partida del día si ya se había empezado. */
+    if (saved.guesses.length) {
+      saved.guesses.forEach(function (guess, index) {
+        paintRow(index, guess, scoreOf(guess), false);
+      });
+      row = saved.guesses.length;
+    }
+    openRow();
+    if (saved.done) {
+      finish(saved.won, false);
+      say(text.alreadyPlayed);
+    }
+  }
+
   /* ---------- Formulario de contacto ---------- */
   var form = doc.querySelector('form[data-contact-form]');
   if (form) {
+    /* Si se llega desde el juego con un código, el mensaje ya viene escrito. */
+    try {
+      var codeParam = new URLSearchParams(window.location.search).get('code');
+      if (codeParam && form.elements.message && !form.elements.message.value) {
+        var intro = (config.formText && config.formText.codeIntro) || 'Código de descuento:';
+        form.elements.message.value = intro + ' ' + codeParam + '\n\n';
+        form.elements.message.focus({ preventScroll: true });
+      }
+    } catch (e) { /* URL sin parámetros */ }
     var status = form.querySelector('.form-status');
     var submit = form.querySelector('button[type="submit"]');
     var t = config.formText || {};

@@ -11,12 +11,15 @@ Um die von Ihnen gewählte Sprache zu speichern, legen wir eine Einstellung im l
 | Name | Art | Zweck | Dauer |
 | --- | --- | --- | --- |
 | tradissea-lang | Lokaler Speicher (technisch) | Speichern der gewählten Sprache, damit die Website beim nächsten Besuch in derselben Sprache angezeigt wird. | Bis Sie sie im Browser löschen |
+| tradissea-word-es, -en, -de | Lokaler Speicher (technisch) | Speichern des Spielstands beim Spiel «Wort des Tages», damit Sie später weiterspielen können. | Bis Sie sie im Browser löschen |
 
 ## Inhalte Dritter
 
 Auf der Startseite binden wir ein Video ein, das bei YouTube (Google Ireland Limited) gehostet wird. Das Video **wird erst geladen, wenn Sie auf die Wiedergabe-Schaltfläche klicken**: Bis dahin wird keine Verbindung zu YouTube hergestellt und kein Cookie Dritter gesetzt.
 
 Wenn Sie das Video abspielen, kann YouTube eigene Cookies setzen und Daten gemäß seiner eigenen Datenschutzerklärung verarbeiten, auf die Tradissea keinen Einfluss hat. Sie finden sie unter [policies.google.com/privacy](https://policies.google.com/privacy).
+
+Auf der Rabattseite prüft das Spiel «Wort des Tages» im **Wiktionary** (Wikimedia Foundation), ob das eingegebene Wort existiert. Diese Abfrage erfolgt nur beim Absenden eines Versuchs und übermittelt Wikimedia die IP-Adresse der Besucherin bzw. des Besuchers sowie das geprüfte Wort, gemäß der [Datenschutzrichtlinie von Wikimedia](https://foundation.wikimedia.org/wiki/Policy:Privacy_policy). Ohne Verbindung funktioniert das Spiel weiterhin, dann eben ohne Prüfung.
 
 Dasselbe gilt, wenn Sie Links zu sozialen Netzwerken oder anderen externen Seiten folgen: Sobald Sie diese Website verlassen, gelten deren eigene Richtlinien.
 

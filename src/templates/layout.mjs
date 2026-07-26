@@ -126,6 +126,7 @@ export function layout({
   content,
   jsonLd,
   noindex = false,
+  game = null,
   assets
 }) {
   const p = prefixFor(depth);
@@ -268,6 +269,7 @@ ${seaDivider()}
       <div>
         <h2>${esc(t.footer.legalTitle)}</h2>
         <ul class="footer-links">
+          ${paths.game ? `<li><a href="${url('game')}">${esc(t.game.eyebrow)}</a></li>` : ''}
           <li><a href="${url('legal')}">${esc(t.footer.legal)}</a></li>
           <li><a href="${url('privacy')}">${esc(t.footer.privacy)}</a></li>
           <li><a href="${url('cookies')}">${esc(t.footer.cookies)}</a></li>
@@ -287,7 +289,15 @@ ${seaDivider()}
     mail: { u: String(site.contact.email).split('@')[0], d: String(site.contact.email).split('@')[1] },
     formEndpoint: site.form.endpoint || '',
     mailSubject: site.brand,
-    formText: t.contact.form
+    formText: t.contact.form,
+    game: game
+      ? {
+          words: game.words,
+          percent: game.percent,
+          prefix: game.prefix,
+          text: t.game
+        }
+      : null
   })};</script>
 <script src="${p}assets/js/${assets.js}" defer></script>
 </body>

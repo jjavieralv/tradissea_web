@@ -48,6 +48,58 @@
     "play": "Laufenden Hinweis fortsetzen"
   },
 
+  "game": {
+    "_comment": "Seite «Wort des Tages». {percent} wird durch den in site.json festgelegten Rabatt ersetzt.",
+    "route": "rabatte",
+    "title": "Wort des Tages | Tradissea",
+    "description": "Erraten Sie das Wort des Tages und erhalten Sie {percent} % Rabatt auf Ihren nächsten Übersetzungsauftrag.",
+    "eyebrow": "Rabatte",
+    "heading": "Wort des Tages",
+    "lead": "Sechs Versuche für ein Wort aus fünf Buchstaben. Wer es errät, bekommt {percent} % Rabatt auf den nächsten Auftrag.",
+    "howTitle": "So wird gespielt",
+    "how": [
+      "Geben Sie ein Wort aus fünf Buchstaben ein und drücken Sie die Eingabetaste.",
+      "Die Farben zeigen, wie nah Sie dran sind.",
+      "Sie haben sechs Versuche und jeden Tag ein neues Wort."
+    ],
+    "legendTitle": "Was die Farben bedeuten",
+    "legend": [
+      { "state": "ok", "label": "Richtig", "text": "Der Buchstabe steht im Wort und an dieser Stelle." },
+      { "state": "near", "label": "Fast", "text": "Der Buchstabe kommt vor, steht aber woanders." },
+      { "state": "off", "label": "Nicht dabei", "text": "Der Buchstabe kommt im Wort nicht vor." }
+    ],
+    "board": "Spielfeld",
+    "keyboard": "Tastatur",
+    "enter": "Eingabe",
+    "delete": "Löschen",
+    "rowLabel": "Versuch {n} von 6",
+    "shortWord": "Es fehlen Buchstaben: Das Wort hat fünf.",
+    "notAWord": "Dieses Wort steht nicht im Wörterbuch.",
+    "checking": "Wort wird geprüft …",
+    "cellEmpty": "Buchstabe {n}, leer. Auswählen, um hier zu schreiben.",
+    "cellFilled": "Buchstabe {n}: {letter}. Auswählen, um ihn zu ändern.",
+    "checkNote": "Die Wörter werden im Wiktionary geprüft, dafür ist eine Verbindung nötig.",
+    "alreadyPlayed": "Sie haben heute schon gespielt. Kommen Sie morgen wieder!",
+    "guessResult": "Versuch {n}: {word}. {result}",
+    "winTitle": "Erraten!",
+    "winText": "Das Wort war {word}. Hier ist Ihr Rabatt von {percent} %:",
+    "loseTitle": "Heute leider nicht",
+    "loseText": "Das Wort war {word}. Morgen gibt es ein neues.",
+    "codeLabel": "Ihr Rabattcode",
+    "copy": "Code kopieren",
+    "copied": "Code kopiert",
+    "useTitle": "So lösen Sie ihn ein",
+    "useText": "Schreiben Sie uns mit dem Code und wir ziehen den Rabatt von Ihrem Angebot ab.",
+    "useButton": "Angebot mit dem Code anfordern",
+    "termsTitle": "Bedingungen",
+    "terms": [
+      "{percent} % Rabatt auf das Angebot für einen neuen Auftrag.",
+      "Gültig 30 Tage ab dem Datum des Codes.",
+      "Nicht mit anderen Aktionen kombinierbar; ein Auftrag pro Kundin oder Kunde."
+    ],
+    "backHome": "Zurück zur Startseite"
+  },
+
   "nav": {
     "home": "Start",
     "services": "Leistungen",
@@ -383,7 +435,8 @@
       "invalidEmail": "Bitte prüfen Sie die E-Mail-Adresse.",
       "invalidName": "Bitte nennen Sie uns Ihren Namen.",
       "invalidMessage": "Bitte beschreiben Sie kurz, was Sie brauchen.",
-      "invalidConsent": "Wir benötigen Ihre Einwilligung, um Ihnen antworten zu können."
+      "invalidConsent": "Wir benötigen Ihre Einwilligung, um Ihnen antworten zu können.",
+      "codeIntro": "Rabattcode:"
     }
   },
 

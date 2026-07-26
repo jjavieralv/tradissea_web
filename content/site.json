@@ -12,6 +12,13 @@
     "linkedin": "https://www.linkedin.com/in/paula-barbero-urdiales/"
   },
 
+  "discount": {
+    "_comment": "Juego «La palabra del día» de la página de descuentos. «percent» es el descuento que se lleva quien acierta: aparece en los textos (donde pone {percent}) y dentro del código que genera el juego. «prefix» son las letras con las que empieza ese código. Pon \"enabled\": false para retirar la página.",
+    "enabled": true,
+    "percent": 10,
+    "prefix": "TRAD"
+  },
+
   "announcement": {
     "_comment": "Banner con texto en movimiento en lo alto de la web. Pon \"enabled\": false para quitarlo (o cambia el texto en es.json, en.json y de.json → announcement.text).",
     "enabled": true
