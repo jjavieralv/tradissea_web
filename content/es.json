@@ -131,6 +131,8 @@
 
     "services": {
       "title": "Servicios",
+      "carousel": "Servicios: desliza para verlos todos",
+      "goTo": "Ir a {name}",
       "intro": "Seis formas de acompañarte, desde la traducción técnica más exigente hasta la adaptación creativa de tu publicidad.",
       "items": [
         {

@@ -199,7 +199,7 @@ ${announcement(site, t)}
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="${url('home')}" aria-label="${esc(site.brand)} — ${esc(t.nav.home)}">
-      <img src="${p}assets/img/logo-tradissea.png" alt="${esc(t.ui.logoAlt)}" width="380" height="110">
+      <img src="${p}assets/img/logo-tradissea.svg" alt="${esc(t.ui.logoAlt)}" width="380" height="110">
     </a>
 
     <nav id="primary-nav" class="nav" aria-label="${esc(t.ui.menu)}">
@@ -234,7 +234,7 @@ ${seaDivider()}
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="${p}assets/img/logo-tradissea.png" alt="${esc(t.ui.logoAlt)}" width="360" height="104" loading="lazy">
+        <img src="${p}assets/img/logo-tradissea.svg" alt="${esc(t.ui.logoAlt)}" width="360" height="104" loading="lazy">
         <ul class="footer-tagline">
           ${t.footer.tagline.map((line) => `<li>${esc(line)}</li>`).join('\n          ')}
         </ul>

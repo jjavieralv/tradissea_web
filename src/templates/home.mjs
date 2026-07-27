@@ -93,7 +93,7 @@ export function homePage({ site, t, depth, paths }) {
     </div>
 
     <div class="hero-card">
-      <img src="${p}assets/img/logo-tradissea.png" alt="${esc(t.ui.logoAlt)}" width="380" height="110" fetchpriority="high">
+      <img src="${p}assets/img/logo-tradissea.svg" alt="${esc(t.ui.logoAlt)}" width="380" height="110" fetchpriority="high">
       <div class="hero-langs">
         <span>EN → ES</span>
         <span>DE → ES</span>
@@ -110,12 +110,28 @@ ${clientsBand({ site, t, depth })}
 
 <section class="section" id="${esc(a.services)}" aria-labelledby="services-title">
   <div class="wrap">
-    <div class="section-head section-head--center">
-      <h2 id="services-title" class="has-rule" data-type-in><span class="visually-hidden">${esc(h.services.title)}</span><span class="type-in__text" aria-hidden="true">${esc(h.services.title)}</span><span class="type-caret" aria-hidden="true"></span></h2>
-      <p>${esc(h.services.intro)}</p>
-    </div>
-    <div class="cards">
-      ${h.services.items.map(serviceCard).join('\n')}
+    <div class="cards-pin" data-cards-pin>
+      <div class="cards-pin__stage">
+        <div class="section-head section-head--center">
+          <h2 id="services-title" class="has-rule" data-type-in><span class="visually-hidden">${esc(h.services.title)}</span><span class="type-in__text" aria-hidden="true">${esc(h.services.title)}</span><span class="type-caret" aria-hidden="true"></span></h2>
+          <p>${esc(h.services.intro)}</p>
+        </div>
+
+        <div class="cards" data-cards role="group" aria-label="${esc(h.services.carousel)}">
+          ${h.services.items.map(serviceCard).join('\n')}
+        </div>
+
+        <div class="cards-nav" data-cards-nav aria-hidden="true">
+          ${h.services.items
+            .map(
+              (service, i) =>
+                `<button class="cards-nav__dot" type="button" data-go="${i}" tabindex="-1" title="${esc(
+                  h.services.goTo.replace('{name}', service.title)
+                )}"></button>`
+            )
+            .join('\n          ')}
+        </div>
+      </div>
     </div>
   </div>
 

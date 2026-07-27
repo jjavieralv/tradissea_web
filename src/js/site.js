@@ -669,6 +669,194 @@
     }
   }
 
+  /* ---------- Servicios: recorrido horizontal en el móvil ----------
+     La sección se queda clavada en pantalla y el scroll vertical va pasando las
+     tarjetas de lado. También se pueden arrastrar con el dedo: mientras alguien
+     lo hace mandan sus manos, y al soltar se recoloca el scroll de la página
+     para que corresponda con la tarjeta en la que se ha quedado. Como la
+     sección está fija, ese reajuste no se nota. */
+  var cards = doc.querySelector('[data-cards]');
+  var pin = doc.querySelector('[data-cards-pin]');
+  var cardsNav = doc.querySelector('[data-cards-nav]');
+
+  if (cards && pin) {
+    var dots = cardsNav ? cardsNav.querySelectorAll('.cards-nav__dot') : [];
+    var stage = pin.querySelector('.cards-pin__stage');
+    var manual = false;
+    var settle = null;
+    var ticking = false;
+
+    var pinned = function () {
+      return getComputedStyle(stage).position === 'sticky' && !reduceMotionQuery.matches;
+    };
+    var maxScroll = function () {
+      return Math.max(0, cards.scrollWidth - cards.clientWidth);
+    };
+
+    /* Respiro al entrar y al salir: la sección sigue clavada un poco antes de
+       que arranque el carrusel y otro poco después de que llegue al final, para
+       que el paso al scroll normal no sea de golpe. */
+    var hold = function () {
+      return Math.min(240, window.innerHeight * 0.3);
+    };
+
+    /* Altura del tramo clavado: la pantalla, más el recorrido de lado, más los
+       dos respiros. */
+    var measure = function () {
+      if (!pinned()) {
+        pin.style.height = '';
+        return;
+      }
+      pin.style.height = stage.offsetHeight + maxScroll() * 0.9 + hold() * 2 + 'px';
+    };
+
+    var paintDots = function () {
+      if (!dots.length) return;
+      var max = maxScroll();
+      var index = Math.round((max ? cards.scrollLeft / max : 0) * (dots.length - 1));
+      Array.prototype.forEach.call(dots, function (dot, i) {
+        dot.classList.toggle('is-on', i === index);
+      });
+    };
+
+    /* Cuánto se lleva recorrido del tramo clavado, de 0 a 1, descontando los
+       respiros de entrada y salida. */
+    var progress = function () {
+      var travel = pin.offsetHeight - stage.offsetHeight;
+      var pad = hold();
+      var useful = travel - pad * 2;
+      if (useful <= 0) return 0;
+      var moved = -pin.getBoundingClientRect().top - pad;
+      return Math.max(0, Math.min(1, moved / useful));
+    };
+
+    /* El objetivo lo marca el scroll, pero el carrusel lo persigue poco a poco:
+       así el movimiento sale continuo en vez de a tirones. */
+    var target = 0;
+    var eased = 0;
+    var gliding = false;
+
+    var glide = function () {
+      if (manual || !pinned()) {
+        gliding = false;
+        cards.classList.remove('is-auto');
+        return;
+      }
+      var diff = target - eased;
+      if (Math.abs(diff) < 0.4) {
+        eased = target;
+        cards.scrollLeft = eased;
+        applied = cards.scrollLeft;
+        paintDots();
+        gliding = false;
+        return;
+      }
+      eased += diff * 0.16;
+      cards.scrollLeft = eased;
+      applied = cards.scrollLeft;
+      paintDots();
+      window.requestAnimationFrame(glide);
+    };
+
+    var followScroll = function () {
+      if (!pinned() || manual) return;
+      var max = maxScroll();
+      if (!max) return;
+      cards.classList.add('is-auto');
+      target = progress() * max;
+      if (!gliding) {
+        gliding = true;
+        window.requestAnimationFrame(glide);
+      }
+    };
+
+    /* Al soltar, el scroll de la página se pone donde toca según la tarjeta. */
+    var syncPage = function () {
+      manual = false;
+      eased = cards.scrollLeft;
+      target = eased;
+      if (!pinned()) return;
+      var max = maxScroll();
+      var travel = pin.offsetHeight - stage.offsetHeight;
+      if (!max || travel <= 0) return;
+      var pad = hold();
+      var useful = Math.max(1, travel - pad * 2);
+      var top = pin.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: top + pad + (cards.scrollLeft / max) * useful, behavior: 'instant' });
+    };
+
+    var takeOver = function () {
+      manual = true;
+      cards.classList.remove('is-auto');
+      eased = cards.scrollLeft;
+      clearTimeout(settle);
+    };
+    var release = function () {
+      clearTimeout(settle);
+      settle = setTimeout(syncPage, 260);
+    };
+
+    /* Solo se cede el mando si el carrusel se mueve de lado por su cuenta: si
+       se detectara el simple hecho de tocarlo, bajar con el dedo apoyado en una
+       tarjeta congelaría el recorrido. */
+    var applied = -1;
+    cards.addEventListener('scroll', function () {
+      paintDots();
+      if (!pinned()) return;
+      if (Math.abs(cards.scrollLeft - applied) > 2) {
+        takeOver();
+        release();
+      }
+    }, { passive: true });
+
+    /* Rueda o trackpad en horizontal: eso sí es intención de moverlo. */
+    cards.addEventListener('wheel', function (ev) {
+      if (Math.abs(ev.deltaX) > Math.abs(ev.deltaY)) {
+        takeOver();
+        release();
+      }
+    }, { passive: true });
+
+    /* Al tabular a una tarjeta que no se ve, manda el foco. */
+    cards.addEventListener('focusin', function () {
+      takeOver();
+      release();
+    });
+
+    Array.prototype.forEach.call(dots, function (dot, i) {
+      dot.addEventListener('click', function () {
+        takeOver();
+        var card = cards.children[i];
+        if (!card) return;
+        cards.scrollTo({
+          left: card.offsetLeft - (cards.clientWidth - card.offsetWidth) / 2,
+          behavior: reduceMotionQuery.matches ? 'auto' : 'smooth'
+        });
+        release();
+      });
+    });
+
+    var onScroll = function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        ticking = false;
+        followScroll();
+      });
+    };
+
+    var onResize = function () {
+      measure();
+      followScroll();
+    };
+
+    measure();
+    paintDots();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
+    window.addEventListener('load', onResize);
+  }
+
   /* ---------- La palabra del día ----------
      Juego de seis intentos para adivinar una palabra de cinco letras. La
      palabra del día sale de la fecha, así que es la misma para todo el mundo

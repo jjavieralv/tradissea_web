@@ -30,10 +30,19 @@ src/templates/      Plantillas de cada página
 src/lib/            Conversor de Markdown
 static/img          Imágenes y logotipos
 static/fonts        Tipografías alojadas en el propio sitio
+assets-fuente/      Originales en alta resolución (no se publican)
 build.mjs           Generador del sitio
 serve.mjs           Servidor local
 dist/               Resultado (no se versiona; se genera al publicar)
 ```
+
+### El logotipo
+
+`static/img/logo-tradissea.svg` es vectorial: se ve nítido en cualquier pantalla
+y a cualquier tamaño, y pesa unos 7 KB al servirse comprimido. Se generó
+vectorizando el original en alta resolución, que se conserva en
+`assets-fuente/`. El PNG que queda en `static/img/` ya no se usa en las páginas;
+solo sirve para regenerar la imagen de redes sociales (`og-image.jpg`).
 
 ## Qué genera el build
 
@@ -67,6 +76,30 @@ En **Settings → Pages → Custom domain**, escribe `tradissea.com` y activa
 
 Alternativa: escribir el dominio en `content/site.json` → `"customDomain":
 "tradissea.com"` para que el build genere el archivo `CNAME`.
+
+## Publicar en Cloudflare
+
+La configuración está en [wrangler.toml](wrangler.toml): la web se publica como
+un Worker de «Static Assets», que no es más que Cloudflare sirviendo los
+archivos de `dist/` desde su red.
+
+A mano, desde el ordenador:
+
+```bash
+npm run deploy   # genera dist/ y la sube
+```
+
+La primera vez pedirá entrar en la cuenta de Cloudflare desde el navegador.
+
+Automático: en el panel de Cloudflare, **Workers & Pages → Create → Workers →
+Import a repository**, se elige el repositorio y Cloudflare ejecuta `node
+build.mjs` y publica en cada `push` a `main`.
+
+### Dominio propio en Cloudflare
+
+En el Worker, **Settings → Domains & Routes → Add → Custom domain**, se escribe
+`tradissea.com`. Si el dominio ya está en Cloudflare, los DNS y el HTTPS se
+configuran solos.
 
 ### Publicar en una subcarpeta
 

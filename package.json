@@ -7,7 +7,8 @@
   "scripts": {
     "build": "node build.mjs",
     "start": "node serve.mjs --port 4000",
-    "dev": "node serve.mjs --port 4000 --watch"
+    "dev": "node serve.mjs --port 4000 --watch",
+    "deploy": "node build.mjs && npx wrangler deploy"
   },
   "engines": {
     "node": ">=18"

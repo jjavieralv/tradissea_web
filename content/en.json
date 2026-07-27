@@ -131,6 +131,8 @@
 
     "services": {
       "title": "Services",
+      "carousel": "Services: swipe to see them all",
+      "goTo": "Go to {name}",
       "intro": "Six ways to work together, from the most demanding technical translation to the creative adaptation of your advertising.",
       "items": [
         {

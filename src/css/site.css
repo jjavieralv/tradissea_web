@@ -707,6 +707,71 @@ strong { font-weight: 600; }
   gap: clamp(1.1rem, 2.2vw, 1.6rem);
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
 }
+/* En el móvil los servicios se recorren en horizontal: la sección se queda
+   clavada en pantalla y el scroll vertical va pasando las tarjetas. También se
+   pueden mover con el dedo. */
+.cards-nav { display: none; }
+
+@media (max-width: 779px) {
+  .cards-pin__stage {
+    position: sticky;
+    top: 0;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.4rem;
+    padding-top: 4.75rem;   /* deja sitio a la cabecera fija */
+  }
+  .cards-pin__stage .section-head { margin-bottom: 1.5rem; }
+
+  .cards {
+    display: flex;
+    gap: 1rem;
+    /* Solo desplaza en horizontal: sin «overflow-y: hidden» el navegador lo
+       trata también como scroller vertical y se traga el gesto de bajar
+       cuando el dedo cae encima de una tarjeta. */
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    touch-action: pan-x pan-y;
+    /* «proximity» y no «mandatory»: al arrastrar con el dedo las tarjetas
+       encajan, pero permite posiciones intermedias. */
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: var(--gutter);
+    padding: 0.9rem var(--gutter) 1.6rem;
+    margin-inline: calc(var(--gutter) * -1);
+    scrollbar-width: none;
+  }
+  /* Mientras el movimiento lo lleva el scroll de la página, el ajuste por
+     tarjetas estorba: tiraría del carrusel en sentido contrario. */
+  .cards.is-auto { scroll-snap-type: none; }
+  .cards::-webkit-scrollbar { display: none; }
+  .cards > .card {
+    flex: 0 0 82%;
+    scroll-snap-align: center;
+  }
+
+  .cards-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.2rem;
+  }
+  .cards-nav__dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    padding: 0;
+    background: var(--line);
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.25s ease;
+  }
+  .cards-nav__dot.is-on { background: var(--teal); transform: scale(1.35); }
+}
+
 .card {
   position: relative;
   display: flex;
@@ -2028,6 +2093,8 @@ strong { font-weight: 600; }
 /* ---------- Preferencias del usuario ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .cards-pin { height: auto !important; }
+  .cards-pin__stage { position: static; min-height: 0; padding-top: 0; }
   *,
   *::before,
   *::after {

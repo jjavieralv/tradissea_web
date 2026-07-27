@@ -1,0 +1,18 @@
+# Despliegue en Cloudflare como Worker de "Static Assets".
+# Sirve directamente la web estática generada en `dist/` — sin código de Worker.
+#
+#   npm run build     genera dist/
+#   npm run deploy    genera dist/ y la publica  (equivale a: npx wrangler deploy)
+
+name = "tradissea-web"
+compatibility_date = "2025-06-01"
+
+[assets]
+directory = "./dist"
+
+# Si la dirección no existe, se devuelve el 404 del sitio (con su diseño)
+# en vez de la página de error genérica de Cloudflare.
+not_found_handling = "404-page"
+
+[build]
+command = "node build.mjs"

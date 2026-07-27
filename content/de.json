@@ -131,6 +131,8 @@
 
     "services": {
       "title": "Leistungen",
+      "carousel": "Leistungen: zum Ansehen wischen",
+      "goTo": "Zu {name}",
       "intro": "Sechs Wege der Zusammenarbeit – von der anspruchsvollsten Fachübersetzung bis zur kreativen Anpassung Ihrer Werbung.",
       "items": [
         {

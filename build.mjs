@@ -414,7 +414,7 @@ ${alternates}
 <body>
 <div class="picker">
   <div>
-    <img src="assets/img/logo-tradissea.png" alt="${esc(site.brand)}" width="760" height="220">
+    <img src="assets/img/logo-tradissea.svg" alt="${esc(site.brand)}" width="760" height="220">
     <div class="lang-options">
       ${options}
     </div>

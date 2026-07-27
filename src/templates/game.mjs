@@ -62,7 +62,7 @@ export function gamePage({ site, t, depth, paths }) {
 <section class="section section--tight">
   <div class="wrap game-layout">
     <div class="game" data-game>
-      <div class="board" data-board aria-label="${esc(g.board)}">
+      <div class="board" data-board role="group" aria-label="${esc(g.board)}">
       ${board}
       </div>
 
@@ -70,12 +70,12 @@ export function gamePage({ site, t, depth, paths }) {
       <p class="visually-hidden" data-game-say aria-live="polite"></p>
       <p class="game__note">${esc(g.checkNote)}</p>
 
-      <div class="keyboard" data-keyboard aria-label="${esc(g.keyboard)}">
+      <div class="keyboard" data-keyboard role="group" aria-label="${esc(g.keyboard)}">
       ${keyboard}
       </div>
 
       <div class="game__result" data-game-result hidden>
-        <h2 data-result-title></h2>
+        <h2 data-result-title>${esc(g.winTitle)}</h2>
         <p data-result-text></p>
         <div class="code" data-code-box hidden>
           <p class="code__label">${esc(g.codeLabel)}</p>
