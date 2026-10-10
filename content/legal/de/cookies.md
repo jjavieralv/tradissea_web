@@ -19,9 +19,13 @@ Auf der Startseite binden wir ein Video ein, das bei YouTube (Google Ireland Lim
 
 Wenn Sie das Video abspielen, kann YouTube eigene Cookies setzen und Daten gemäß seiner eigenen Datenschutzerklärung verarbeiten, auf die Tradissea keinen Einfluss hat. Sie finden sie unter [policies.google.com/privacy](https://policies.google.com/privacy).
 
-Auf der Rabattseite prüft das Spiel «Wort des Tages» im **Wiktionary** (Wikimedia Foundation), ob das eingegebene Wort existiert. Diese Abfrage erfolgt nur beim Absenden eines Versuchs und übermittelt Wikimedia die IP-Adresse der Besucherin bzw. des Besuchers sowie das geprüfte Wort, gemäß der [Datenschutzrichtlinie von Wikimedia](https://foundation.wikimedia.org/wiki/Policy:Privacy_policy). Ohne Verbindung funktioniert das Spiel weiterhin, dann eben ohne Prüfung.
+Auf der Rabattseite prüft das Spiel «Wort des Tages» im **Wiktionary** (Wikimedia Foundation), ob das eingegebene Wort existiert. Diese Abfrage stellt unser Cloudflare-Server, nicht Ihr Browser: Wikimedia erhält nur das Wort, nie Ihre IP-Adresse. Ohne Verbindung funktioniert das Spiel weiterhin, dann eben ohne Prüfung.
 
 Dasselbe gilt, wenn Sie Links zu sozialen Netzwerken oder anderen externen Seiten folgen: Sobald Sie diese Website verlassen, gelten deren eigene Richtlinien.
+
+## Hosting-Anbieter
+
+Diese Website wird bei **Cloudflare** gehostet. Erkennt Cloudflare verdächtigen Datenverkehr, kann es technische Sicherheits-Cookies (etwa __cf_bm oder cf_clearance) verwenden, um Menschen von automatisierten Programmen zu unterscheiden. Sie sind für den Schutz der Website unbedingt erforderlich, dienen nicht dazu, Sie zu verfolgen, und bedürfen keiner Einwilligung. Mehr dazu in der [Cookie-Richtlinie von Cloudflare](https://www.cloudflare.com/cookie-policy/).
 
 ## Wie Sie Ihre Cookie-Einstellungen ändern
 

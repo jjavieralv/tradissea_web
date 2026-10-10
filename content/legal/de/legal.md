@@ -1,6 +1,6 @@
 ## Rechtliche Angaben
 
-In Erfüllung der Informationspflicht gemäß Artikel 10 des spanischen Gesetzes 34/2002 vom 11. Juli über Dienste der Informationsgesellschaft und den elektronischen Geschäftsverkehr teilen wir Ihnen mit, dass die Inhalte dieser Website https://www.tradissea.com (nachfolgend die „Website") Tradissea gehören, mit Sitz in C/ Pinar de San José, 14. 28054 (Spanien) und der Steuernummer 50621525C. Dieses Impressum regelt die Nutzungsbedingungen des genannten Internetportals.
+In Erfüllung der Informationspflicht gemäß Artikel 10 des spanischen Gesetzes 34/2002 vom 11. Juli über Dienste der Informationsgesellschaft und den elektronischen Geschäftsverkehr teilen wir Ihnen mit, dass die Inhalte dieser Website https://www.tradissea.com (nachfolgend die „Website") Tradissea gehören, mit Sitz in Madrid, Spanien, E-Mail: {{email}}. Dieses Impressum regelt die Nutzungsbedingungen des genannten Internetportals.
 
 ## Zustimmung der Nutzerinnen und Nutzer
 
@@ -43,15 +43,9 @@ Tradissea ist ausschließliche Inhaberin der Rechte an ihrer Website und ihren S
 
 Tradissea erteilt keinerlei Nutzungserlaubnis an ihren Urheber- und gewerblichen Schutzrechten oder an sonstigen mit der Website verbundenen Rechten. Der Zugang zur Website und deren Nutzung sind in keinem Fall als Verzicht, Übertragung, Lizenz oder vollständige bzw. teilweise Abtretung dieser Rechte durch Tradissea zu verstehen. Jede nicht zuvor von Tradissea genehmigte Nutzung dieser Inhalte gilt als schwerwiegende Verletzung der Urheber- oder gewerblichen Schutzrechte und zieht die gesetzlich vorgesehene Haftung nach sich. Tradissea behält sich das Recht vor, die entsprechenden gerichtlichen und außergerichtlichen Schritte einzuleiten.
 
-## Datenschutzklausel
+## Datenschutz
 
-Gemäß den geltenden Vorschriften zum Schutz personenbezogener Daten werden die Nutzerinnen und Nutzer darüber informiert, dass ihre Daten in das Verzeichnis von Verarbeitungstätigkeiten von Tradissea aufgenommen werden, um gegebenenfalls die beauftragten Leistungen erbringen zu können.
-
-In Übereinstimmung mit den geltenden Vorschriften weist Tradissea darauf hin, dass die Daten nur so lange aufbewahrt werden, wie es für die Erbringung der Leistungen unbedingt erforderlich ist.
-
-Die Daten werden rechtmäßig, nach Treu und Glauben, transparent, angemessen, erheblich, auf das notwendige Maß beschränkt, richtig und aktuell verarbeitet. Tradissea verpflichtet sich daher, alle angemessenen technischen und Sicherheitsmaßnahmen zu ergreifen, damit unrichtige oder unwahre Daten unverzüglich gelöscht oder berichtigt werden.
-
-Gemäß den Datenschutzvorschriften können die Nutzerinnen und Nutzer ihre Rechte auf Auskunft, Berichtigung, Einschränkung der Verarbeitung, Löschung, Datenübertragbarkeit und Widerspruch gegen die Verarbeitung ihrer personenbezogenen Daten ausüben sowie eine erteilte Einwilligung widerrufen. Der Antrag ist an folgende E-Mail-Adresse zu richten: {{email}}.
+Welche personenbezogenen Daten wir verarbeiten, wozu und wie Sie Ihre Rechte ausüben, erfahren Sie in unserer [Datenschutzerklärung](../datenschutz/).
 
 ## Vorbehalt der Änderung dieses Impressums
 
@@ -65,4 +59,4 @@ Sollte eine dieser Bestimmungen nichtig, unwirksam oder undurchführbar sein, so
 
 ## Kontakt
 
-Sie erreichen uns unter der angegebenen Anschrift sowie telefonisch unter der auf der Website genannten Nummer.
+Sie erreichen uns per E-Mail unter {{email}} oder über die übrigen auf der Website genannten Kontaktwege.

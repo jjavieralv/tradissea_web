@@ -19,9 +19,13 @@ En la página de inicio incluimos un vídeo alojado en YouTube (Google Ireland L
 
 Si decides reproducirlo, YouTube podrá instalar sus propias cookies y tratar datos conforme a su propia política de privacidad, sobre la que Tradissea no tiene control. Puedes consultarla en [policies.google.com/privacy](https://policies.google.com/privacy).
 
-En la página de descuentos, el juego «La palabra del día» comprueba en **Wikcionario** (Wikimedia Foundation) que la palabra escrita existe. Esa consulta solo se hace al enviar un intento y transmite a Wikimedia la dirección IP del visitante y la palabra consultada, conforme a la [política de privacidad de Wikimedia](https://foundation.wikimedia.org/wiki/Policy:Privacy_policy). Si no hay conexión, el juego sigue funcionando sin comprobar.
+En la página de descuentos, el juego «La palabra del día» comprueba en **Wikcionario** (Wikimedia Foundation) que la palabra escrita existe. Esa consulta la hace nuestro servidor de Cloudflare, no tu navegador: Wikimedia solo recibe la palabra, nunca tu dirección IP. Si no hay conexión, el juego sigue funcionando sin comprobar.
 
 Lo mismo ocurre si sigues los enlaces a redes sociales u otros sitios externos: una vez fuera de esta web, se aplican sus propias políticas.
+
+## Proveedor de alojamiento
+
+La web está alojada en **Cloudflare**. Si detecta tráfico sospechoso, Cloudflare puede usar cookies técnicas de seguridad (como __cf_bm o cf_clearance) para distinguir a las personas de los programas automáticos. Son estrictamente necesarias para proteger la web, no sirven para seguirte y no requieren consentimiento. Más información en la [política de cookies de Cloudflare](https://www.cloudflare.com/cookie-policy/).
 
 ## Cómo modificar la configuración de las cookies
 

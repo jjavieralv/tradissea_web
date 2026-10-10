@@ -1,6 +1,17 @@
 /* Bloques reutilizables entre páginas. */
 import { esc, nbsp, icons, mailLink, prefixFor } from './layout.mjs';
 
+/** Texto de la casilla de consentimiento: donde pone {link} va el enlace a la
+ *  política de privacidad, que se abre en otra pestaña para no perder lo que
+ *  ya se ha escrito en el formulario. */
+function consentLabel(f, href) {
+  const [before, after = ''] = f.consent.split('{link}');
+  const link = `<a href="${href}" target="_blank" rel="noopener">${esc(f.consentLink)}<span class="visually-hidden"> ${esc(
+    f.newTab
+  )}</span></a>`;
+  return `${esc(before)}${link}${esc(after)}`;
+}
+
 /** Formulario de contacto + vías directas. */
 export function contactBlock({ site, t, depth, paths, idPrefix = '', aside = '', anchors = null }) {
   const p = prefixFor(depth);
@@ -66,7 +77,7 @@ export function contactBlock({ site, t, depth, paths, idPrefix = '', aside = '',
 
       <div class="field field--check">
         <input type="checkbox" id="${id('consent')}" name="consent" aria-describedby="${id('consent')}-error" required>
-        <label for="${id('consent')}">${esc(f.consent)}</label>
+        <label for="${id('consent')}">${consentLabel(f, `${p}${paths.privacy}`)}</label>
       </div>
       <span class="field-error" id="${id('consent')}-error" aria-live="polite"></span>
 
@@ -74,9 +85,6 @@ export function contactBlock({ site, t, depth, paths, idPrefix = '', aside = '',
         <button class="btn btn--primary" type="submit">${esc(f.submit)}</button>
       </div>
 
-      <p class="form-note">${esc(t.contact.privacyNote)} <a href="${p}${paths.privacy}">${esc(
-    t.contact.privacyLink
-  )}</a>.</p>
       <div class="form-status" role="status" tabindex="-1"></div>
     </form>
   </div>

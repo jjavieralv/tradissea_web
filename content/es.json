@@ -95,7 +95,11 @@
     "terms": [
       "Un {percent} % de descuento sobre el presupuesto de un encargo nuevo.",
       "Válido durante los 30 días siguientes a la fecha del código.",
-      "No acumulable con otras promociones y aplicable a un solo encargo por cliente."
+      "No acumulable con otras promociones y aplicable a un solo encargo por cliente.",
+      "Pueden participar empresas y personas mayores de edad. Jugar es gratis y no obliga a contratar.",
+      "El código es personal e intransferible, se canjea una sola vez y no se puede cambiar por dinero.",
+      "Tradissea podrá rechazar códigos caducados, alterados, compartidos o conseguidos manipulando el juego.",
+      "Tradissea puede modificar o terminar la promoción en cualquier momento; los códigos ya conseguidos se respetarán hasta que caduquen."
     ],
     "backHome": "Volver al inicio"
   },
@@ -404,8 +408,6 @@
     "phoneLabel": "Teléfono",
     "whatsappLabel": "WhatsApp",
     "linkedinLabel": "LinkedIn",
-    "privacyNote": "Tus datos solo se utilizan para responderte. Puedes consultar la",
-    "privacyLink": "política de privacidad",
     "form": {
       "name": "Nombre",
       "namePlaceholder": "Cómo te llamas",
@@ -425,7 +427,10 @@
       ],
       "message": "Háblanos sobre tu proyecto",
       "messagePlaceholder": "Tipo de documento, idiomas, número de palabras aproximado, plazo…",
-      "consent": "He leído y acepto la política de privacidad.",
+      "_consentComment": "Donde pone {link} va el enlace a la política de privacidad, con el texto de consentLink.",
+      "consent": "He leído la {link} y acepto que uséis mis datos para responderme.",
+      "consentLink": "información sobre protección de datos y privacidad",
+      "newTab": "(se abre en una pestaña nueva)",
       "submit": "Enviar mensaje",
       "sending": "Enviando…",
       "required": "obligatorio",

@@ -1054,37 +1054,34 @@
       }
     };
 
-    /* ¿Existe la palabra? Se pregunta a Wikcionario, que cubre los tres
-       idiomas. Si la consulta falla o tarda, se da por buena: nadie debería
-       quedarse sin jugar por un problema de red. */
+    /* ¿Existe la palabra? Se pregunta a /api/word (src/worker.mjs), que a su
+       vez consulta Wikcionario desde Cloudflare: así Wikimedia no recibe la
+       IP de quien juega. La búsqueda no distingue tildes, ñ ni diéresis
+       (AUREO encuentra «áureo»). Si la consulta falla o tarda, la palabra se
+       da por buena: nadie debería quedarse sin jugar por un problema de red. */
     var wordExists = function (word) {
       if (known[word] !== undefined) return Promise.resolve(known[word]);
       if (!window.fetch) return Promise.resolve(true);
 
-      var lang = config.lang || 'es';
-      var lower = word.toLowerCase();
-      var capital = lower.charAt(0).toUpperCase() + lower.slice(1);
       var url =
-        'https://' + lang + '.wiktionary.org/w/api.php?action=query&format=json&origin=*&titles=' +
-        encodeURIComponent(lower + '|' + capital);
+        '/api/word?lang=' + encodeURIComponent(config.lang || 'es') +
+        '&q=' + encodeURIComponent(word.toLowerCase());
 
       var stop = null;
       var signal;
       if (window.AbortController) {
         var ctrl = new AbortController();
         signal = ctrl.signal;
-        stop = setTimeout(function () { ctrl.abort(); }, 2500);
+        stop = setTimeout(function () { ctrl.abort(); }, 4000);
       }
 
       return fetch(url, { signal: signal })
         .then(function (res) { return res.ok ? res.json() : null; })
         .then(function (data) {
           if (stop) clearTimeout(stop);
-          if (!data || !data.query || !data.query.pages) return true;
-          var pages = data.query.pages;
-          var exists = Object.keys(pages).some(function (id) { return !('missing' in pages[id]); });
-          known[word] = exists;
-          return exists;
+          if (!data || typeof data.exists !== 'boolean') return true;
+          known[word] = data.exists;
+          return data.exists;
         })
         .catch(function () {
           if (stop) clearTimeout(stop);

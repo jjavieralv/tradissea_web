@@ -28,8 +28,13 @@ const log = (msg) => process.stdout.write(`${msg}\n`);
 const warnings = [];
 
 /* ---------- Utilidades de ficheros ---------- */
-function rmrf(dir) {
-  fs.rmSync(dir, { recursive: true, force: true });
+/* Vacía la carpeta sin borrarla: así los servidores que la están sirviendo
+   (npm run dev, npm run preview) siguen viéndola tras regenerar la web. */
+function emptyDir(dir) {
+  fs.mkdirSync(dir, { recursive: true });
+  for (const entry of fs.readdirSync(dir)) {
+    fs.rmSync(path.join(dir, entry), { recursive: true, force: true });
+  }
 }
 
 function copyDir(from, to) {
@@ -137,8 +142,7 @@ for (const lang of languages) {
 }
 
 /* ---------- Assets ---------- */
-rmrf(DIST);
-fs.mkdirSync(DIST, { recursive: true });
+emptyDir(DIST);
 
 const css = fs.readFileSync(path.join(SRC, 'css', 'site.css'), 'utf8');
 const js = fs.readFileSync(path.join(SRC, 'js', 'site.js'), 'utf8');
@@ -148,7 +152,32 @@ copyDir(path.join(STATIC, 'img'), path.join(DIST, 'assets', 'img'));
 copyDir(path.join(STATIC, 'fonts'), path.join(DIST, 'assets', 'fonts'));
 write(path.join('assets', 'css', assets.css), css);
 write(path.join('assets', 'js', assets.js), js);
-write('.nojekyll', '');
+
+/* ---------- Cabeceras para Cloudflare ----------
+   El CSS y el JS llevan la huella en el nombre: si cambian, cambia el nombre,
+   así que el navegador puede guardarlos un año sin preguntar. Las tipografías
+   no cambian nunca. El resto de cabeceras son de seguridad básica. */
+write(
+  '_headers',
+  `/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+/assets/css/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/img/*
+  Cache-Control: public, max-age=604800
+`
+);
 
 /* ---------- Mapa de clientes ----------
    Se dibuja en cada compilación a partir de las coordenadas de site.json, así
@@ -305,24 +334,26 @@ if (gameOn) {
 }
 
 /* ---------- Páginas 404 ----------
-   El servidor solo puede servir un archivo para las direcciones que no existen,
-   así que se genera una página 404 completa por idioma y, en la raíz, un
-   redirector que elige la del idioma del visitante. */
+   Cloudflare sirve el 404.html más cercano a la dirección pedida: por eso hay
+   uno por idioma (/es/404.html para /es/loquesea), que se ve sin redirigir y
+   con el código 404 correcto. Para las direcciones fuera de una carpeta de
+   idioma, el 404.html de la raíz elige el idioma del visitante. La copia en
+   /es/404/ es la que enlaza el selector de idioma. Todas usan rutas absolutas,
+   así que funcionan a cualquier profundidad. */
 for (const lang of languages) {
   const t = translations[lang];
   const paths = pathsByLang[lang];
-  write(
-    `${lang}/404/index.html`,
-    renderPage({
-      lang,
-      pageKey: 'notFound',
-      depth: -1,
-      title: t.notFound.title,
-      description: t.notFound.text,
-      noindex: true,
-      content: notFoundPage({ t, paths, anchors: t.anchors })
-    })
-  );
+  const html = renderPage({
+    lang,
+    pageKey: 'notFound',
+    depth: -1,
+    title: t.notFound.title,
+    description: t.notFound.text,
+    noindex: true,
+    content: notFoundPage({ t, paths, anchors: t.anchors })
+  });
+  write(`${lang}/404/index.html`, html);
+  write(`${lang}/404.html`, html);
 }
 
 {
@@ -475,9 +506,6 @@ ${urls}
 
   write('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${site.domain}/sitemap.xml\n`);
 }
-
-/* ---------- Dominio propio (opcional) ---------- */
-if (site.customDomain) write('CNAME', `${site.customDomain}\n`);
 
 /* ---------- Resumen ---------- */
 const pageCount = sitemapEntries.length + 2;

@@ -95,7 +95,11 @@
     "terms": [
       "{percent}% off the quote for a new project.",
       "Valid for 30 days from the date of the code.",
-      "Cannot be combined with other offers; one project per client."
+      "Cannot be combined with other offers; one project per client.",
+      "Open to businesses and adults. Playing is free and does not commit you to anything.",
+      "The code is personal and non-transferable, can be redeemed only once and cannot be exchanged for cash.",
+      "Tradissea may refuse codes that have expired, been altered or shared, or were obtained by tampering with the game.",
+      "Tradissea may change or end this promotion at any time; codes already won will be honoured until they expire."
     ],
     "backHome": "Back to home"
   },
@@ -404,8 +408,6 @@
     "phoneLabel": "Phone",
     "whatsappLabel": "WhatsApp",
     "linkedinLabel": "LinkedIn",
-    "privacyNote": "Your details are only used to reply to you. You can read our",
-    "privacyLink": "privacy policy",
     "form": {
       "name": "Name",
       "namePlaceholder": "Your name",
@@ -425,7 +427,10 @@
       ],
       "message": "Tell us about your project",
       "messagePlaceholder": "Type of document, languages, approximate word count, deadline…",
-      "consent": "I have read and accept the privacy policy.",
+      "_consentComment": "{link} is replaced with a link to the privacy policy, using the consentLink text.",
+      "consent": "I have read the {link} and agree to my data being used to reply to me.",
+      "consentLink": "data protection and privacy information",
+      "newTab": "(opens in a new tab)",
       "submit": "Send message",
       "sending": "Sending…",
       "required": "required",

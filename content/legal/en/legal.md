@@ -1,6 +1,6 @@
 ## Legal information
 
-In compliance with the duty to provide information set out in article 10 of Spanish Act 34/2002 of 11 July on Information Society Services and Electronic Commerce, we inform you that the content of this website https://www.tradissea.com (hereinafter, the "Website") belongs to Tradissea, with registered office at C/ Pinar de San José, 14. 28054 (Spain) and tax number 50621525C. This legal notice governs the conditions of use of the aforementioned website.
+In compliance with the duty to provide information set out in article 10 of Spanish Act 34/2002 of 11 July on Information Society Services and Electronic Commerce, we inform you that the content of this website https://www.tradissea.com (hereinafter, the "Website") belongs to Tradissea, based in Madrid, Spain, email {{email}}. This legal notice governs the conditions of use of the aforementioned website.
 
 ## Acceptance by the user
 
@@ -43,15 +43,9 @@ Tradissea is the exclusive holder of the rights relating to its website and its 
 
 Tradissea grants no authorisation of any kind to use its intellectual and industrial property rights or any other property or right related to the website, and access to and browsing of the website by users shall under no circumstances be understood as a waiver, transfer, licence or assignment, in whole or in part, of those rights by Tradissea. Any use of that content not previously authorised by Tradissea shall be considered a serious breach of intellectual or industrial property rights and shall give rise to the corresponding legal liability. Tradissea reserves the right to take any appropriate judicial and extrajudicial action against the user.
 
-## Data protection clause
+## Data protection
 
-In accordance with current legislation on the Protection of Personal Data, users are informed that their data will be included in the Record of Processing Activities owned by Tradissea for the purpose of, where applicable, carrying out the contracted services.
-
-In compliance with current legislation, Tradissea states that the data will be kept for the period strictly necessary to fulfil the services provided.
-
-The data will also be processed in a lawful, fair, transparent, adequate, relevant, limited, accurate and up-to-date manner. Tradissea therefore undertakes to adopt all reasonable technical and security measures to ensure that data are deleted or rectified without delay when they are inaccurate or untrue.
-
-In accordance with data protection legislation, users may exercise their rights of access, rectification, restriction of processing, erasure, portability and objection to the processing of their personal data, as well as withdraw the consent given for such processing. Requests should be sent to the following email address: {{email}}.
+What personal data we process, why, and how to exercise your rights is explained in our [privacy policy](../privacy-policy/).
 
 ## Right to modify this legal notice
 
@@ -65,4 +59,4 @@ If any of these provisions is deemed null, invalid or unenforceable, that provis
 
 ## Contact us
 
-You can contact us at the address indicated and also by telephone on the number given on the website.
+You can contact us by email at {{email}} or through the other channels shown on the website.

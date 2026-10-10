@@ -150,8 +150,8 @@ página desaparece de la web.
 
 **Las palabras que escribe la gente se comprueban en Wikcionario**, así que no
 se pueden meter cinco letras al azar. Si alguien juega sin conexión, el juego
-acepta la palabra en vez de bloquearse. Esa consulta está declarada en la
-política de cookies.
+acepta la palabra en vez de bloquearse. La consulta la hace Cloudflare, no el
+navegador del visitante, así que Wikimedia no recibe ningún dato suyo.
 
 **Cómo son los códigos:** `TRAD-10-2607-6AKA`
 
@@ -187,6 +187,12 @@ Para recibirlos directamente en el buzón:
 }
 ```
 
+**Importante:** Formspree pasaría a recibir los datos del formulario, así que
+hay que añadirlo como destinatario en la política de privacidad
+(`content/legal/*/privacy.md`): tanto en la «Información básica» del principio
+como en el apartado «¿A quién se comunican tus datos?». Lo mismo si algún día
+cambias de proveedor de correo: ahora mismo es IONOS.
+
 ---
 
 ## 6. Ver los cambios antes de publicarlos
@@ -207,7 +213,7 @@ mensaje del tipo `Unexpected token in JSON`, indicando la línea del problema.
 
 ## 7. Publicar los cambios
 
-Si el proyecto está en GitHub con las páginas activadas, basta con guardar los
-cambios en la rama `main`: en un par de minutos la web pública se actualiza sola.
+Basta con guardar los cambios en la rama `main` de GitHub: Cloudflare los
+detecta y en un par de minutos la web pública se actualiza sola.
 
 Más detalles en el archivo `README.md`.

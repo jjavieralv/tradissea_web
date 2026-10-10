@@ -19,9 +19,13 @@ The home page includes a video hosted on YouTube (Google Ireland Limited). The v
 
 If you decide to play it, YouTube may install its own cookies and process data in accordance with its own privacy policy, over which Tradissea has no control. You can read it at [policies.google.com/privacy](https://policies.google.com/privacy).
 
-On the discounts page, the «Word of the day» game checks with **Wiktionary** (Wikimedia Foundation) that the word you typed exists. That request is only made when you submit a guess and sends Wikimedia the visitor's IP address and the word being checked, under the [Wikimedia privacy policy](https://foundation.wikimedia.org/wiki/Policy:Privacy_policy). Without a connection the game still works, simply without checking.
+On the discounts page, the «Word of the day» game checks with **Wiktionary** (Wikimedia Foundation) that the word you typed exists. That check is made by our Cloudflare server, not by your browser: Wikimedia only receives the word, never your IP address. Without a connection the game still works, simply without checking.
 
 The same applies if you follow the links to social media or other external sites: once you leave this website, their own policies apply.
+
+## Hosting provider
+
+This website is hosted by **Cloudflare**. If it detects suspicious traffic, Cloudflare may use technical security cookies (such as __cf_bm or cf_clearance) to tell people apart from automated programs. They are strictly necessary to protect the website, are not used to track you and do not require consent. More information in [Cloudflare's cookie policy](https://www.cloudflare.com/cookie-policy/).
 
 ## How to change your cookie settings
 

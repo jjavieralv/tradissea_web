@@ -1528,10 +1528,9 @@ strong { font-weight: 600; }
   accent-color: var(--teal);
 }
 .field--check label { margin: 0; font-size: var(--step--1); color: var(--ink-soft); font-weight: 400; }
+.field--check label a { color: var(--teal-ink); }
 
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-
-.form-note { margin-top: 1rem; font-size: var(--step--1); color: var(--ink-mute); }
 
 .form-status {
   margin-top: 1.2rem;

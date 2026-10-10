@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 /* Servidor local para ver la web mientras se edita.
    Uso:  node serve.mjs [--port 4000] [--watch]
-   Con --watch, cualquier cambio en content/ o src/ regenera el sitio. */
+   Con --watch, cualquier cambio en content/ o src/ regenera el sitio.
+   Las direcciones /api/ las atiende src/worker.mjs, como en Cloudflare. */
 
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { handleApi } from './src/worker.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const DIST = path.join(ROOT, 'dist');
@@ -58,7 +60,13 @@ if (WATCH) {
   }
 }
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
+  if (req.url.startsWith('/api/')) {
+    const answer = await handleApi(new Request(`http://localhost${req.url}`, { method: req.method }));
+    res.writeHead(answer.status, Object.fromEntries(answer.headers)).end(await answer.text());
+    return;
+  }
+
   let pathname;
   try {
     pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
@@ -80,8 +88,14 @@ const server = http.createServer((req, res) => {
     filePath = path.join(filePath, 'index.html');
   }
 
-  if (!fs.existsSync(filePath)) {
-    const notFound = path.join(DIST, '404.html');
+  /* Igual que Cloudflare: se sirve el 404.html más cercano subiendo de carpeta
+     (/es/loquesea → /es/404.html), y el archivo _headers no se publica. */
+  if (!fs.existsSync(filePath) || path.basename(filePath) === '_headers') {
+    let dir = path.dirname(path.join(DIST, pathname));
+    while (dir.startsWith(DIST) && dir !== DIST && !fs.existsSync(path.join(dir, '404.html'))) {
+      dir = path.dirname(dir);
+    }
+    const notFound = path.join(dir.startsWith(DIST) ? dir : DIST, '404.html');
     const body = fs.existsSync(notFound) ? fs.readFileSync(notFound) : 'Not found';
     res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' }).end(body);
     return;

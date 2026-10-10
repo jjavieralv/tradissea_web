@@ -1,96 +1,89 @@
-In accordance with articles 13 and 14 of REGULATION (EU) 2016/679 OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data (hereinafter, "GDPR"), and articles 6 and 11 of Spanish Organic Act 3/2018 of 5 December on the Protection of Personal Data and guarantee of digital rights (hereinafter, "LOPDGDD"), which governs the right to information when data are collected, we inform you of the following.
+In accordance with articles 13 and 14 of Regulation (EU) 2016/679, the General Data Protection Regulation («GDPR»), and Spanish Organic Law 3/2018 on the Protection of Personal Data and Guarantee of Digital Rights («LOPDGDD»), this policy explains what personal data we process, why, and what your rights are.
 
-## Who is responsible for processing your personal data?
+## Basic data protection information
 
-The personal data you have provided through the website and in any other communications with us will be included in the Record of Processing Activities owned by Tradissea, with registered office at C/ Pinar de San José, 14. 28054 (Spain) and tax number 50621525C.
+- **Controller:** Tradissea.
+- **Purpose:** to answer your enquiry and, if you ask for one, prepare a quote.
+- **Legal basis:** your consent and, if you ask for a quote, steps taken at your request before entering into a contract.
+- **Recipients:** we do not share your data with third parties unless required by law. Messages reach our mailbox, hosted by IONOS (European Union).
+- **Your rights:** access, rectify or erase your data, among other rights, by writing to {{email}}.
+- **Further information:** in the rest of this policy, below.
 
-## What is our presence on social media?
+## Who is responsible for your data?
 
-Tradissea has profiles on the main social media platforms.
+Tradissea, based in Madrid, Spain. You can write to us about anything related to your data at {{email}}.
 
-It acts as controller for the data of its users, followers or people who post comments through those platforms. Likewise, in accordance with the Spanish act on information society services and electronic commerce, Tradissea accepts no liability arising from comments made by users and followers on its social media profiles.
+## What data do we process?
 
-Tradissea may use the profiles described above to inform its users about topics it considers to be of interest to them.
+- **The data you send us when you get in touch**, by email or through the form on this website: your name, email address, company (if you give one), the service you are interested in and whatever you tell us in your message, including any documents you attach.
+- **If you commission a project from us**, the data needed for the quote and the invoice: name or company name, tax ID and billing address.
+- **Technical data about your visit**: to deliver and protect the pages, our hosting provider, Cloudflare, processes your IP address and technical data about your browser. We do not use analytics or advertising tools, and we do not build profiles.
 
-## What personal data do we collect?
+If the documents you send us for translation or review contain personal data about other people, we process it only to carry out that project, on behalf of the person who commissioned it and in strict confidence.
 
-The personal data users may provide:
+This website is not intended for children under 14.
 
-- **Identification data:** name, surname, position, role, email address and/or telephone number.
-- **Accounting data:** account number, bank card, etc.
+## Why do we use your data, and on what legal basis?
 
-## Why and for what purpose do we process your data?
+| Purpose | Legal basis |
+| --- | --- |
+| Answering your enquiries and preparing a quote. | Your consent when you write to us (art. 6.1.a GDPR) and steps taken at your request before entering into a contract (art. 6.1.b GDPR). |
+| Providing the service you commission and invoicing it. | Performance of the contract (art. 6.1.b GDPR) and compliance with legal, tax and accounting obligations (art. 6.1.c GDPR). |
+| Keeping the website secure and working. | Our legitimate interest in protecting the website and its visitors (art. 6.1.f GDPR). |
 
-Depending on the purpose, we will need to process different data, generally as follows:
-
-- The website is purely informative about the language services offered by Tradissea. Data may be processed in order to respond to requests for information about these services.
-- The collection and automated processing of data carried out through the website's contact form is intended to make it possible to get in touch with us.
-- To manage and maintain your application for a job at Tradissea when you send us your application to take part in a selection process. This processing is based on the user's consent and on the mutual legitimate interest of Tradissea and the user, as indicated in the privacy information that the user must accept before submitting their application.
-
-The personal data obtained through any of the website's channels will form part of the Record of Processing Activities owned by Tradissea. This record is updated periodically in accordance with the GDPR and the LOPDGDD, and Tradissea has adopted all relevant security measures to that end.
-
-Users are informed that they may withdraw their consent where it has been given for a specific purpose, without this affecting the lawfulness of processing carried out before its withdrawal.
-
-## What is the legal basis for processing your data?
-
-The processing of your data may be based on the following legal grounds:
-
-- **Consent** expressly given by users when completing forms.
-- **Legitimate interest:** ensuring that our website remains secure, as well as helping us understand users' needs, expectations and level of satisfaction and therefore improve our services.
-- **Compliance with legal obligations** for fraud prevention, cooperation with public authorities and/or possible third-party claims.
+We will not send you advertising or newsletters, and we do not make automated decisions about you.
 
 ## How long do we keep your data?
 
-Data will be processed for the purposes described for as long as necessary to fulfil the purpose for which they were collected, as well as to comply with the legal obligations arising from that processing. This is without prejudice to the retention required for the formulation, exercise or defence of potential claims, whenever applicable legislation allows it.
+- **Enquiries and quotes that do not lead to a project**: up to one year from our last contact.
+- **Clients**: for as long as the relationship lasts and then for the periods required by law; for invoices and accounting records, six years (art. 30 of the Spanish Commercial Code).
+- **Documents received for a project**: only for as long as they are needed to complete it and handle any revisions.
+- **Technical data about your visit**: kept by Cloudflare for short periods, in accordance with its privacy policy.
 
-Tradissea undertakes to stop processing personal data once the retention period has ended, and to block them appropriately in our databases.
+After those periods, the data is deleted or, where the law requires it, blocked until it can be erased.
 
 ## Who do we share your data with?
 
-As a general rule, Tradissea will not transfer personal data to third parties, except in situations where data may be shared with collaborators providing services to Tradissea, for the purpose of managing the provision of services, the contractual and/or pre-contractual relationship with data subjects, or processing requests made by them.
+We do not sell your data or share it with third parties. Only the providers that help us run our business can access it, to the extent necessary and always under contract and a duty of confidentiality:
 
-In such cases, we ensure that recipients respect confidentiality and have appropriate measures in place to protect personal data. Tradissea endeavours to guarantee the security of personal data when they are sent outside the company. The third parties Tradissea contracts with are obliged to ensure that the information is processed in accordance with current data protection legislation.
+- **IONOS**, our email provider (a European Union company). Messages you send us by email or through the form arrive here.
+- **Cloudflare, Inc.**, the website's hosting provider. It is a US company certified under the EU-US Data Privacy Framework, which the European Commission recognises as an adequate safeguard for international transfers.
+- **Professional collaborators**, such as our accountants or, where a project requires it, other translation professionals.
+- **Public authorities**, when the law requires us to.
 
-Where the law may require personal data to be disclosed to public bodies or other parties, only what is strictly necessary to comply with those legal obligations will be disclosed.
+The «Word of the day» game checks with Wiktionary (Wikimedia Foundation) that words exist. That check is made by our Cloudflare server, not by your browser, so Wikimedia only receives the word, never your IP address or any other data about you.
 
-## What are your rights and how can you exercise them?
+## Third-party content and services
 
-You may send your communications and exercise your rights by writing to the following email address: {{email}}.
+- **YouTube video**: it is not loaded until you press the play button. If you play it, YouTube processes your data under its own policy, as explained in our [cookie policy](../cookie-policy/).
+- **WhatsApp and LinkedIn**: if you message us on WhatsApp or visit our LinkedIn profile, those services process your data under their own privacy policies.
 
-Under data protection legislation you may request:
+## What are your rights?
 
-- **Right of access:** you may request information about the personal data we hold about you.
-- **Right to rectification:** you may notify us of any change in your personal data.
-- **Right to erasure and to be forgotten:** you may request the deletion of personal data, after they have been blocked.
-- **Right to restriction of processing:** this involves restricting the processing of personal data.
-- **Right to object:** you may withdraw your consent to the processing of your data, objecting to its continued processing.
-- **Right to data portability:** in some cases you may request a copy of your personal data in a structured, commonly used and machine-readable format so that they can be transmitted to another controller.
-- **Right not to be subject to automated individual decision-making:** you may request that decisions are not taken based solely on automated processing, including profiling, which produce legal effects or significantly affect you.
+You can exercise these rights at any time by writing to us at {{email}}:
 
-In some cases the request may be refused if you ask for the deletion of data that are necessary to comply with legal obligations. Likewise, if you have any complaint about the processing of your data, you may lodge a claim with the Spanish Data Protection Agency, the competent supervisory authority.
+- **Access**: find out what data about you we process.
+- **Rectification**: correct any data that is inaccurate.
+- **Erasure**: ask us to delete it.
+- **Restriction**: ask us to stop using it for a while.
+- **Objection**: object to us processing it.
+- **Portability**: receive it in a commonly used format to take it to another controller.
+- **Withdraw your consent**, without affecting anything done before you withdrew it.
 
-## Who is responsible for the accuracy and truthfulness of the data provided?
+We will reply within one month at the latest. If you are not satisfied with our reply, you can complain to the Spanish Data Protection Agency ([www.aepd.es](https://www.aepd.es)) or to the data protection authority of your country of residence.
 
-Users are solely responsible for the truthfulness and accuracy of the data provided through any of the forms on the website, releasing Tradissea from any liability in this respect. Users guarantee and are responsible, in any case, for the accuracy, validity and authenticity of the personal data provided, and undertake to keep them duly updated. Users agree to provide complete and correct information in the forms they fill in.
+## How do we protect your data?
 
-Tradissea is not responsible for the truthfulness of information that it has not produced itself and for which another source is indicated, and therefore accepts no liability for any hypothetical damage arising from the use of such information.
+We apply appropriate technical and organisational measures to protect your data: the website only works over an encrypted connection (HTTPS), access to messages and documents is limited to those who need it, and our providers comply with the GDPR.
 
-Tradissea is released from liability for any damage or loss that users may suffer as a result of errors, defects or omissions in the information provided by Tradissea, whenever that information comes from external sources.
+If a security breach affected personal data, we would notify the Spanish Data Protection Agency within 72 hours at the latest and, where it posed a high risk to you, we would tell you without undue delay.
 
-## What security measures do we apply to protect your personal data?
+## Cookies
 
-Tradissea has adopted the legally required levels of personal data security, and endeavours to install any additional technical means and measures within its reach to prevent the loss, misuse, alteration, unauthorised access to and theft of the personal data provided to Tradissea. Nevertheless, users should be aware that security measures on the internet are not impregnable.
+This website does not use its own cookies. You can see what we store in your browser, and why, in our [cookie policy](../cookie-policy/).
 
-Tradissea is therefore not responsible for any hypothetical damage arising from interference, omissions, interruptions, computer viruses, telephone faults or disconnections in the operation of this electronic system caused by circumstances beyond Tradissea's control; from delays or blockages in the use of this electronic system caused by deficiencies or overloads of telephone lines or overloads in the data processing centre, the internet system or other electronic systems; or from damage caused by third parties through unlawful interference beyond Tradissea's control.
+## Changes to this policy
 
-## How do we use cookies?
+We may update this policy when our services or the law change. The version in force is always the one published on this page.
 
-You can find full details of what we store in your browser, and why, in our cookie policy.
-
-## Internal security policy
-
-Security breaches may be caused by employees, third parties or computer errors. We are therefore legally obliged to notify data subjects within a maximum of 72 hours if their personal data have been seriously affected. Users will also be notified as soon as the security breach has been resolved.
-
-## Changes to this privacy policy
-
-This privacy policy may be modified. We recommend that you review it periodically.
+Last updated: October 2026.

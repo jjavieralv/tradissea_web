@@ -1,6 +1,6 @@
 ## Información legal
 
-En cumplimiento con el deber de la información recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico, le informamos que el contenido de esta página web https://www.tradissea.com (en adelante, la «Web») pertenece a Tradissea, con domicilio social en C/ Pinar de San José, 14. 28054 (España) y con CIF núm. 50621525C. El presente aviso legal regula las condiciones de uso del citado portal de Internet.
+En cumplimiento con el deber de la información recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico, le informamos que el contenido de esta página web https://www.tradissea.com (en adelante, la «Web») pertenece a Tradissea, con domicilio en Madrid, España, y correo electrónico {{email}}. El presente aviso legal regula las condiciones de uso del citado portal de Internet.
 
 ## Aceptación del usuario
 
@@ -43,15 +43,9 @@ Tradissea es el titular en exclusiva de los derechos relativos a su página web 
 
 Tradissea no concede ninguna autorización de uso de ninguna clase sobre sus derechos de propiedad intelectual e industrial o sobre cualquier otra propiedad o derecho relacionado con la web, y en ningún caso se entenderá que el acceso y navegación de los usuarios implica una renuncia, transmisión, licencia o cesión total ni parcial de dichos derechos por parte de Tradissea. Cualquier uso de esos contenidos no autorizado previamente por parte de Tradissea será considerado un incumplimiento grave de los derechos de propiedad intelectual o industrial y dará lugar a las responsabilidades legalmente establecidas. Tradissea se reserva el derecho de ejercitar frente al usuario las acciones judiciales y extrajudiciales que correspondan.
 
-## Cláusula de protección de datos
+## Protección de datos
 
-De conformidad con lo establecido en la normativa vigente en materia de Protección de Datos de Carácter Personal, se informa a los usuarios que sus datos serán incorporados al Registro de Actividades de Tratamiento titularidad de Tradissea con la finalidad de, eventualmente, poder llevar a cabo los servicios contratados.
-
-En cumplimiento con la normativa vigente, Tradissea informa de que los datos serán conservados durante el plazo estrictamente necesario para cumplir con los servicios prestados.
-
-Asimismo, los datos se tratarán de manera lícita, leal, transparente, adecuada, pertinente, limitada, exacta y actualizada. Es por ello que Tradissea se compromete a adoptar todas las medidas técnicas y de seguridad razonables para que estos se supriman o rectifiquen sin dilación cuando sean inexactos o no veraces.
-
-De acuerdo con la normativa en protección de datos, los usuarios podrán ejercer los derechos de acceso, rectificación, limitación de tratamiento, supresión, portabilidad y oposición al tratamiento de sus datos de carácter personal, así como renunciar al consentimiento prestado para el tratamiento de los mismos. La petición se deberá dirigir al siguiente correo electrónico: {{email}}.
+Qué datos personales tratamos, para qué y cómo ejercer tus derechos se explica en la [política de privacidad](../privacidad/).
 
 ## Reserva del derecho a modificar el presente aviso legal
 
@@ -65,4 +59,4 @@ Si alguna de las presentes disposiciones se considerase nula, inválida o inapli
 
 ## Contacta con nosotros
 
-Para contactar con nosotros puede hacerlo en la dirección indicada y también telefónicamente en el número indicado en la web.
+Para contactar con nosotros puede escribirnos a {{email}} o utilizar las demás vías indicadas en la web.

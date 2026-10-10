@@ -2,13 +2,14 @@
   "name": "tradissea-web",
   "version": "1.0.0",
   "private": true,
-  "description": "Web estática y multiidioma de Tradissea (ES · EN · DE)",
+  "description": "Web estática y multiidioma de Tradissea (ES · EN · DE), publicada en Cloudflare",
   "type": "module",
   "scripts": {
     "build": "node build.mjs",
     "start": "node serve.mjs --port 4000",
     "dev": "node serve.mjs --port 4000 --watch",
-    "deploy": "node build.mjs && npx wrangler deploy"
+    "preview": "npx wrangler dev --port 8787",
+    "deploy": "npx wrangler deploy"
   },
   "engines": {
     "node": ">=18"

@@ -95,7 +95,11 @@
     "terms": [
       "{percent} % Rabatt auf das Angebot für einen neuen Auftrag.",
       "Gültig 30 Tage ab dem Datum des Codes.",
-      "Nicht mit anderen Aktionen kombinierbar; ein Auftrag pro Kundin oder Kunde."
+      "Nicht mit anderen Aktionen kombinierbar; ein Auftrag pro Kundin oder Kunde.",
+      "Teilnehmen können Unternehmen und volljährige Personen. Die Teilnahme ist kostenlos und verpflichtet zu nichts.",
+      "Der Code ist persönlich und nicht übertragbar, kann nur einmal eingelöst und nicht in bar ausgezahlt werden.",
+      "Tradissea kann abgelaufene, veränderte, weitergegebene oder durch Manipulation des Spiels erlangte Codes ablehnen.",
+      "Tradissea kann die Aktion jederzeit ändern oder beenden; bereits gewonnene Codes bleiben bis zu ihrem Ablauf gültig."
     ],
     "backHome": "Zurück zur Startseite"
   },
@@ -404,8 +408,6 @@
     "phoneLabel": "Telefon",
     "whatsappLabel": "WhatsApp",
     "linkedinLabel": "LinkedIn",
-    "privacyNote": "Ihre Daten werden ausschließlich zur Beantwortung Ihrer Anfrage verwendet. Hier finden Sie die",
-    "privacyLink": "Datenschutzerklärung",
     "form": {
       "name": "Name",
       "namePlaceholder": "Ihr Name",
@@ -425,7 +427,10 @@
       ],
       "message": "Erzählen Sie uns von Ihrem Projekt",
       "messagePlaceholder": "Art des Dokuments, Sprachen, ungefähre Wortzahl, Termin …",
-      "consent": "Ich habe die Datenschutzerklärung gelesen und akzeptiere sie.",
+      "_consentComment": "{link} wird durch einen Link zur Datenschutzerklärung mit dem Text aus consentLink ersetzt.",
+      "consent": "Ich habe die {link} gelesen und bin einverstanden, dass meine Daten zur Beantwortung meiner Anfrage verwendet werden.",
+      "consentLink": "Informationen zu Datenschutz und Privatsphäre",
+      "newTab": "(öffnet sich in einem neuen Tab)",
       "submit": "Nachricht senden",
       "sending": "Wird gesendet …",
       "required": "Pflichtfeld",
